@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Education;
 use App\Models\Skill;
 use App\Models\Project;
+use App\Models\CodingProject;
 use App\Models\Testimonial;
 use App\Models\GuestBook;
 use Illuminate\View\View;
@@ -18,19 +19,20 @@ class PortfolioController extends Controller
         $educations = Education::all();
         $softSkills = Skill::where('type', 'soft')->get();
         $hardSkills = Skill::where('type', 'hard')->get();
+        $projects = Project::all();
+        $codingProjects = CodingProject::orderBy('order')->orderBy('year', 'desc')->get();
         $testimonials = Testimonial::where('is_approved', true)
             ->latest()
             ->take(6)
             ->get();
-        $guestbooks = GuestBook::latest()->take(10)->get();
 
         return view('portfolio.index', [
             'educations' => $educations,
             'softSkills' => $softSkills,
             'hardSkills' => $hardSkills,
             'projects' => $projects,
+            'codingProjects' => $codingProjects,
             'testimonials' => $testimonials,
-            'guestbooks' => $guestbooks,
         ]);
     }
 

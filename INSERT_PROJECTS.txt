@@ -1,0 +1,13 @@
+// Copy-paste command ini ke terminal setelah ketik: php artisan tinker
+
+// Project 1: 3D Modeling Kelas
+App\Models\CodingProject::create(['title' => '3D Modeling Ruang Kelas', 'description' => 'Modeling 3D barang-barang yang ada di kelas seperti meja, bangku, papan tulis, lemari, buku, dan vas bunga. Dibuat dengan detail untuk simulasi ruang kelas yang realistis.', 'image_url' => 'kelas.png', 'demo_url' => null, 'github_url' => null, 'technologies' => json_encode(['3D Modeling', 'Blender']), 'category' => 'design', 'year' => 2024, 'order' => 1]);
+
+// Project 2: 3D Modeling Pedang
+App\Models\CodingProject::create(['title' => '3D Modeling Pedang', 'description' => 'Modeling 3D pedang dengan detail tekstur dan material yang realistis. Project ini menunjukkan kemampuan dalam membuat objek 3D dengan detail yang kompleks.', 'image_url' => 'pedang.png', 'demo_url' => null, 'github_url' => null, 'technologies' => json_encode(['3D Modeling', 'Blender']), 'category' => 'design', 'year' => 2024, 'order' => 2]);
+
+// Project 3: UI/UX Design Portfolio Pertama
+App\Models\CodingProject::create(['title' => 'UI/UX Design Portfolio Website', 'description' => 'Design UI/UX untuk website portfolio pribadi pertama saya. Dibuat menggunakan Figma dengan fokus pada user experience dan tampilan yang modern dan menarik.', 'image_url' => 'porto1.png', 'demo_url' => null, 'github_url' => null, 'technologies' => json_encode(['Figma', 'UI/UX Design']), 'category' => 'design', 'year' => 2024, 'order' => 3]);
+
+// Project 4: UI/UX Design Web Kursus PT Komari
+App\Models\CodingProject::create(['title' => 'UI/UX Design Web Kursus PT Komari', 'description' => 'Design UI/UX untuk website kursus PT Komari. Design ini mencakup halaman landing, katalog kursus, dan sistem pendaftaran dengan interface yang user-friendly.', 'image_url' => 'web1.png', 'demo_url' => null, 'github_url' => null, 'technologies' => json_encode(['Figma', 'UI/UX Design']), 'category' => 'design', 'year' => 2024, 'order' => 4]);
