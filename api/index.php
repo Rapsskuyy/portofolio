@@ -17,12 +17,24 @@ foreach ($directories as $dir) {
     }
 }
 
+// Set environment variables dynamically for Serverless environment
+putenv('VIEW_COMPILED_PATH=' . $storagePath . '/framework/views');
+putenv('CACHE_STORE=array');
+putenv('SESSION_DRIVER=cookie');
+putenv('LOG_CHANNEL=stderr');
+
 // Copy sqlite database to /tmp if exists
 $dbPath = __DIR__ . '/../database/database.sqlite';
 $tmpDbPath = $tmpPath . '/database.sqlite';
 
-if (file_exists($dbPath) && !file_exists($tmpDbPath)) {
-    @copy($dbPath, $tmpDbPath);
+if (file_exists($dbPath)) {
+    if (!file_exists($tmpDbPath) || filesize($tmpDbPath) === 0) {
+        @copy($dbPath, $tmpDbPath);
+    }
+    putenv('DB_CONNECTION=sqlite');
+    putenv('DB_DATABASE=' . $tmpDbPath);
+    $_ENV['DB_CONNECTION'] = 'sqlite';
+    $_ENV['DB_DATABASE'] = $tmpDbPath;
 }
 
 // Forward request to Laravel's public/index.php
