@@ -16,6 +16,9 @@ class CodingProject extends Model
         'category',
         'year',
         'order',
+        'architecture_diagram',
+        'database_schema',
+        'code_snippet',
     ];
 
     protected $casts = [
@@ -30,5 +33,10 @@ class CodingProject extends Model
             return [];
         }
         return is_array($this->technologies) ? $this->technologies : json_decode($this->technologies, true);
+    }
+
+    public function projectDetail()
+    {
+        return $this->hasOne(ProjectDetail::class);
     }
 }

@@ -22,15 +22,25 @@ class GuestBookController extends Controller
     }
 
     // ADMIN lihat
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
+        // Proteksi sederhana: harus ada ?key=raffa di URL
+        if ($request->query('key') !== 'raffa') {
+            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
+        }
+
         $messages = GuestBook::latest()->get();
         return view('admin.guestbook', compact('messages'));
     }
 
     // ADMIN hapus
-    public function destroy(GuestBook $guestbook)
+    public function destroy(Request $request, GuestBook $guestbook)
     {
+        // Proteksi sederhana: harus ada ?key=raffa di URL
+        if ($request->query('key') !== 'raffa') {
+            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
+        }
+
         $guestbook->delete();
         return back()->with('success', 'Pesan buku tamu berhasil dihapus');
     }

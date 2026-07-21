@@ -67,6 +67,71 @@ class CodingProjectSeeder extends Seeder
                 'year' => 2025,
                 'order' => 4,
             ],
+
+            // Project 5: MCD - HTML CSS Tugas Kelas 10
+            [
+                'title' => 'MCD - HTML CSS Tugas',
+                'description' => 'Tugas kelas 10 membuat tampilan website menggunakan HTML dan CSS. Project ini menunjukkan pemahaman fundamental dalam pembuatan halaman web statis dengan styling yang baik.',
+                'image_url' => 'mcd.png',
+                'demo_url' => null,
+                'github_url' => null,
+                'technologies' => ['HTML', 'CSS'],
+                'category' => 'web',
+                'year' => 2025,
+                'order' => 5,
+            ],
+
+            // Project 6: Canteen SMK N 1 Depok
+            [
+                'title' => 'Canteen SMK N 1 Depok',
+                'description' => 'Aplikasi Android untuk manajemen penjualan makanan dan minuman di kantin sekolah SMK N 1 Depok. Aplikasi ini menampilkan katalog produk, sistem pemesanan, dan tracking penjualan.',
+                'image_url' => 'canteensmkn1depok.png',
+                'demo_url' => null,
+                'github_url' => null,
+                'technologies' => ['Kotlin', 'Java', 'Android Studio'],
+                'category' => 'mobile',
+                'year' => 2025,
+                'order' => 6,
+            ],
+
+            // Project 7: Wandek Airlines
+            [
+                'title' => 'Wandek Airlines',
+                'description' => 'Website pemesanan tiket pesawat maskapai Wandek Airlines. Platform ini memungkinkan pengguna mencari, membandingkan, dan memesan tiket penerbangan dengan sistem pembayaran terintegrasi.',
+                'image_url' => 'wandekairlines.png',
+                'demo_url' => null,
+                'github_url' => null,
+                'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+                'category' => 'web',
+                'year' => 2025,
+                'order' => 7,
+            ],
+
+            // Project 8: PT Komari - Web Kursus
+            [
+                'title' => 'PT Komari - Web Kursus Online',
+                'description' => 'Website platform kursus online PT Komari yang memungkinkan pengguna melihat katalog kursus, mendaftar kelas, dan melacak progress belajar mereka dengan dashboard yang intuitif.',
+                'image_url' => 'Ptkomari.png',
+                'demo_url' => null,
+                'github_url' => null,
+                'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+                'category' => 'web',
+                'year' => 2025,
+                'order' => 8,
+            ],
+
+            // Project 9: Sarpras - Web Peminjaman Barang Sekolah
+            [
+                'title' => 'Sarpras - Sistem Peminjaman Barang',
+                'description' => 'Website sistem peminjaman sarana dan prasarana (barang sekolah) yang membantu siswa dan guru meminjam barang-barang untuk kebutuhan pembelajaran dan kegiatan sekolah.',
+                'image_url' => 'sarpras.png',
+                'demo_url' => null,
+                'github_url' => null,
+                'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+                'category' => 'web',
+                'year' => 2025,
+                'order' => 9,
+            ],
         ];
 
         // Insert all projects

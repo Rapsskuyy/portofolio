@@ -23,13 +23,33 @@
                 <h4 class="mb-4">Admin Raffa</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ Request::routeIs('admin.dashboard') ? 'active' : 'text-white-50' }}" href="{{ route('admin.dashboard') }}">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.dashboard') ? 'active' : 'text-white-50' }}" href="{{ route('admin.dashboard', ['key' => 'raffa']) }}">
                             <i class="fas fa-comments me-2"></i> Testimoni
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ Request::routeIs('admin.guestbook.index') ? 'active' : 'text-white-50' }}" href="{{ route('admin.guestbook.index') }}">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.guestbook.index') ? 'active' : 'text-white-50' }}" href="{{ route('admin.guestbook.index', ['key' => 'raffa']) }}">
                             <i class="fas fa-book me-2"></i> Buku Tamu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.coding_projects.index') ? 'active' : 'text-white-50' }}" href="{{ route('admin.coding_projects.index', ['key' => 'raffa']) }}">
+                            <i class="fas fa-laptop-code me-2"></i> Project Coding
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.project-details.*') ? 'active' : 'text-white-50' }}" href="{{ route('admin.project-details.index', ['key' => 'raffa']) }}">
+                            <i class="fas fa-layer-group me-2"></i> Project Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.posts.index') ? 'active' : 'text-white-50' }}" href="{{ route('admin.posts.index', ['key' => 'raffa']) }}">
+                            <i class="fas fa-newspaper me-2"></i> Blog Posts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ Request::routeIs('admin.mock_apis.index') ? 'active' : 'text-white-50' }}" href="{{ route('admin.mock_apis.index', ['key' => 'raffa']) }}">
+                            <i class="fas fa-server me-2"></i> Mock APIs
                         </a>
                     </li>
                     <li class="nav-item mt-4">

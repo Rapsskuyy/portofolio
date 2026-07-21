@@ -24,6 +24,8 @@
             <li><a href="#skills" class="nav-dot" data-tooltip="Skills"><span></span></a></li>
             <li><a href="#gallery" class="nav-dot" data-tooltip="Gallery"><span></span></a></li>
             <li><a href="#projects" class="nav-dot" data-tooltip="Projects"><span></span></a></li>
+            <li><a href="#api-playground" class="nav-dot" data-tooltip="API Playground"><span></span></a></li>
+            <li><a href="#blog" class="nav-dot" data-tooltip="Blog"><span></span></a></li>
             <li><a href="#experience" class="nav-dot" data-tooltip="Experience"><span></span></a></li>
             <li><a href="#testimonials" class="nav-dot" data-tooltip="Testimonials"><span></span></a></li>
             <li><a href="#guestbook" class="nav-dot" data-tooltip="Guestbook"><span></span></a></li>
@@ -32,6 +34,10 @@
             <a href="https://github.com/Rapsskuyy" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.instagram.com/rrapskuy/" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">
+            <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
     </nav>
 
     <!-- Main Content -->
@@ -48,13 +54,45 @@
                             <span class="hero-role-label">I'm a</span>
                             <span class="hero-role" id="roleRotator">Web Developer</span>
                         </div>
-                        <p class="hero-description">Siswa SMK PPLG yang passionate dalam backend development. Suka ngulik kode, bikin project seru, dan aktif di organisasi sekolah.</p>
+                        <p class="hero-description">Siswa SMK PPLG dengan fokus pada Backend Development. Senang merancang sistem yang efisien dan aktif berkolaborasi melalui organisasi sekolah</p>
                         <div class="hero-buttons">
-                            <a href="#gallery" class="btn-primary-custom">View Projects</a>
+                            <a href="#projects" class="btn-primary-custom">View Projects</a>
                             <a href="#guestbook" class="btn-secondary-custom">Say Hello</a>
                             <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-cv">
                                 <i class="fas fa-download"></i> Download CV
                             </a>
+                        </div>
+                        
+                        <div class="hero-tech-stack">
+                            <span class="tech-stack-label">Software & Tools I Use:</span>
+                            <div class="tech-marquee-container">
+                                <div class="tech-marquee">
+                                    <!-- Original set -->
+                                    <div class="tech-icon" title="VS Code"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"></div>
+                                    <div class="tech-icon" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub"></div>
+                                    <div class="tech-icon" title="Laragon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/laragon.svg" alt="Laragon"></div>
+
+                                    <div class="tech-icon" title="Canva"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canva"></div>
+                                    <div class="tech-icon" title="Figma"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma"></div>
+                                    <div class="tech-icon" title="Unity Hub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="Unity"></div>
+                                    <div class="tech-icon" title="Apache NetBeans"><img src="https://cdn.simpleicons.org/apache/white" alt="NetBeans"></div>
+                                    <div class="tech-icon" title="Eclipse IDE"><img src="https://cdn.simpleicons.org/eclipseide/white" alt="Eclipse"></div>
+                                    <div class="tech-icon" title="Team Viewer"><img src="https://cdn.simpleicons.org/teamviewer/white" alt="TeamViewer"></div>
+                                    <div class="tech-icon" title="Blender"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" alt="Blender"></div>
+                                    
+                                    <!-- Duplicated set for infinite loop -->
+                                    <div class="tech-icon" title="VS Code"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"></div>
+                                    <div class="tech-icon" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub"></div>
+                                    <div class="tech-icon" title="Laragon"><img src="https://laragon.org/logo.png" alt="Laragon"></div>
+                                    <div class="tech-icon" title="Canva"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canva"></div>
+                                    <div class="tech-icon" title="Figma"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma"></div>
+                                    <div class="tech-icon" title="Unity Hub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" alt="Unity"></div>
+                                    <div class="tech-icon" title="Apache NetBeans"><img src="https://cdn.simpleicons.org/apache/white" alt="NetBeans"></div>
+                                    <div class="tech-icon" title="Eclipse IDE"><img src="https://cdn.simpleicons.org/eclipseide/white" alt="Eclipse"></div>
+                                    <div class="tech-icon" title="Team Viewer"><img src="https://cdn.simpleicons.org/teamviewer/white" alt="TeamViewer"></div>
+                                    <div class="tech-icon" title="Blender"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" alt="Blender"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="hero-stats">
                             <div class="stat-item">
@@ -66,8 +104,12 @@
                                 <span class="stat-label">Organizations</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-number">{{ $testimonials->count() }}+</span>
+                                <span class="stat-number">25+</span>
                                 <span class="stat-label">Testimonials</span>
+                            </div>
+                            <div class="stat-item github-live-stat" style="cursor: pointer;" onclick="window.open('https://github.com/Rapsskuyy', '_blank')">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label"><i class="fab fa-github"></i> Public Repos</span>
                             </div>
                         </div>
                     </div>
@@ -75,7 +117,7 @@
                 <div class="hero-right">
                     <div class="hero-image-wrapper">
                         <div class="hero-image-bg"></div>
-                        <img src="{{ asset('images/profile/profilrappa.jpeg') }}" alt="Raffa" class="hero-image" onerror="this.src='{{ asset('storage/profile/raffa.jpg') }}'">
+                        <img src="{{ asset('images/profile/profilrappa.jpeg') }}" alt="Raffa" id="heroProfileImage" class="hero-image" style="transition: opacity 0.5s ease-in-out;" onerror="this.src='{{ asset('storage/profile/raffa.jpg') }}'">
                         <!-- Floating cards positioned above the profile image -->
                         <div class="floating-card card-top-1">
                             <i class="fas fa-code"></i>
@@ -405,7 +447,13 @@
 
                 <div class="projects-grid">
                     @forelse($codingProjects as $codingProject)
-                    <div class="project-card-new">
+                    <div class="project-card-new" onclick="openProjectDetails(this)" 
+                         data-title="{{ $codingProject->title }}" 
+                         data-desc="{{ $codingProject->description }}"
+                         data-tech="{{ is_array($codingProject->technologies) ? implode(',', $codingProject->technologies) : '' }}"
+                         data-arch="{{ $codingProject->architecture_diagram }}"
+                         data-schema="{{ $codingProject->database_schema }}"
+                         data-snippet="{{ $codingProject->code_snippet }}">
                         <div class="project-image-container">
                             @php
                                 // Support multiple path formats
@@ -455,6 +503,11 @@
                                     <i class="fab fa-github"></i> GitHub
                                 </a>
                                 @endif
+                                @if($codingProject->projectDetail)
+                                <button class="project-link-btn detail-btn" onclick="openProjectDetail({{ $codingProject->id }})">
+                                    <i class="fas fa-layer-group"></i> View Details
+                                </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -468,11 +521,228 @@
             </div>
         </section>
 
+        <!-- ==================== PROJECT DETAIL MODALS ==================== -->
+        @foreach($codingProjects as $cp)
+        @if($cp->projectDetail)
+        @php $detail = $cp->projectDetail; @endphp
+        <div class="project-detail-overlay" id="projectDetailModal{{ $cp->id }}">
+            <div class="project-detail-modal">
+                <button class="project-detail-close" onclick="closeProjectDetail({{ $cp->id }})"><i class="fas fa-times"></i></button>
+
+                <div class="project-detail-header">
+                    <div>
+                        <h2 class="project-detail-title">{{ $cp->title }}</h2>
+                        <div class="project-detail-meta">
+                            <span class="project-year-badge">{{ $cp->year }}</span>
+                            @if($cp->category)<span class="project-category ms-2">{{ ucfirst($cp->category) }}</span>@endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="project-detail-tabs">
+                    <button class="detail-tab active" onclick="switchTab({{ $cp->id }}, 'overview')">Overview</button>
+                    @if($detail->system_architecture)<button class="detail-tab" onclick="switchTab({{ $cp->id }}, 'architecture')">Architecture</button>@endif
+                    @if($detail->database_schema)<button class="detail-tab" onclick="switchTab({{ $cp->id }}, 'database')">Database</button>@endif
+                    @if($detail->code_snippets)<button class="detail-tab" onclick="switchTab({{ $cp->id }}, 'code')">Code Snippets</button>@endif
+                    @if($detail->technical_specs)<button class="detail-tab" onclick="switchTab({{ $cp->id }}, 'specs')">Tech Specs</button>@endif
+                </div>
+
+                <!-- Tab: Overview -->
+                <div class="detail-tab-content active" id="tab-{{ $cp->id }}-overview">
+                    <p class="project-detail-desc">{{ $cp->description }}</p>
+                    @if(count($cp->getTechnologiesArray()) > 0)
+                    <div class="project-tech-stack mt-3">
+                        @foreach($cp->getTechnologiesArray() as $tech)
+                        <span class="tech-badge">{{ $tech }}</span>
+                        @endforeach
+                    </div>
+                    @endif
+                    <div class="project-links-new mt-3">
+                        @if($cp->demo_url)<a href="{{ $cp->demo_url }}" target="_blank" class="project-link-btn demo-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>@endif
+                        @if($cp->github_url)<a href="{{ $cp->github_url }}" target="_blank" class="project-link-btn github-btn"><i class="fab fa-github"></i> GitHub</a>@endif
+                    </div>
+                </div>
+
+                <!-- Tab: Architecture -->
+                @if($detail->system_architecture)
+                <div class="detail-tab-content" id="tab-{{ $cp->id }}-architecture">
+                    <div class="architecture-content">
+                        <pre class="architecture-text">{{ $detail->system_architecture }}</pre>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Tab: Database -->
+                @if($detail->database_schema)
+                <div class="detail-tab-content" id="tab-{{ $cp->id }}-database">
+                    @php $schemas = is_array($detail->database_schema) ? $detail->database_schema : json_decode($detail->database_schema, true); @endphp
+                    <div class="database-schema">
+                        @foreach($schemas as $schema)
+                        @if(!empty($schema['table']))
+                        <div class="schema-table">
+                            <div class="schema-table-header"><i class="fas fa-table me-2"></i>{{ $schema['table'] }}</div>
+                            <div class="schema-columns">
+                                @foreach(explode(',', $schema['columns'] ?? '') as $col)
+                                <span class="schema-col">{{ trim($col) }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
+                <!-- Tab: Code Snippets -->
+                @if($detail->code_snippets)
+                <div class="detail-tab-content" id="tab-{{ $cp->id }}-code">
+                    @php $snippets = is_array($detail->code_snippets) ? $detail->code_snippets : json_decode($detail->code_snippets, true); @endphp
+                    @foreach($snippets as $snippet)
+                    @if(!empty($snippet['code']))
+                    <div class="code-snippet-block">
+                        <div class="snippet-header">
+                            <span class="snippet-title">{{ $snippet['title'] ?? 'Code Snippet' }}</span>
+                            <span class="snippet-lang">{{ strtoupper($snippet['language'] ?? 'CODE') }}</span>
+                        </div>
+                        <pre class="snippet-code"><code>{{ $snippet['code'] }}</code></pre>
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+                @endif
+
+                <!-- Tab: Tech Specs -->
+                @if($detail->technical_specs)
+                <div class="detail-tab-content" id="tab-{{ $cp->id }}-specs">
+                    <pre class="specs-text">{{ $detail->technical_specs }}</pre>
+                </div>
+                @endif
+
+            </div>
+        </div>
+        @endif
+        @endforeach
+
+        <!-- ==================== API PLAYGROUND SECTION ==================== -->
+        <section id="api-playground" class="api-playground-section">
+            <div class="container-fluid px-4">
+                <h2 class="section-title-modern">
+                    <span class="title-number">06.</span>
+                    <span class="title-text">API Playground</span>
+                </h2>
+                <p class="section-subtitle">Coba langsung API endpoint yang saya buat — klik tombol Send dan lihat response-nya secara real-time.</p>
+
+                <div class="api-playground-container">
+                    <!-- Left: Endpoint List -->
+                    <div class="api-endpoint-list">
+                        @forelse($mockApis as $api)
+                        <div class="api-endpoint-item {{ $loop->first ? 'active' : '' }}"
+                             data-endpoint="/api/v1/{{ $api->path }}"
+                             data-method="{{ $api->method }}"
+                             data-desc="{{ $api->description }}"
+                             onclick="selectEndpoint(this)">
+                            <span class="api-method-badge method-{{ strtolower($api->method) }}">{{ $api->method }}</span>
+                            <div class="api-endpoint-info">
+                                <span class="api-endpoint-path">/api/v1/{{ $api->path }}</span>
+                                <span class="api-endpoint-desc">{{ $api->description ?? 'No description' }}</span>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="api-empty">
+                            <i class="fas fa-plug fa-2x mb-2"></i>
+                            <p>Belum ada API endpoint. Tambahkan melalui admin panel.</p>
+                        </div>
+                        @endforelse
+                    </div>
+
+                    <!-- Right: Request/Response Panel -->
+                    <div class="api-response-panel">
+                        <div class="api-request-header">
+                            <div class="api-url-bar">
+                                <span class="api-method-tag" id="currentMethod">GET</span>
+                                <span class="api-url-text" id="currentEndpoint">Pilih endpoint di kiri</span>
+                            </div>
+                            <button class="api-send-btn" id="sendBtn" onclick="sendApiRequest()" disabled>
+                                <i class="fas fa-paper-plane me-2"></i>Send Request
+                            </button>
+                        </div>
+                        <div class="api-response-area">
+                            <div class="api-response-header">
+                                <span>Response</span>
+                                <div class="api-response-meta">
+                                    <span class="api-status" id="apiStatus"></span>
+                                    <span class="api-time" id="apiTime"></span>
+                                </div>
+                            </div>
+                            <pre class="api-response-body" id="apiResponseBody"><code class="api-code">// Pilih endpoint dan klik Send Request
+// Response JSON akan muncul di sini...</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BLOG SECTION ==================== -->
+        <section id="blog" class="blog-section">
+            <div class="container-fluid px-4">
+                <h2 class="section-title-modern">
+                    <span class="title-number">07.</span>
+                    <span class="title-text">Blog & Catatan</span>
+                </h2>
+                <p class="section-subtitle">Artikel singkat tentang apa yang sedang saya pelajari dan kerjakan</p>
+
+                @if($posts->count() > 0)
+                <div class="blog-grid">
+                    @foreach($posts->take(6) as $post)
+                    <article class="blog-card" onclick="openBlogModal({{ $post->id }})">
+                        <div class="blog-card-body">
+                            <div class="blog-meta">
+                                @if($post->category)
+                                <span class="blog-category">{{ $post->category }}</span>
+                                @endif
+                                <span class="blog-date">{{ $post->created_at->format('d M Y') }}</span>
+                            </div>
+                            <h3 class="blog-title">{{ $post->title }}</h3>
+                            <p class="blog-excerpt">{{ $post->excerpt }}</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <span class="blog-read-more">Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </article>
+                    @endforeach
+                </div>
+                @else
+                <div class="blog-empty">
+                    <i class="fas fa-pen-nib fa-3x mb-3"></i>
+                    <p>Belum ada artikel. Coming soon!</p>
+                </div>
+                @endif
+            </div>
+        </section>
+
+        <!-- Blog Modal -->
+        @foreach($posts as $post)
+        <div class="blog-modal-overlay" id="blogModal{{ $post->id }}">
+            <div class="blog-modal-container">
+                <button class="blog-modal-close" onclick="closeBlogModal({{ $post->id }})"><i class="fas fa-times"></i></button>
+                @if($post->category)
+                <span class="blog-category mb-2 d-inline-block">{{ $post->category }}</span>
+                @endif
+                <h2 class="blog-modal-title">{{ $post->title }}</h2>
+                <div class="blog-modal-meta">
+                    <span><i class="fas fa-calendar me-1"></i>{{ $post->created_at->format('d M Y') }}</span>
+                </div>
+                <div class="blog-modal-content">{!! $post->content !!}</div>
+            </div>
+        </div>
+        @endforeach
+
         <!-- Experience Section - Horizontal Timeline -->
         <section id="experience" class="experience-horizontal">
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">06.</span>
+                    <span class="title-number">08.</span>
                     <span class="title-text">Experience</span>
                 </h2>
 
@@ -530,7 +800,7 @@
         <section id="testimonials" class="testimonials-carousel">
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">07.</span>
+                    <span class="title-number">09.</span>
                     <span class="title-text">Testimonials</span>
                 </h2>
 
@@ -625,7 +895,7 @@
         <section id="guestbook" class="guestbook-chat">
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">08.</span>
+                    <span class="title-number">10.</span>
                     <span class="title-text">Guestbook</span>
                 </h2>
 
@@ -722,7 +992,81 @@
         </div>
     </div>
 
+    <!-- Project Technical Detail Modal -->
+    <div class="modal-overlay" id="projectDetailModal">
+        <div class="modal-container project-detail-modal">
+            <button class="modal-close" onclick="closeProjectDetailModal()"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title" id="modal-proj-title">Project Title</h3>
+            <div class="project-tags-row mb-3" id="modal-proj-tech">
+                <!-- Tech badges will be appended here -->
+            </div>
+            
+            <div class="modal-scroll-body">
+                <div class="modal-section mb-4">
+                    <h4 class="modal-sec-title"><i class="fas fa-align-left me-2"></i> Deskripsi</h4>
+                    <p id="modal-proj-desc" class="modal-sec-content">Project description goes here...</p>
+                </div>
+                
+                <div class="modal-section mb-4 d-none" id="sec-architecture">
+                    <h4 class="modal-sec-title"><i class="fas fa-network-wired me-2"></i> System Architecture</h4>
+                    <pre class="modal-sec-content text-box-spec" id="modal-proj-arch"></pre>
+                </div>
+                
+                <div class="modal-section mb-4 d-none" id="sec-schema">
+                    <h4 class="modal-sec-title"><i class="fas fa-database me-2"></i> Database Schema</h4>
+                    <pre class="modal-sec-content text-box-spec" id="modal-proj-schema"></pre>
+                </div>
+                
+                <div class="modal-section mb-4 d-none" id="sec-snippet">
+                    <h4 class="modal-sec-title"><i class="fas fa-code me-2"></i> Featured Code Snippet</h4>
+                    <pre class="modal-sec-content code-box-spec"><code id="modal-proj-snippet"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Article Reader Modal -->
+    <div class="modal-overlay" id="blogDetailModal">
+        <div class="modal-container blog-reader-modal">
+            <button class="modal-close" onclick="closeBlogDetailModal()"><i class="fas fa-times"></i></button>
+            <div class="blog-meta-top mb-2">
+                <span class="badge bg-primary" id="modal-blog-category">Category</span>
+                <span class="text-muted ms-2" id="modal-blog-date">Date</span>
+            </div>
+            <h2 class="modal-title mb-4" id="modal-blog-title">Blog Title</h2>
+            <div class="modal-scroll-body blog-content-body" id="modal-blog-content">
+                <!-- Content will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle Floating Button -->
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Ganti Tema">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/portfolio.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImage = document.getElementById('heroProfileImage');
+            if(profileImage) {
+                const images = [
+                    "{{ asset('images/profile/profilrappa.jpeg') }}",
+                    "{{ asset('images/profile/profile.jpeg') }}",
+                    "{{ asset('images/profile/rapoy122345.png') }}"
+                ];
+                let currentIndex = 0;
+                setInterval(() => {
+                    profileImage.style.opacity = 0;
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        profileImage.src = images[currentIndex];
+                        profileImage.style.opacity = 1;
+                    }, 500);
+                }, 3700);
+            }
+        });
+    </script>
 </body>
 </html>
