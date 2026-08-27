@@ -9,16 +9,6 @@ use Illuminate\Http\Request;
 
 class ProjectDetailController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if ($request->query('key') !== 'raffa') {
-                abort(403, 'Unauthorized');
-            }
-            return $next($request);
-        });
-    }
-
     public function index(Request $request)
     {
         $projects = CodingProject::with('projectDetail')->orderBy('order')->get();
@@ -45,7 +35,7 @@ class ProjectDetailController extends Controller
             $validated
         );
 
-        return redirect()->route('admin.project-details.index', ['key' => 'raffa'])
-            ->with('success', 'Project details updated successfully.');
+        return redirect()->route('admin.project-details.index')
+            ->with('success', 'Spesifikasi teknis project berhasil diperbarui.');
     }
 }

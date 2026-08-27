@@ -10,15 +10,26 @@ use App\Http\Controllers\CodingProjectController;
 use App\Http\Controllers\PostController;
 
 // Portfolio Routes
-Route::get('/', [PortfolioController::class, 'index'])->name('portfolio.index');
-Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.home');
+Route::get('/', [PortfolioController::class, 'home'])->name('portfolio.home');
+Route::get('/about', [PortfolioController::class, 'about'])->name('portfolio.about');
+Route::get('/skills', [PortfolioController::class, 'skills'])->name('portfolio.skills');
+Route::get('/experience', [PortfolioController::class, 'experience'])->name('portfolio.experience');
+Route::get('/guestbook', [PortfolioController::class, 'guestbook'])->name('portfolio.guestbook');
 Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])->name('testimonial.store');
 
 // Public Mock API Endpoint
 Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])->where('path', '.*');
 
-// Admin Dashboard Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Middleware\AdminAuthMiddleware;
+
+// Admin Auth Routes (Public)
+Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+// Admin Protected Routes
+Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->group(function () {
     // Testimonials
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::patch('/testimonials/{testimonial}/approve', [DashboardController::class, 'approve'])->name('testimonials.approve');
@@ -56,7 +67,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // Guest Book Public Route
 Route::post('/guestbook', [GuestBookController::class, 'store'])->name('guestbook.store');
 
-// Legacy route
+// Legacy route redirect
 Route::get('/index', function () {
-    return view('index');
+    return redirect()->route('portfolio.home');
+})->name('portfolio.index');
+Route::get('/portfolio', function () {
+    return redirect()->route('portfolio.home');
 });

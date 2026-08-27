@@ -12,11 +12,6 @@ class DashboardController extends Controller
 {
     public function index(Request $request): View
     {
-        // Proteksi sederhana: harus ada ?key=raffa di URL
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $testimonials = Testimonial::latest()->get();
         return view('admin.dashboard', compact('testimonials'));
     }

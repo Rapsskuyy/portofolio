@@ -27,12 +27,13 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'design',
                 'year' => 2025,
                 'order' => 1,
+                'type' => 'school',
             ],
 
             // Project 2: 3D Modeling Pedang
             [
                 'title' => '3D Modeling Pedang',
-                'description' => 'Modeling 3D pedang dengan detail tekstur dan material yang realistis. Project ini menunjukkan kemampuan dalam membuat objek 3D dengan detail yang kompleks.',
+                'description' => 'Modeling 3D pedang dengan detail tekstur and material yang realistis. Project ini menunjukkan kemampuan dalam membuat objek 3D dengan detail yang kompleks.',
                 'image_url' => 'pedang.png',
                 'demo_url' => null,
                 'github_url' => null,
@@ -40,6 +41,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'design',
                 'year' => 2025,
                 'order' => 2,
+                'type' => 'school',
             ],
 
             // Project 3: UI/UX Design Portfolio Website
@@ -53,6 +55,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'design',
                 'year' => 2025,
                 'order' => 3,
+                'type' => 'school',
             ],
 
             // Project 4: UI/UX Design Web Kursus PT Komari
@@ -66,6 +69,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'design',
                 'year' => 2025,
                 'order' => 4,
+                'type' => 'internship',
             ],
 
             // Project 5: MCD - HTML CSS Tugas Kelas 10
@@ -79,6 +83,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'web',
                 'year' => 2025,
                 'order' => 5,
+                'type' => 'school',
             ],
 
             // Project 6: Canteen SMK N 1 Depok
@@ -92,6 +97,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'mobile',
                 'year' => 2025,
                 'order' => 6,
+                'type' => 'school',
             ],
 
             // Project 7: Wandek Airlines
@@ -105,6 +111,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'web',
                 'year' => 2025,
                 'order' => 7,
+                'type' => 'school',
             ],
 
             // Project 8: PT Komari - Web Kursus
@@ -118,6 +125,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'web',
                 'year' => 2025,
                 'order' => 8,
+                'type' => 'internship',
             ],
 
             // Project 9: Sarpras - Web Peminjaman Barang Sekolah
@@ -131,6 +139,7 @@ class CodingProjectSeeder extends Seeder
                 'category' => 'web',
                 'year' => 2025,
                 'order' => 9,
+                'type' => 'school',
             ],
         ];
 

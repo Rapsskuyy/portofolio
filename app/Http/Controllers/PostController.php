@@ -12,10 +12,6 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $posts = Post::latest()->get();
         return view('admin.posts', compact('posts'));
     }
@@ -25,10 +21,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $validated = $request->validate([
             'title' => 'required|string|max:200',
             'content' => 'required|string',
@@ -47,10 +39,6 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $validated = $request->validate([
             'title' => 'required|string|max:200',
             'content' => 'required|string',
@@ -68,10 +56,6 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Post $post)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $post->delete();
         return back()->with('success', 'Blog post berhasil dihapus!');
     }

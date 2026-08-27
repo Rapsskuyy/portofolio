@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    console.log('🚀 Raffa Portfolio v2.0 Loaded!');
+    console.log('[SYS_INIT] Raffa Portfolio Cyber-Telemetry Loaded');
 });
 
 // ============================================================

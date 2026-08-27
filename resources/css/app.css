@@ -6,6 +6,661 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Cosmic Navy Background Tokens */
+    --color-cosmic-950: #080d1a;
+    --color-cosmic-900: #0b132b;
+    --color-cosmic-850: #0e1736;
+    --color-cosmic-800: #111c3a;
+    --color-cosmic-700: #1a2750;
+    --color-cosmic-600: #23346b;
+
+    /* Royal Cobalt Blue Brand Tokens */
+    --color-cobalt-950: #0f1d4a;
+    --color-cobalt-900: #1e3a8a;
+    --color-cobalt-800: #1e40af;
+    --color-cobalt-700: #1d4ed8;
+    --color-cobalt-600: #2563eb;
+    --color-cobalt-500: #3b82f6;
+    --color-cobalt-400: #60a5fa;
+    --color-cobalt-300: #93c5fd;
+    --color-cobalt-200: #bfdbfe;
+
+    /* Trophy Gold Prestige Tokens */
+    --color-gold-700: #a16207;
+    --color-gold-600: #ca8a04;
+    --color-gold-500: #eab308;
+    --color-gold-400: #facc15;
+    --color-gold-300: #fde047;
+    --color-gold-200: #fef08a;
+    --color-gold-100: #fef9c3;
+
+    /* Telemetry Diagnostics Tokens */
+    --color-telemetry-cyan: #06b6d4;
+    --color-telemetry-emerald: #10b981;
+    --color-telemetry-rose: #ef4444;
+    --color-telemetry-slate: #94a3b8;
+    --color-telemetry-muted: #64748b;
+
+    /* Typography Stacks */
+    --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+    --bg-cosmic-navy: #080d1a;
+    --surface-void-slate: #0b132b;
+    --surface-cockpit-border: #111c3a;
+    --surface-hud-glass: rgba(11, 19, 43, 0.75);
+    --accent-cobalt-primary: #2563eb;
+    --accent-cobalt-dark: #1d4ed8;
+    --accent-cobalt-glow: #3b82f6;
+    --accent-cobalt-light: #60a5fa;
+    --accent-gold-trophy: #facc15;
+    --accent-gold-dark: #eab308;
+    --accent-gold-light: #fef08a;
+    --accent-gold-bronze: #ca8a04;
+    --accent-gold-glow: rgba(250, 204, 21, 0.25);
+    --telemetry-cyan: #06b6d4;
+    --telemetry-emerald: #10b981;
+    --telemetry-rose: #ef4444;
+    --border-dim: rgba(255, 255, 255, 0.08);
+    --border-cobalt-active: rgba(37, 99, 235, 0.45);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted-telemetry: #64748b;
+}
+
+/* Base Document Reset & Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-cosmic-navy);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    scroll-padding-top: 100px;
+}
+
+body {
+    background-color: var(--bg-cosmic-navy);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings Tracking */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+}
+
+/* Monospace Telemetry Formatting */
+code, kbd, samp, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+/* ==========================================================================
+   CYBER-TELEMETRY CHAMFERED POLYGON SYSTEM
+   ========================================================================== */
+
+/* Dual Diagonal Chamfer (Top-Right & Bottom-Left) */
+.hud-chamfer {
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 14px) 0px,
+        100% 14px,
+        100% 100%,
+        14px 100%,
+        0px calc(100% - 14px)
+    );
+}
+
+.hud-chamfer-sm {
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 8px) 0px,
+        100% 8px,
+        100% 100%,
+        8px 100%,
+        0px calc(100% - 8px)
+    );
+}
+
+.hud-chamfer-lg {
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 20px) 0px,
+        100% 20px,
+        100% 100%,
+        20px 100%,
+        0px calc(100% - 20px)
+    );
+}
+
+/* Quad Symmetrical Cockpit Chamfer (All 4 Corners) */
+.hud-chamfer-quad {
+    clip-path: polygon(
+        12px 0px,
+        calc(100% - 12px) 0px,
+        100% 12px,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        12px 100%,
+        0px calc(100% - 12px),
+        0px 12px
+    );
+}
+
+.hud-chamfer-quad-lg {
+    clip-path: polygon(
+        18px 0px,
+        calc(100% - 18px) 0px,
+        100% 18px,
+        100% calc(100% - 18px),
+        calc(100% - 18px) 100%,
+        18px 100%,
+        0px calc(100% - 18px),
+        0px 18px
+    );
+}
+
+/* Dual-Layer Chamfer Container Architecture */
+.hud-card {
+    position: relative;
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 14px) 0px,
+        100% 14px,
+        100% 100%,
+        14px 100%,
+        0px calc(100% - 14px)
+    );
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(37, 99, 235, 0.15) 100%);
+    padding: 1px;
+    transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-card:hover {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(6, 182, 212, 0.4) 50%, rgba(37, 99, 235, 0.6) 100%);
+    filter: drop-shadow(0 0 16px rgba(37, 99, 235, 0.35));
+    transform: translateY(-2px);
+}
+
+.hud-card > .hud-card-body,
+.hud-card-body {
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 13.5px) 0px,
+        100% 13.5px,
+        100% 100%,
+        13.5px 100%,
+        0px calc(100% - 13.5px)
+    );
+    background-color: var(--surface-void-slate);
+    height: 100%;
+    width: 100%;
+}
+
+/* Prestige Trophy Gold Dual-Layer Card */
+.hud-card-gold {
+    position: relative;
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 16px) 0px,
+        100% 16px,
+        100% 100%,
+        16px 100%,
+        0px calc(100% - 16px)
+    );
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.75) 0%, rgba(202, 138, 4, 0.3) 50%, rgba(250, 204, 21, 0.5) 100%);
+    padding: 1px;
+    transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-card-gold:hover {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 1) 0%, rgba(254, 240, 138, 0.6) 50%, rgba(234, 179, 8, 0.9) 100%);
+    filter: drop-shadow(0 0 22px rgba(250, 204, 21, 0.4));
+    transform: translateY(-2px);
+}
+
+.hud-card-gold > .hud-card-body {
+    clip-path: polygon(
+        0px 0px,
+        calc(100% - 15.5px) 0px,
+        100% 15.5px,
+        100% 100%,
+        15.5px 100%,
+        0px calc(100% - 15.5px)
+    );
+    background-color: #0b132b;
+    height: 100%;
+    width: 100%;
+}
+
+/* Symmetrical Quad HUD Card */
+.hud-card-quad {
+    position: relative;
+    clip-path: polygon(
+        12px 0px,
+        calc(100% - 12px) 0px,
+        100% 12px,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        12px 100%,
+        0px calc(100% - 12px),
+        0px 12px
+    );
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(37, 99, 235, 0.2) 100%);
+    padding: 1px;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.hud-card-quad > .hud-card-body {
+    clip-path: polygon(
+        11.5px 0px,
+        calc(100% - 11.5px) 0px,
+        100% 11.5px,
+        100% calc(100% - 11.5px),
+        calc(100% - 11.5px) 100%,
+        11.5px 100%,
+        0px calc(100% - 11.5px),
+        0px 11.5px
+    );
+    background-color: var(--surface-void-slate);
+    height: 100%;
+    width: 100%;
+}
+
+/* ==========================================================================
+   CYBER-TELEMETRY HUD NAVIGATION CAPSULE & RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+.hud-nav {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-nav-desktop {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.hud-nav-mobile {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    width: calc(100vw - 24px);
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hud-nav-capsule {
+    width: 100%;
+}
+
+/* Mobile Viewport Adaptation (<768px): Prevent horizontal bleed, enforce touch targets */
+@media (max-width: 767px) {
+    .hud-nav-desktop {
+        display: none;
+    }
+
+    .hud-nav-mobile {
+        display: flex;
+        position: fixed;
+        bottom: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        z-index: 50;
+    }
+}
+
+/* Tablet Transition Viewport (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .hud-nav-desktop {
+        display: flex;
+    }
+}
+
+/* Desktop Viewport Adaptation (>=992px) */
+@media (min-width: 992px) {
+    .hud-nav-desktop {
+        display: flex;
+    }
+
+    .hud-nav-mobile {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   TELEMETRY BADGES & PILLS
+   ========================================================================== */
+
+.hud-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(17, 28, 58, 0.85);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    color: var(--color-cobalt-400);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+
+.hud-badge-gold {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(30, 24, 8, 0.85);
+    border: 1px solid rgba(250, 204, 21, 0.45);
+    color: var(--color-gold-400);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+
+.hud-badge-emerald {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(6, 32, 22, 0.85);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: var(--telemetry-emerald);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+
+.hud-badge-cyan {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(8, 28, 42, 0.85);
+    border: 1px solid rgba(6, 182, 212, 0.45);
+    color: var(--telemetry-cyan);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+
+.hud-badge-rose {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(42, 10, 18, 0.85);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    color: var(--telemetry-rose);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+
+/* ==========================================================================
+   BACKGROUND MESHES, GRIDS & SCANLINES
+   ========================================================================== */
+
+/* Sub-Pixel Telemetry Grid */
+.telemetry-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.14) 1px, transparent 0);
+    background-size: 24px 24px;
+}
+
+.telemetry-grid-dense {
+    background-image: radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.18) 1px, transparent 0);
+    background-size: 16px 16px;
+}
+
+/* CRT Telemetry Scanline Overlay */
+.telemetry-scanline {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(37, 99, 235, 0.03) 50%);
+    background-size: 100% 4px;
+}
+
+/* Radial Glow Orbs */
+.cobalt-orb {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(8, 13, 26, 0) 70%);
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+.gold-orb {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(250, 204, 21, 0.2) 0%, rgba(8, 13, 26, 0) 70%);
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+.cyan-orb {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(8, 13, 26, 0) 70%);
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+/* Avionics Reticle Brackets */
+.hud-corner-brackets {
+    position: relative;
+}
+
+.hud-corner-brackets::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #2563eb;
+    border-left: 2px solid #2563eb;
+    pointer-events: none;
+}
+
+.hud-corner-brackets::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid #2563eb;
+    border-right: 2px solid #2563eb;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES & UTILITIES
+   ========================================================================== */
+
+/* Radar Pulse for Live Status Beacon */
+@keyframes radar-pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.9;
+    }
+    70% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+.animate-radar-pulse {
+    animation: radar-pulse 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.animate-radar-pulse-delayed {
+    animation: radar-pulse 2.2s cubic-bezier(0.25, 1, 0.5, 1) 0.7s infinite;
+}
+
+/* Kinetic Telemetry Marquee Crawl */
+@keyframes marquee-crawl {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.telemetry-marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    border-top: 1px solid rgba(37, 99, 235, 0.25);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.25);
+    background: rgba(11, 19, 43, 0.7);
+    padding: 12px 0;
+}
+
+.telemetry-marquee-track {
+    display: inline-flex;
+    width: max-content;
+    animation: marquee-crawl 32s linear infinite;
+    will-change: transform;
+}
+
+.telemetry-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .telemetry-marquee-track {
+        animation: none;
+    }
+}
+
+/* Scanline Sweep */
+@keyframes scanline-sweep {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(1000%);
+    }
+}
+
+.animate-scanline-sweep {
+    animation: scanline-sweep 8s linear infinite;
+}
+
+/* Glowing Pulsing Accents */
+@keyframes pulse-cobalt-glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 22px rgba(37, 99, 235, 0.7));
+    }
+}
+
+.animate-pulse-cobalt {
+    animation: pulse-cobalt-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-gold-glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 26px rgba(250, 204, 21, 0.75));
+    }
+}
+
+.animate-pulse-gold {
+    animation: pulse-gold-glow 3s ease-in-out infinite;
+}
+
+/* Gentle Floating Element */
+@keyframes float-slow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.animate-float-slow {
+    animation: float-slow 5s ease-in-out infinite;
+}
+
+/* Content Fade In Up */
+.page-wrapper {
+    animation: fadeInUpHUD 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUpHUD {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Reveal Observer Class */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom Cockpit Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080d1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e3a8a;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2563eb;
 }

@@ -6,250 +6,425 @@
     <title>Edit Project Detail - {{ $codingProject->title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; }
-        .sidebar { min-height: 100vh; background: #212529; color: white; padding: 20px; }
+        :root {
+            --primary: #6366f1;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 16px;
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .nav-link-custom {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 4px;
+        }
+
+        .nav-link-custom:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link-custom.active {
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
         .main-content { padding: 30px; }
-        .card { border: none; box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075); }
-        textarea.code-area { font-family: 'Courier New', monospace; font-size: 13px; background: #1e1e1e; color: #d4d4d4; }
-        .schema-row { background: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
-        .snippet-row { background: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+
+        .card-custom {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header-dark {
+            background: rgba(15, 23, 42, 0.6);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            font-weight: 600;
+        }
+
+        .form-control, .form-select {
+            background-color: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #0f172a;
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+        }
+
+        .code-area {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: #0d1117 !important;
+            color: #a5b4fc !important;
+        }
+
+        .schema-row, .snippet-row {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .mobile-navbar {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 20px;
+        }
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar">
-            <h4 class="mb-4">Admin Raffa</h4>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a class="nav-link text-white-50" href="{{ route('admin.dashboard', ['key'=>'raffa']) }}"><i class="fas fa-comments me-2"></i> Testimoni</a></li>
-                <li class="nav-item"><a class="nav-link text-white-50" href="{{ route('admin.guestbook.index', ['key'=>'raffa']) }}"><i class="fas fa-book me-2"></i> Buku Tamu</a></li>
-                <li class="nav-item"><a class="nav-link text-white-50" href="{{ route('admin.coding_projects.index', ['key'=>'raffa']) }}"><i class="fas fa-laptop-code me-2"></i> Project Coding</a></li>
-                <li class="nav-item"><a class="nav-link text-white active" href="{{ route('admin.project-details.index', ['key'=>'raffa']) }}"><i class="fas fa-layer-group me-2"></i> Project Details</a></li>
-                <li class="nav-item"><a class="nav-link text-white-50" href="{{ route('admin.posts.index', ['key'=>'raffa']) }}"><i class="fas fa-newspaper me-2"></i> Blog Posts</a></li>
-                <li class="nav-item"><a class="nav-link text-white-50" href="{{ route('admin.mock_apis.index', ['key'=>'raffa']) }}"><i class="fas fa-server me-2"></i> Mock APIs</a></li>
-                <li class="nav-item mt-4"><a class="nav-link text-white-50" href="{{ route('portfolio.index') }}"><i class="fas fa-external-link-alt me-2"></i> Lihat Web</a></li>
-            </ul>
-        </nav>
 
-        <main class="col-md-10 ms-sm-auto main-content">
-            <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <div>
-                    <a href="{{ route('admin.project-details.index', ['key'=>'raffa']) }}" class="btn btn-sm btn-outline-secondary me-2">
-                        <i class="fas fa-arrow-left"></i> Kembali
-                    </a>
-                    <h1 class="h2 d-inline">{{ $codingProject->title }}</h1>
-                </div>
-                <span class="badge bg-primary">{{ $codingProject->year }} · {{ ucfirst($codingProject->category) }}</span>
-            </div>
-
-            @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
-            </div>
-            @endif
-
-            <form action="{{ route('admin.project-details.update', [$codingProject, 'key'=>'raffa']) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <!-- System Architecture -->
-                <div class="card mb-4">
-                    <div class="card-header bg-white fw-bold"><i class="fas fa-project-diagram text-primary me-2"></i>System Architecture</div>
-                    <div class="card-body">
-                        <p class="text-muted small">Jelaskan alur sistem project ini. Contoh: Client → Request → Controller → Model → Database → Response</p>
-                        <textarea name="system_architecture" class="form-control" rows="5" placeholder="Contoh:&#10;1. User membuka halaman&#10;2. Browser mengirim request ke Controller&#10;3. Controller memproses data dari Model&#10;4. Data dikembalikan ke View&#10;5. User melihat hasilnya">{{ old('system_architecture', $detail->system_architecture ?? '') }}</textarea>
-                    </div>
-                </div>
-
-                <!-- Database Schema -->
-                <div class="card mb-4">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <span class="fw-bold"><i class="fas fa-database text-success me-2"></i>Database Schema</span>
-                        <button type="button" class="btn btn-sm btn-outline-success" onclick="addSchemaRow()">+ Tambah Tabel</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted small">Tambahkan tabel-tabel database yang digunakan dalam project ini.</p>
-                        <div id="schema-container">
-                            @php
-                                $schemas = old('database_schema', $detail->database_schema ?? []);
-                                if (is_string($schemas)) $schemas = json_decode($schemas, true) ?? [];
-                            @endphp
-                            @forelse($schemas as $i => $schema)
-                            <div class="schema-row" id="schema-{{ $i }}">
-                                <div class="row g-2 align-items-start">
-                                    <div class="col-md-3">
-                                        <input type="text" name="database_schema[{{ $i }}][table]" class="form-control form-control-sm" placeholder="Nama tabel" value="{{ $schema['table'] ?? '' }}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="database_schema[{{ $i }}][columns]" class="form-control form-control-sm" placeholder="Kolom: id, name, email, created_at, ..." value="{{ $schema['columns'] ?? '' }}">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('schema-{{ $i }}')"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            @empty
-                            <div class="schema-row" id="schema-0">
-                                <div class="row g-2 align-items-start">
-                                    <div class="col-md-3">
-                                        <input type="text" name="database_schema[0][table]" class="form-control form-control-sm" placeholder="Nama tabel">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="database_schema[0][columns]" class="form-control form-control-sm" placeholder="Kolom: id, name, email, created_at, ...">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('schema-0')"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Code Snippets -->
-                <div class="card mb-4">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <span class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Snippets</span>
-                        <button type="button" class="btn btn-sm btn-outline-warning" onclick="addSnippetRow()">+ Tambah Snippet</button>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted small">Tambahkan cuplikan kode backend terbaik kamu.</p>
-                        <div id="snippet-container">
-                            @php
-                                $snippets = old('code_snippets', $detail->code_snippets ?? []);
-                                if (is_string($snippets)) $snippets = json_decode($snippets, true) ?? [];
-                            @endphp
-                            @forelse($snippets as $j => $snippet)
-                            <div class="snippet-row" id="snippet-{{ $j }}">
-                                <div class="row g-2 mb-2">
-                                    <div class="col-md-6">
-                                        <input type="text" name="code_snippets[{{ $j }}][title]" class="form-control form-control-sm" placeholder="Judul snippet (e.g: Auth Middleware)" value="{{ $snippet['title'] ?? '' }}">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <select name="code_snippets[{{ $j }}][language]" class="form-select form-select-sm">
-                                            <option value="php" {{ ($snippet['language'] ?? '') == 'php' ? 'selected' : '' }}>PHP</option>
-                                            <option value="javascript" {{ ($snippet['language'] ?? '') == 'javascript' ? 'selected' : '' }}>JavaScript</option>
-                                            <option value="sql" {{ ($snippet['language'] ?? '') == 'sql' ? 'selected' : '' }}>SQL</option>
-                                            <option value="kotlin" {{ ($snippet['language'] ?? '') == 'kotlin' ? 'selected' : '' }}>Kotlin</option>
-                                            <option value="java" {{ ($snippet['language'] ?? '') == 'java' ? 'selected' : '' }}>Java</option>
-                                            <option value="html" {{ ($snippet['language'] ?? '') == 'html' ? 'selected' : '' }}>HTML</option>
-                                            <option value="css" {{ ($snippet['language'] ?? '') == 'css' ? 'selected' : '' }}>CSS</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('snippet-{{ $j }}')"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <textarea name="code_snippets[{{ $j }}][code]" class="form-control code-area" rows="6" placeholder="Paste code di sini...">{{ $snippet['code'] ?? '' }}</textarea>
-                            </div>
-                            @empty
-                            <div class="snippet-row" id="snippet-0">
-                                <div class="row g-2 mb-2">
-                                    <div class="col-md-6">
-                                        <input type="text" name="code_snippets[0][title]" class="form-control form-control-sm" placeholder="Judul snippet (e.g: Auth Middleware)">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <select name="code_snippets[0][language]" class="form-select form-select-sm">
-                                            <option value="php">PHP</option>
-                                            <option value="javascript">JavaScript</option>
-                                            <option value="sql">SQL</option>
-                                            <option value="kotlin">Kotlin</option>
-                                            <option value="java">Java</option>
-                                            <option value="html">HTML</option>
-                                            <option value="css">CSS</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('snippet-0')"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <textarea name="code_snippets[0][code]" class="form-control code-area" rows="6" placeholder="Paste code di sini..."></textarea>
-                            </div>
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Technical Specs -->
-                <div class="card mb-4">
-                    <div class="card-header bg-white fw-bold"><i class="fas fa-cogs text-info me-2"></i>Technical Specs</div>
-                    <div class="card-body">
-                        <p class="text-muted small">Info teknis tambahan: server, hosting, dependencies khusus, dll.</p>
-                        <textarea name="technical_specs" class="form-control" rows="4" placeholder="Contoh:&#10;- PHP 8.2 + Laravel 11&#10;- MySQL 8.0&#10;- Hosted on localhost (Laragon)&#10;- Menggunakan JWT Authentication">{{ old('technical_specs', $detail->technical_specs ?? '') }}</textarea>
-                    </div>
-                </div>
-
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Simpan Detail</button>
-                    <a href="{{ route('admin.project-details.index', ['key'=>'raffa']) }}" class="btn btn-outline-secondary">Batal</a>
-                </div>
-            </form>
-        </main>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-let schemaCount = {{ count($schemas ?? []) }};
-let snippetCount = {{ count($snippets ?? []) }};
-
-function addSchemaRow() {
-    const container = document.getElementById('schema-container');
-    const div = document.createElement('div');
-    div.className = 'schema-row';
-    div.id = 'schema-' + schemaCount;
-    div.innerHTML = `
-        <div class="row g-2 align-items-start">
-            <div class="col-md-3">
-                <input type="text" name="database_schema[${schemaCount}][table]" class="form-control form-control-sm" placeholder="Nama tabel">
-            </div>
-            <div class="col-md-8">
-                <input type="text" name="database_schema[${schemaCount}][columns]" class="form-control form-control-sm" placeholder="Kolom: id, name, email, ...">
-            </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('schema-${schemaCount}')"><i class="fas fa-times"></i></button>
-            </div>
-        </div>`;
-    container.appendChild(div);
-    schemaCount++;
-}
-
-function addSnippetRow() {
-    const container = document.getElementById('snippet-container');
-    const div = document.createElement('div');
-    div.className = 'snippet-row';
-    div.id = 'snippet-' + snippetCount;
-    div.innerHTML = `
-        <div class="row g-2 mb-2">
-            <div class="col-md-6">
-                <input type="text" name="code_snippets[${snippetCount}][title]" class="form-control form-control-sm" placeholder="Judul snippet">
-            </div>
-            <div class="col-md-5">
-                <select name="code_snippets[${snippetCount}][language]" class="form-select form-select-sm">
-                    <option value="php">PHP</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="sql">SQL</option>
-                    <option value="kotlin">Kotlin</option>
-                    <option value="java">Java</option>
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow('snippet-${snippetCount}')"><i class="fas fa-times"></i></button>
-            </div>
+    <!-- Mobile Top Header -->
+    <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon">R</div>
+            <span class="fw-bold">Admin Raffa</span>
         </div>
-        <textarea name="code_snippets[${snippetCount}][code]" class="form-control code-area" rows="6" placeholder="Paste code di sini..."></textarea>`;
-    container.appendChild(div);
-    snippetCount++;
-}
+        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
 
-function removeRow(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-}
-</script>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
+                <div class="brand-header">
+                    <div class="brand-icon">R</div>
+                    <div>
+                        <h6 class="fw-bold mb-0">Raffa Admin</h6>
+                        <small class="text-secondary" style="font-size: 11px;">CMS Dashboard</small>
+                    </div>
+                </div>
+
+                <div class="nav flex-column">
+                    <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
+                    <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
+                    <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
+                    <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
+                    <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
+                    <a class="nav-link-custom active" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
+                    <hr style="border-color: var(--border-color); margin: 20px 0;">
+                    <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
+                    <form action="{{ route('admin.logout') }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent">
+                            <i class="fas fa-sign-out-alt text-danger"></i> Logout
+                        </button>
+                    </form>
+                </div>
+            </nav>
+
+            <!-- Offcanvas Mobile Drawer -->
+            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
+                <div class="offcanvas-header border-bottom border-secondary">
+                    <h5 class="offcanvas-title fw-bold">Menu Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="nav flex-column">
+                        <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
+                        <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
+                        <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
+                        <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
+                        <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
+                        <a class="nav-link-custom active" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
+                        <hr>
+                        <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
+                        <form action="{{ route('admin.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent mt-2">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light btn-sm rounded-2">
+                            <i class="fas fa-arrow-left me-1"></i> Kembali
+                        </a>
+                        <h3 class="fw-bold mb-0">{{ $codingProject->title }}</h3>
+                    </div>
+                    <span class="badge bg-indigo bg-opacity-20 text-indigo border border-indigo px-3 py-2 rounded-2" style="background: rgba(99,102,241,0.15); color: #a5b4fc;">
+                        {{ $codingProject->year }} · {{ ucfirst($codingProject->category) }}
+                    </span>
+                </div>
+
+                @if($errors->any())
+                    <div class="alert alert-danger bg-danger bg-opacity-20 text-danger border-0 rounded-3 mb-4">
+                        <ul class="mb-0">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('admin.project-details.update', $codingProject->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- System Architecture -->
+                    <div class="card-custom">
+                        <div class="card-header-dark text-indigo d-flex align-items-center gap-2">
+                            <i class="fas fa-project-diagram"></i> System Architecture
+                        </div>
+                        <div class="p-4">
+                            <p class="text-secondary small mb-3">Jelaskan alur sistem project ini (Client → Controller → Model → Database → Response).</p>
+                            <textarea name="system_architecture" class="form-control" rows="5" placeholder="1. User membuka halaman&#10;2. Request dikirim ke Backend Controller...">{{ old('system_architecture', $detail->system_architecture ?? '') }}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Database Schema -->
+                    <div class="card-custom">
+                        <div class="card-header-dark d-flex justify-content-between align-items-center">
+                            <span class="text-success"><i class="fas fa-database me-2"></i>Database Schema</span>
+                            <button type="button" class="btn btn-sm btn-outline-success rounded-2" onclick="addSchemaRow()">+ Tambah Tabel</button>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-secondary small mb-3">Tambahkan tabel-tabel database yang digunakan dalam project ini.</p>
+                            <div id="schema-container">
+                                @php
+                                    $schemas = old('database_schema', $detail->database_schema ?? []);
+                                    if (is_string($schemas)) $schemas = json_decode($schemas, true) ?? [];
+                                @endphp
+                                @forelse($schemas as $i => $schema)
+                                <div class="schema-row" id="schema-{{ $i }}">
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-md-4">
+                                            <input type="text" name="database_schema[{{ $i }}][table]" class="form-control" placeholder="Nama tabel" value="{{ $schema['table'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" name="database_schema[{{ $i }}][columns]" class="form-control" placeholder="Kolom: id, name, email, created_at, ..." value="{{ $schema['columns'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-{{ $i }}')"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @empty
+                                <div class="schema-row" id="schema-0">
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-md-4">
+                                            <input type="text" name="database_schema[0][table]" class="form-control" placeholder="Nama tabel">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" name="database_schema[0][columns]" class="form-control" placeholder="Kolom: id, name, email, created_at, ...">
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-0')"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippets -->
+                    <div class="card-custom">
+                        <div class="card-header-dark d-flex justify-content-between align-items-center">
+                            <span class="text-warning"><i class="fas fa-code me-2"></i>Code Snippets</span>
+                            <button type="button" class="btn btn-sm btn-outline-warning rounded-2" onclick="addSnippetRow()">+ Tambah Snippet</button>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-secondary small mb-3">Tambahkan cuplikan kode backend terbaik Anda.</p>
+                            <div id="snippet-container">
+                                @php
+                                    $snippets = old('code_snippets', $detail->code_snippets ?? []);
+                                    if (is_string($snippets)) $snippets = json_decode($snippets, true) ?? [];
+                                @endphp
+                                @forelse($snippets as $j => $snippet)
+                                <div class="snippet-row" id="snippet-{{ $j }}">
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-md-6">
+                                            <input type="text" name="code_snippets[{{ $j }}][title]" class="form-control" placeholder="Judul snippet (e.g: Auth Middleware)" value="{{ $snippet['title'] ?? '' }}">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <select name="code_snippets[{{ $j }}][language]" class="form-select">
+                                                <option value="php" {{ ($snippet['language'] ?? '') == 'php' ? 'selected' : '' }}>PHP</option>
+                                                <option value="javascript" {{ ($snippet['language'] ?? '') == 'javascript' ? 'selected' : '' }}>JavaScript</option>
+                                                <option value="sql" {{ ($snippet['language'] ?? '') == 'sql' ? 'selected' : '' }}>SQL</option>
+                                                <option value="kotlin" {{ ($snippet['language'] ?? '') == 'kotlin' ? 'selected' : '' }}>Kotlin</option>
+                                                <option value="java" {{ ($snippet['language'] ?? '') == 'java' ? 'selected' : '' }}>Java</option>
+                                                <option value="html" {{ ($snippet['language'] ?? '') == 'html' ? 'selected' : '' }}>HTML</option>
+                                                <option value="css" {{ ($snippet['language'] ?? '') == 'css' ? 'selected' : '' }}>CSS</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-{{ $j }}')"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <textarea name="code_snippets[{{ $j }}][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini...">{{ $snippet['code'] ?? '' }}</textarea>
+                                </div>
+                                @empty
+                                <div class="snippet-row" id="snippet-0">
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-md-6">
+                                            <input type="text" name="code_snippets[0][title]" class="form-control" placeholder="Judul snippet (e.g: Auth Middleware)">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <select name="code_snippets[0][language]" class="form-select">
+                                                <option value="php">PHP</option>
+                                                <option value="javascript">JavaScript</option>
+                                                <option value="sql">SQL</option>
+                                                <option value="kotlin">Kotlin</option>
+                                                <option value="java">Java</option>
+                                                <option value="html">HTML</option>
+                                                <option value="css">CSS</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 text-end">
+                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-0')"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <textarea name="code_snippets[0][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini..."></textarea>
+                                </div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Specs -->
+                    <div class="card-custom">
+                        <div class="card-header-dark text-info"><i class="fas fa-cogs me-2"></i>Technical Specs</div>
+                        <div class="p-4">
+                            <p class="text-secondary small mb-3">Info teknis tambahan: server, dependencies khusus, dll.</p>
+                            <textarea name="technical_specs" class="form-control" rows="4" placeholder="- PHP 8.2 + Laravel 11&#10;- SQLite / MySQL Database">{{ old('technical_specs', $detail->technical_specs ?? '') }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4 py-2 rounded-3" style="background: var(--primary); border: none;"><i class="fas fa-save me-2"></i>Simpan Technical Details</button>
+                        <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light px-4 py-2 rounded-3">Batal</a>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let schemaCount = {{ count($schemas ?? []) }};
+        let snippetCount = {{ count($snippets ?? []) }};
+
+        function addSchemaRow() {
+            const container = document.getElementById('schema-container');
+            const div = document.createElement('div');
+            div.className = 'schema-row';
+            div.id = 'schema-' + schemaCount;
+            div.innerHTML = `
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-4">
+                        <input type="text" name="database_schema[${schemaCount}][table]" class="form-control" placeholder="Nama tabel">
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" name="database_schema[${schemaCount}][columns]" class="form-control" placeholder="Kolom: id, name, email, ...">
+                    </div>
+                    <div class="col-md-1 text-end">
+                        <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-${schemaCount}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`;
+            container.appendChild(div);
+            schemaCount++;
+        }
+
+        function addSnippetRow() {
+            const container = document.getElementById('snippet-container');
+            const div = document.createElement('div');
+            div.className = 'snippet-row';
+            div.id = 'snippet-' + snippetCount;
+            div.innerHTML = `
+                <div class="row g-2 mb-2">
+                    <div class="col-md-6">
+                        <input type="text" name="code_snippets[${snippetCount}][title]" class="form-control" placeholder="Judul snippet">
+                    </div>
+                    <div class="col-md-5">
+                        <select name="code_snippets[${snippetCount}][language]" class="form-select">
+                            <option value="php">PHP</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="sql">SQL</option>
+                            <option value="kotlin">Kotlin</option>
+                            <option value="java">Java</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 text-end">
+                        <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-${snippetCount}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <textarea name="code_snippets[${snippetCount}][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini..."></textarea>`;
+            container.appendChild(div);
+            snippetCount++;
+        }
+
+        function removeRow(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+    </script>
 </body>
 </html>

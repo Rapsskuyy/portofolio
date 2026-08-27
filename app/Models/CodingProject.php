@@ -19,6 +19,7 @@ class CodingProject extends Model
         'architecture_diagram',
         'database_schema',
         'code_snippet',
+        'type',
     ];
 
     protected $casts = [

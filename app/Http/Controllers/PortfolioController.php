@@ -13,41 +13,58 @@ use Illuminate\Http\RedirectResponse;
 
 class PortfolioController extends Controller
 {
-    public function index(): View
+    public function home(): View
     {
-        $educations = Education::all();
-        $softSkills = Skill::where('type', 'soft')->get();
-        $hardSkills = Skill::where('type', 'hard')->get();
-        $projects = Project::all();
-        $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
-        $testimonials = Testimonial::where('is_approved', true)->latest()->take(6)->get();
-        $posts = \App\Models\Post::where('is_published', true)->latest()->get();
-        $mockApis = \App\Models\MockApi::where('is_active', true)->orderBy('id')->get();
-
-        // GitHub Stats (cached)
         $githubStats = \Illuminate\Support\Facades\Cache::remember('github_stats', 3600, function () {
             try {
-                $username = 'Rapsskuyy';
-                $url = "https://api.github.com/users/{$username}";
-                $ctx = stream_context_create(['http' => ['header' => "User-Agent: RaffaPortfolio\r\n", 'timeout' => 3]]);
-                $data = @file_get_contents($url, false, $ctx);
-                return $data ? json_decode($data, true) : null;
+                $response = \Illuminate\Support\Facades\Http::withHeaders([
+                    'User-Agent' => 'RaffaPortfolio'
+                ])->timeout(3)->get('https://api.github.com/users/Rapsskuyy');
+
+                return $response->successful() ? $response->json() : null;
             } catch (\Exception $e) {
                 return null;
             }
         });
 
-        return view('portfolio.index', [
-            'educations'   => $educations,
-            'softSkills'   => $softSkills,
-            'hardSkills'   => $hardSkills,
-            'projects'     => $projects,
-            'codingProjects' => $codingProjects,
-            'testimonials' => $testimonials,
-            'posts'        => $posts,
-            'mockApis'     => $mockApis,
-            'githubStats'  => $githubStats,
+        $projectsCount = \App\Models\Project::count();
+        $codingProjectsCount = CodingProject::count();
+        $testimonialsCount = Testimonial::where('is_approved', true)->count();
+
+        return view('portfolio.home', [
+            'githubStats' => $githubStats,
+            'projectsCount' => $projectsCount,
+            'codingProjectsCount' => $codingProjectsCount,
+            'testimonialsCount' => $testimonialsCount,
         ]);
+    }
+
+    public function about(): View
+    {
+        $educations = Education::all();
+        return view('portfolio.about', compact('educations'));
+    }
+
+    public function skills(): View
+    {
+        $softSkills = Skill::where('type', 'soft')->get();
+        $hardSkills = Skill::where('type', 'hard')->get();
+        return view('portfolio.skills', compact('softSkills', 'hardSkills'));
+    }
+
+    public function experience(): View
+    {
+        $projects = Project::all(); // Organisasi, MC, dll.
+        $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
+        return view('portfolio.experience', compact('projects', 'codingProjects'));
+    }
+
+    public function guestbook(): View
+    {
+        $testimonials = Testimonial::where('is_approved', true)->latest()->take(6)->get();
+        $posts = \App\Models\Post::where('is_published', true)->latest()->get();
+        $mockApis = \App\Models\MockApi::where('is_active', true)->orderBy('id')->get();
+        return view('portfolio.guestbook', compact('testimonials', 'posts', 'mockApis'));
     }
 
     public function storeTestimonial(Request $request): RedirectResponse

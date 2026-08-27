@@ -137,6 +137,28 @@ class PortfolioSeeder extends Seeder
             ]
         );
 
+        Project::updateOrCreate(
+            ['title' => "Master of Ceremony One's Harmony 2.0"],
+            [
+                'description' => "Menjadi Master of Ceremony pada event One's Harmony 2.0. Memandu jalannya seluruh rangkaian acara dari pembukaan hingga penutupan dengan energik dan profesional.",
+                'image_url' => 'projects/mcOH2.0.png',
+                'project_url' => '#',
+                'github_url' => '#',
+                'technologies' => json_encode(['Public Speaking', 'MC', 'Event Host', 'Communication']),
+            ]
+        );
+
+        Project::updateOrCreate(
+            ['title' => 'Ketua Pelaksana Sidang Triwulan OSIS 2025'],
+            [
+                'description' => 'Memimpin sidang triwulan OSIS 2025 sebagai Ketua Pelaksana. Sidang ini membahas evaluasi program kerja OSIS dan memberikan saran serta masukan agar program kerja dapat berjalan dengan baik dan lancar. Bertanggung jawab dalam koordinasi agenda, moderasi diskusi, dan penyusunan hasil sidang.',
+                'image_url' => 'projects/triwulan.jpg',
+                'project_url' => '#',
+                'github_url' => '#',
+                'technologies' => json_encode(['Leadership', 'Public Speaking', 'Event Management', 'Organizational Skills']),
+            ]
+        );
+
         // Testimonials table siap, menunggu pengunjung untuk mengisi
     }
 }

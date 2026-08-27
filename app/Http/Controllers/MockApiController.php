@@ -13,10 +13,6 @@ class MockApiController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $apis = MockApi::latest()->get();
         return view('admin.mock_apis', compact('apis'));
     }
@@ -26,10 +22,6 @@ class MockApiController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $validated = $request->validate([
             'path' => 'required|string|max:100',
             'method' => 'required|in:GET,POST',
@@ -56,10 +48,6 @@ class MockApiController extends Controller
      */
     public function update(Request $request, MockApi $mockApi)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $validated = $request->validate([
             'path' => 'required|string|max:100',
             'method' => 'required|in:GET,POST',
@@ -86,10 +74,6 @@ class MockApiController extends Controller
      */
     public function destroy(Request $request, MockApi $mockApi)
     {
-        if ($request->query('key') !== 'raffa') {
-            abort(403, 'Akses Ditolak. Gunakan kunci yang benar.');
-        }
-
         $mockApi->delete();
         return back()->with('success', 'Mock API berhasil dihapus!');
     }
