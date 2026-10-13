@@ -21,6 +21,11 @@ foreach ([
     'CACHE_STORE' => 'array',
     'SESSION_DRIVER' => 'cookie',
     'LOG_CHANNEL' => 'stderr',
+    'APP_CONFIG_CACHE' => $tmpPath.'/bootstrap/cache/config.php',
+    'APP_EVENTS_CACHE' => $tmpPath.'/bootstrap/cache/events.php',
+    'APP_PACKAGES_CACHE' => $tmpPath.'/bootstrap/cache/packages.php',
+    'APP_ROUTES_CACHE' => $tmpPath.'/bootstrap/cache/routes.php',
+    'APP_SERVICES_CACHE' => $tmpPath.'/bootstrap/cache/services.php',
 ] as $key => $value) {
     if (getenv($key) === false) {
         putenv("{$key}={$value}");
