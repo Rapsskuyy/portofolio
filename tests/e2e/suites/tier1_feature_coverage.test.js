@@ -84,11 +84,10 @@ export async function runTier1FeatureCoverageTests(context = {}) {
     // =========================================================================
     // FEATURE 2: Chamfered Polygon Card Geometry
     // =========================================================================
-    await test('T1.2.1', 'Chamfer Geometry: CSS clip-path polygon implementation', () => {
-        const hasClipPath = css.hasClipPathPolygon(aggregatedCss) ||
-            /clip-path\s*:\s*polygon\([^)]+\)/i.test(aggregatedViews) ||
-            aggregatedCss.includes('polygon(');
-        assertTrue(hasClipPath, 'Expected clip-path polygon definition in CSS or views');
+    await test('T1.2.1', 'Card Geometry: avoids clipping content with CSS masking', () => {
+        const usesMasking = css.hasClipPathPolygon(aggregatedCss) ||
+            /clip-path\s*:\s*polygon\([^)]+\)/i.test(aggregatedViews);
+        assertTrue(!usesMasking, 'Project content should not rely on a clipping polygon that can crop it at narrow widths');
     });
 
     await test('T1.2.2', 'Chamfer Geometry: Dual Diagonal Chamfer styling class', () => {

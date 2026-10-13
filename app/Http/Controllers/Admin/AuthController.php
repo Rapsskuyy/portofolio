@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -12,7 +13,7 @@ class AuthController extends Controller
      */
     public function showLogin()
     {
-        if (session('admin_authenticated')) {
+        if (Auth::user()?->is_admin) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -25,20 +26,22 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        $validUsername = 'raffa';
-        $validPassword = 'maygustosiraffakaybalqis';
+        if (Auth::attempt([
+            'email' => $request->string('email')->lower()->toString(),
+            'password' => $request->input('password'),
+            'is_admin' => true,
+        ])) {
+            $request->session()->regenerate();
 
-        if ($request->username === $validUsername && $request->password === $validPassword) {
-            session(['admin_authenticated' => true]);
             return redirect()->route('admin.dashboard')->with('success', 'Selamat datang kembali, Admin Raffa!');
         }
 
-        return back()->withInput($request->only('username'))->withErrors([
-            'login_error' => 'Username atau password yang Anda masukkan salah.'
+        return back()->withInput($request->only('email'))->withErrors([
+            'login' => 'Email atau password yang Anda masukkan salah.',
         ]);
     }
 
@@ -47,7 +50,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        session()->forget('admin_authenticated');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('admin.login')->with('success', 'Anda telah berhasil logout.');
     }
 }

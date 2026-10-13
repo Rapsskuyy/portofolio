@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>API Endpoints</h2>
-        <a href="{{ route('admin.api-endpoints.create', ['key' => 'raffa']) }}" class="btn btn-primary">
+        <a href="{{ route('admin.api-endpoints.create') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Add Endpoint
         </a>
     </div>
@@ -48,10 +48,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('admin.api-endpoints.edit', [$endpoint, 'key' => 'raffa']) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('admin.api-endpoints.edit', $endpoint) }}" class="btn btn-sm btn-info">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('admin.api-endpoints.destroy', [$endpoint, 'key' => 'raffa']) }}" method="POST" style="display: inline;">
+                                <form action="{{ route('admin.api-endpoints.destroy', $endpoint) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">

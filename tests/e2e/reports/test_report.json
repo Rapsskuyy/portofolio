@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-08-27T08:32:26.410Z",
+  "timestamp": "2026-10-13T14:08:16.428Z",
   "summary": {
     "total": 109,
-    "passed": 108,
-    "failed": 1,
-    "passRate": "99.1%",
-    "durationMs": 42
+    "passed": 109,
+    "failed": 0,
+    "passRate": "100.0%",
+    "durationMs": 46
   },
   "tiers": {
     "tier1_feature_coverage": {
@@ -23,7 +23,7 @@
           "id": "T1.1.2",
           "name": "Palette Token: Royal Cobalt Primary Brand Accent (#2563EB)",
           "passed": true,
-          "duration": 1
+          "duration": 2
         },
         {
           "id": "T1.1.3",
@@ -35,7 +35,7 @@
           "id": "T1.1.4",
           "name": "Palette Token: Surface Void Slate Base Container (#0B132B / #0F172A)",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T1.1.5",
@@ -45,7 +45,7 @@
         },
         {
           "id": "T1.2.1",
-          "name": "Chamfer Geometry: CSS clip-path polygon implementation",
+          "name": "Card Geometry: avoids clipping content with CSS masking",
           "passed": true,
           "duration": 0
         },
@@ -53,7 +53,7 @@
           "id": "T1.2.2",
           "name": "Chamfer Geometry: Dual Diagonal Chamfer styling class",
           "passed": true,
-          "duration": 1
+          "duration": 3
         },
         {
           "id": "T1.2.3",
@@ -293,13 +293,13 @@
           "id": "T1.10.2",
           "name": "3D Spatial Lab: SMKN 1 Depok Classroom Reconstruction (Cycles & PBR)",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T1.10.3",
           "name": "3D Spatial Lab: Hard-Surface Cyber Sword Model with Emissive Shaders",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T1.10.4",
@@ -389,7 +389,7 @@
           "id": "T1.13.3",
           "name": "Contrast Compliance: High-contrast text on dark background exceeds WCAG AAA (18.2:1)",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T1.13.4",
@@ -407,13 +407,13 @@
           "id": "T1.14.1",
           "name": "Build Config: package.json specifies build scripts and dependencies",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T1.14.2",
           "name": "Build Config: Vite config integrates Laravel and Tailwind plugins",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T1.14.3",
@@ -425,7 +425,7 @@
           "id": "T1.14.4",
           "name": "Build Assets: Public directory structure has required media folders",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T1.14.5",
@@ -437,14 +437,14 @@
     },
     "tier2_boundary_corner": {
       "total": 17,
-      "passed": 16,
-      "failed": 1,
+      "passed": 17,
+      "failed": 0,
       "results": [
         {
           "id": "T2.1.1",
-          "name": "Boundary: Null/Empty GitHub Telemetry Fallback handling",
+          "name": "Boundary: Homepage does not depend on an external GitHub request",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T2.1.2",
@@ -468,13 +468,13 @@
           "id": "T2.2.2",
           "name": "Asset Integrity: Executive CV PDF document exists and is non-empty",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T2.2.3",
           "name": "Asset Integrity: Coding project screenshots (Canteen, Komari, Wandek, Sarpras)",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T2.2.4",
@@ -503,10 +503,8 @@
         {
           "id": "T2.3.3",
           "name": "Extreme Viewport: Navigation adapts to mobile viewports without horizontal bleed",
-          "passed": false,
-          "error": "Expected navigation media queries adapting between mobile and desktop",
-          "stack": "AssertionError: Expected navigation media queries adapting between mobile and desktop\n    at assertTrue (file:///C:/laragon/www/test1%20-%20Copy/tests/e2e/helpers/assertion.js:22:15)\n    at file:///C:/laragon/www/test1%20-%20Copy/tests/e2e/suites/tier2_boundary_corner.test.js:145:9\n    at test (file:///C:/laragon/www/test1%20-%20Copy/tests/e2e/suites/tier2_boundary_corner.test.js:23:19)\n    at runTier2BoundaryCornerTests (file:///C:/laragon/www/test1%20-%20Copy/tests/e2e/suites/tier2_boundary_corner.test.js:139:11)\n    at async main (file:///C:/laragon/www/test1%20-%20Copy/tests/e2e/test_runner.js:62:28)",
-          "duration": 1
+          "passed": true,
+          "duration": 0
         },
         {
           "id": "T2.4.1",
@@ -518,19 +516,19 @@
           "id": "T2.4.2",
           "name": "Zero-Emoji Scan: Exhaustive scan of all CSS files in resources/ and public/",
           "passed": true,
-          "duration": 1
+          "duration": 2
         },
         {
           "id": "T2.4.3",
           "name": "Zero-Emoji Scan: Exhaustive scan of all JS files in resources/ and public/",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T2.4.4",
           "name": "Zero-Emoji Scan: Verify specific banned emojis are absent across views",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T2.5.1",
@@ -567,7 +565,7 @@
           "id": "T3.1.3",
           "name": "Anchor Coherence: Smooth scrolling offset prevents fixed HUD capsule occlusion",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T3.2.1",
@@ -585,7 +583,7 @@
           "id": "T3.2.3",
           "name": "CV Integration: CV download button in Hero section is synchronized with Navigation button",
           "passed": true,
-          "duration": 0
+          "duration": 1
         },
         {
           "id": "T3.3.1",
@@ -634,7 +632,7 @@
           "id": "T4.1.3",
           "name": "Scholarship Journey Step 3: Verify Official International English Proficiency (TOEIC)",
           "passed": true,
-          "duration": 1
+          "duration": 0
         },
         {
           "id": "T4.1.4",

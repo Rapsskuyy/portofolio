@@ -116,7 +116,7 @@ class PortfolioSeeder extends Seeder
         );
 
         Project::updateOrCreate(
-            ['title' => 'MC — Project Kolaborasi Nusantara'],
+            ['title' => 'MC: Project Kolaborasi Nusantara'],
             [
                 'description' => 'Menjadi MC pada acara Project Kolaborasi Nusantara: memandu acara, menjaga alur, serta berkoordinasi dengan tim produksi dan peserta agar acara berjalan lancar.',
                 'image_url' => 'projects/mc_kolaborasi_nusantara.jpg',

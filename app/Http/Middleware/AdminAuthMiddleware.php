@@ -12,12 +12,7 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Periksa apakah pengguna sudah terotentikasi via session atau URL key legacy
-        if (session('admin_authenticated') === true || $request->query('key') === 'raffa') {
-            // Jika masuk pakai query key raffa, otomatis simpan session agar nav bertahan
-            if ($request->query('key') === 'raffa') {
-                session(['admin_authenticated' => true]);
-            }
+        if ($request->user()?->is_admin) {
             return $next($request);
         }
 
@@ -26,7 +21,7 @@ class AdminAuthMiddleware
         }
 
         return redirect()->route('admin.login')->withErrors([
-            'auth_required' => 'Silakan login terlebih dahulu untuk mengakses Admin Panel.'
+            'auth_required' => 'Silakan login terlebih dahulu untuk mengakses Admin Panel.',
         ]);
     }
 }

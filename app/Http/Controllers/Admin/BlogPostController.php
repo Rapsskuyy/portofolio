@@ -8,19 +8,10 @@ use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if ($request->query('key') !== 'raffa') {
-                abort(403, 'Unauthorized');
-            }
-            return $next($request);
-        });
-    }
-
     public function index(Request $request)
     {
         $posts = BlogPost::orderBy('created_at', 'desc')->get();
+
         return view('admin.blog-posts.index', compact('posts'));
     }
 
@@ -49,7 +40,7 @@ class BlogPostController extends Controller
 
         BlogPost::create($validated);
 
-        return redirect()->route('admin.blog-posts.index', ['key' => 'raffa'])
+        return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post created successfully.');
     }
 
@@ -62,7 +53,7 @@ class BlogPostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:blog_posts,slug,' . $blogPost->id,
+            'slug' => 'nullable|string|max:255|unique:blog_posts,slug,'.$blogPost->id,
             'content' => 'required|string',
             'excerpt' => 'nullable|string',
             'category' => 'nullable|string|max:100',
@@ -78,7 +69,7 @@ class BlogPostController extends Controller
 
         $blogPost->update($validated);
 
-        return redirect()->route('admin.blog-posts.index', ['key' => 'raffa'])
+        return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post updated successfully.');
     }
 
@@ -86,7 +77,7 @@ class BlogPostController extends Controller
     {
         $blogPost->delete();
 
-        return redirect()->route('admin.blog-posts.index', ['key' => 'raffa'])
+        return redirect()->route('admin.blog-posts.index')
             ->with('success', 'Blog post deleted successfully.');
     }
 }

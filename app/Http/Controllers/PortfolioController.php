@@ -13,30 +13,26 @@ use Illuminate\Http\RedirectResponse;
 
 class PortfolioController extends Controller
 {
+    public function index(): View
+    {
+        $educations = Education::all();
+        $softSkills = Skill::where('type', 'soft')->get();
+        $hardSkills = Skill::where('type', 'hard')->get();
+        $projects = Project::where('is_visible', true)->orderBy('order')->orderBy('id', 'asc')->get();
+        $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
+
+        return view('portfolio.index', [
+            'educations'     => $educations,
+            'softSkills'     => $softSkills,
+            'hardSkills'     => $hardSkills,
+            'projects'       => $projects,
+            'codingProjects' => $codingProjects,
+        ]);
+    }
+
     public function home(): View
     {
-        $githubStats = \Illuminate\Support\Facades\Cache::remember('github_stats', 3600, function () {
-            try {
-                $response = \Illuminate\Support\Facades\Http::withHeaders([
-                    'User-Agent' => 'RaffaPortfolio'
-                ])->timeout(3)->get('https://api.github.com/users/Rapsskuyy');
-
-                return $response->successful() ? $response->json() : null;
-            } catch (\Exception $e) {
-                return null;
-            }
-        });
-
-        $projectsCount = \App\Models\Project::count();
-        $codingProjectsCount = CodingProject::count();
-        $testimonialsCount = Testimonial::where('is_approved', true)->count();
-
-        return view('portfolio.home', [
-            'githubStats' => $githubStats,
-            'projectsCount' => $projectsCount,
-            'codingProjectsCount' => $codingProjectsCount,
-            'testimonialsCount' => $testimonialsCount,
-        ]);
+        return $this->index();
     }
 
     public function about(): View
@@ -54,7 +50,7 @@ class PortfolioController extends Controller
 
     public function experience(): View
     {
-        $projects = Project::all(); // Organisasi, MC, dll.
+        $projects = Project::all();
         $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
         return view('portfolio.experience', compact('projects', 'codingProjects'));
     }
@@ -62,8 +58,8 @@ class PortfolioController extends Controller
     public function guestbook(): View
     {
         $testimonials = Testimonial::where('is_approved', true)->latest()->take(6)->get();
-        $posts = \App\Models\Post::where('is_published', true)->latest()->get();
-        $mockApis = \App\Models\MockApi::where('is_active', true)->orderBy('id')->get();
+        $posts = Post::where('is_published', true)->latest()->get();
+        $mockApis = MockApi::where('is_active', true)->orderBy('id')->get();
         return view('portfolio.guestbook', compact('testimonials', 'posts', 'mockApis'));
     }
 
@@ -82,4 +78,3 @@ class PortfolioController extends Controller
         return redirect()->back()->with('success', 'Terima kasih! Testimoni Anda sedang diproses.');
     }
 }
-

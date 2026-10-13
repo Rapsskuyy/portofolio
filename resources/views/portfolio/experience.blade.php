@@ -231,17 +231,7 @@
                 @forelse($projects as $project)
                 <div class="project-card-premium">
                     <div class="project-img-wrapper">
-                        @php
-                            $imagePath = $project->image_url;
-                            if (strpos($imagePath, 'storage/') === 0 || strpos($imagePath, 'images/') === 0) {
-                                $imageUrl = asset($imagePath);
-                            } elseif (strpos($imagePath, 'projects/') === 0) {
-                                $imageUrl = asset('images/' . $imagePath);
-                            } else {
-                                $imageUrl = asset('images/projects/' . $imagePath);
-                            }
-                        @endphp
-                        <img src="{{ $imageUrl }}" alt="{{ $project->title }}" onerror="this.src='{{ asset('images/projects/default.png') }}'">
+                        <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" onerror="this.src='{{ asset('images/projects/default.png') }}'">
                     </div>
                     <div class="project-content-premium">
                         <h3 class="project-title-premium">{{ $project->title }}</h3>

@@ -18,7 +18,7 @@ class GuestBookController extends Controller
 
         GuestBook::create($request->all());
 
-        return back()->with('success_guestbook', 'Terima kasih telah mengisi buku tamu!');
+        return back()->with('success_guestbook', 'Thank you for your message! It has been received.');
     }
 
     // ADMIN lihat

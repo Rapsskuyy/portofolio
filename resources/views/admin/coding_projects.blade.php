@@ -206,6 +206,9 @@
                     <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}">
                         <i class="fas fa-book"></i> Buku Tamu
                     </a>
+                    <a class="nav-link-custom" href="{{ route('admin.projects.index') }}">
+                        <i class="fas fa-images"></i> Galeri Project
+                    </a>
                     <a class="nav-link-custom active" href="{{ route('admin.coding_projects.index') }}">
                         <i class="fas fa-laptop-code"></i> Project Coding
                     </a>

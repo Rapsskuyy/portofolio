@@ -8,19 +8,10 @@ use Illuminate\Http\Request;
 
 class ApiEndpointController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if ($request->query('key') !== 'raffa') {
-                abort(403, 'Unauthorized');
-            }
-            return $next($request);
-        });
-    }
-
     public function index(Request $request)
     {
         $endpoints = ApiEndpoint::orderBy('order')->get();
+
         return view('admin.api-endpoints.index', compact('endpoints'));
     }
 
@@ -43,7 +34,7 @@ class ApiEndpointController extends Controller
 
         ApiEndpoint::create($validated);
 
-        return redirect()->route('admin.api-endpoints.index', ['key' => 'raffa'])
+        return redirect()->route('admin.api-endpoints.index')
             ->with('success', 'API Endpoint created successfully.');
     }
 
@@ -66,7 +57,7 @@ class ApiEndpointController extends Controller
 
         $apiEndpoint->update($validated);
 
-        return redirect()->route('admin.api-endpoints.index', ['key' => 'raffa'])
+        return redirect()->route('admin.api-endpoints.index')
             ->with('success', 'API Endpoint updated successfully.');
     }
 
@@ -74,7 +65,7 @@ class ApiEndpointController extends Controller
     {
         $apiEndpoint->delete();
 
-        return redirect()->route('admin.api-endpoints.index', ['key' => 'raffa'])
+        return redirect()->route('admin.api-endpoints.index')
             ->with('success', 'API Endpoint deleted successfully.');
     }
 }

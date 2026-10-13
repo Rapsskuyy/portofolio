@@ -1,298 +1,292 @@
-{{-- ==========================================================================
-     HERO COCKPIT COMPONENT (CYBER-TELEMETRY HUD)
-     Authoritative Candidate: Raffa Nur Musyaffa (SMKN 1 Depok - PPLG)
-     Design System: Cosmic Navy (#080D1A), Royal Cobalt (#2563EB), Trophy Gold (#FACC15)
-     Iconography: Strict Zero-Emoji Standard (100% Lucide Vector Line Icons)
-     ========================================================================== --}}
+{{-- Hero — Premium Technical Editorial --}}
+<style>
+    /* ── HERO ── */
+    .hero-section {
+        min-height: calc(100vh - 60px);
+        display: flex; align-items: center;
+        padding: 80px 0 64px;
+        position: relative;
+    }
 
-<section id="hero" class="relative min-h-[calc(100vh-5rem)] flex items-center justify-center py-12 lg:py-20 overflow-hidden">
-    <div id="cockpit" class="scroll-mt-24"></div>
-    
-    <!-- Ambient Cockpit Atmospheric Glow Orbs -->
-    <div class="cobalt-orb w-72 h-72 sm:w-96 sm:h-96 -top-20 -left-20 opacity-30 z-0"></div>
-    <div class="gold-orb w-64 h-64 sm:w-80 sm:h-80 top-1/2 -right-20 opacity-20 z-0"></div>
+    .hero-wrap {
+        max-width: 1280px; margin: 0 auto; padding: 0 28px; width: 100%;
+    }
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            <!-- ==============================================================
-                 LEFT COLUMN: EXECUTIVE HOOK, TELEMETRY STATUS, CTAs, KPI CARDS
-                 ============================================================== -->
-            <div class="lg:col-span-7 flex flex-col justify-center space-y-6 animate-on-scroll">
-                
-                <!-- Telemetry Status Ribbon & Monospace Category Badge -->
-                <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                    
-                    <!-- Live Operational Status Tracker -->
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-cosmic-900/90 border border-emerald-500/30 backdrop-blur-md shadow-inner">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-radar-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                        <span class="font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-emerald-400">
-                            SYS_TELEMETRY // LOC: DEPOK, ID // STATUS: ACTIVE
-                        </span>
-                    </div>
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 56px;
+        align-items: center;
+    }
 
-                    <!-- Micro-Header Systems Tag -->
-                    <div class="hud-badge text-[11px] sm:text-xs text-cobalt-300 border-cobalt-500/40 bg-cosmic-900/70">
-                        <i data-lucide="terminal" class="w-3.5 h-3.5 text-cobalt-400"></i>
-                        <span>// SYSTEMS ARCHITECTURE & HIGH-CONCURRENCY BACKEND //</span>
-                    </div>
+    @media (min-width: 900px) {
+        .hero-grid { grid-template-columns: 1.15fr 0.85fr; }
+    }
+
+    /* name */
+    .hero-name {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(3rem, 7.5vw, 6.2rem);
+        font-weight: 800;
+        line-height: 0.94;
+        letter-spacing: -0.04em;
+        color: #fafafa;
+        margin: 0;
+    }
+    .hero-name .accent { color: #4f46e5; }
+
+    /* eyebrow */
+    .hero-eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+        color: #3f3f46;
+        display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+        content: ''; display: block; width: 26px; height: 1px; background: #4f46e5; flex-shrink: 0;
+    }
+
+    /* tagline */
+    .hero-tagline {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: clamp(0.75rem, 1.3vw, 0.88rem);
+        color: #3f3f46; letter-spacing: 0.01em; line-height: 1.75;
+        border-left: 2px solid #27272a;
+        padding-left: 16px;
+        margin: 0;
+    }
+
+    /* CTA row */
+    .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+    .btn-p {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 11px 22px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.73rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+        text-decoration: none; border-radius: 4px; white-space: nowrap;
+        transition: background .2s, box-shadow .2s, border-color .2s, color .2s;
+        cursor: pointer;
+    }
+    .btn-p.primary {
+        background: #4f46e5; color: #fafafa;
+        border: 1px solid #6366f1;
+    }
+    .btn-p.primary:hover { background: #4338ca; box-shadow: 0 0 0 3px rgba(79,70,229,.18); }
+
+    .btn-p.ghost {
+        background: transparent; color: #71717a;
+        border: 1px solid #27272a;
+    }
+    .btn-p.ghost:hover { border-color: #52525b; color: #fafafa; }
+
+    .btn-p.amber {
+        background: transparent; color: #ca8a04;
+        border: 1px solid rgba(202,138,4,.3);
+    }
+    .btn-p.amber:hover { background: rgba(202,138,4,.06); border-color: rgba(202,138,4,.55); }
+
+    /* data table */
+    .ach-table { width: 100%; border-collapse: collapse; }
+    .ach-table thead tr { border-bottom: 1px solid #18181b; }
+    .ach-table thead td {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+        color: #27272a; padding: 0 10px 10px;
+    }
+    .ach-table tbody tr { border-bottom: 1px solid #18181b; transition: background .12s; }
+    .ach-table tbody tr:last-child { border-bottom: none; }
+    .ach-table tbody tr:hover { background: #0f0f12; }
+    .ach-table td { padding: 14px 10px; vertical-align: middle; }
+
+    .td-lbl {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+        color: #3f3f46; white-space: nowrap; width: 100px;
+    }
+    .td-val {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.84rem; font-weight: 600; color: #fafafa;
+    }
+    .td-sub {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.62rem; color: #52525b; letter-spacing: 0.03em; margin-top: 2px;
+    }
+    .td-right { text-align: right; }
+
+    .badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 3px 8px; border-radius: 3px; white-space: nowrap;
+    }
+    .badge.ok    { background: rgba(34,197,94,.08);  color: #22c55e; border: 1px solid rgba(34,197,94,.2); }
+    .badge.warn  { background: rgba(202,138,4,.09);  color: #ca8a04; border: 1px solid rgba(202,138,4,.22); }
+    .badge.blue  { background: rgba(79,70,229,.1);   color: #818cf8; border: 1px solid rgba(79,70,229,.25); }
+    .badge.muted { background: rgba(39,39,42,.6);    color: #71717a; border: 1px solid #27272a; }
+
+    /* profile */
+    .profile-outer {
+        position: relative; max-width: 340px; width: 100%; margin: 0 auto;
+    }
+    .profile-shadow {
+        position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px;
+        border: 1px solid #18181b; border-radius: 6px; pointer-events: none;
+    }
+    .profile-frame {
+        position: relative; z-index: 1;
+        border: 1px solid #27272a; border-radius: 6px; overflow: hidden;
+    }
+    .profile-frame img {
+        width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
+        display: block; filter: grayscale(10%) contrast(1.04);
+    }
+    .profile-fade {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(9,9,11,.88) 0%, rgba(9,9,11,.05) 55%, transparent 100%);
+        pointer-events: none;
+    }
+    .profile-corner {
+        position: absolute; top: 11px; right: 12px; z-index: 2;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+        color: #3f3f46;
+        display: flex; align-items: center; gap: 5px;
+    }
+    .profile-meta {
+        position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+        padding: 12px 14px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase;
+        color: #52525b;
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .profile-tag {
+        position: absolute; bottom: -18px; right: -14px; z-index: 3;
+        background: #0f0f12; border: 1px solid #27272a; border-radius: 4px;
+        padding: 8px 12px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
+        color: #52525b;
+        display: flex; align-items: center; gap: 7px;
+        white-space: nowrap;
+    }
+</style>
+
+<section class="hero-section">
+    <div id="cockpit" style="position:absolute;top:0;"></div>
+
+    <div class="hero-wrap">
+        <div class="hero-grid reveal">
+
+            {{-- LEFT --}}
+            <div style="display:flex;flex-direction:column;gap:30px;">
+
+                <div class="hero-eyebrow">
+                    <span class="status-dot"></span>
+                    <span>Backend Architect · SMKN 1 Depok · Depok, ID</span>
                 </div>
 
-                <!-- Dual-Line Candidate Display Typography -->
-                <div class="space-y-2">
-                    <div class="font-mono text-xs sm:text-sm font-semibold tracking-widest text-cobalt-400 uppercase flex items-center gap-2">
-                        <span class="inline-block w-6 h-[1px] bg-cobalt-500"></span>
-                        <span>Candidate Profile & Scholarship Aspirant</span>
-                    </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
-                        Raffa Nur 
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cobalt-400 via-cobalt-500 to-cyan-400 drop-shadow-sm">
-                            Musyaffa
-                        </span>
-                    </h1>
+                <h1 class="hero-name">
+                    Raffa Nur<br>
+                    <span class="accent">Musyaffa</span>
+                </h1>
 
-                    <div class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-200 tracking-tight leading-snug pt-1">
-                        Engineering Resilient Backend Systems &amp; Cryptographic Architectures.
-                    </div>
-                </div>
-
-                <!-- Executive Mission Statement -->
-                <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-sans max-w-2xl">
-                    Software Engineering scholar at <span class="text-white font-medium">SMKN 1 Depok</span>, National Gold Medalist in Informatics, and specialized backend developer. Focused on database concurrency control, cryptographic ballot verification, and distributed web architectures engineered for high-throughput institutional integrity.
+                <p class="hero-tagline">
+                    Engineering resilient backend systems &amp; cryptographic architectures.<br>
+                    High-concurrency databases · Distributed web · Ballot integrity protocols.
                 </p>
 
-                <!-- Primary & Secondary Command CTAs (Zero Emojis / Strict Lucide Icons) -->
-                <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
-                    
-                    <!-- Primary CTA: Flagship Deep Dive -->
-                    <a href="#flagship" 
-                       class="hud-chamfer-sm inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 text-xs sm:text-sm font-mono font-bold tracking-wider text-white bg-gradient-to-r from-cobalt-600 via-cobalt-700 to-cobalt-800 hover:from-cobalt-500 hover:to-cyan-600 border border-cobalt-400/50 shadow-lg shadow-cobalt-600/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-decoration-none">
-                        <i data-lucide="zap" class="w-4 h-4 text-cyan-300"></i>
-                        <span>Inspect Flagship Architecture</span>
+                <div class="hero-ctas">
+                    <a href="#flagship" class="btn-p primary">
+                        <i data-lucide="arrow-right" style="width:14px;height:14px;flex-shrink:0;"></i>
+                        <span>Flagship Project</span>
                     </a>
-
-                    <!-- Secondary CTA: Honors Spotlight -->
-                    <a href="#honors" 
-                       class="hud-chamfer-sm inline-flex items-center gap-2.5 px-4 sm:px-5 py-3 text-xs sm:text-sm font-mono font-bold tracking-wider text-gold-300 bg-cosmic-900/90 hover:bg-gold-500/10 border border-gold-400/40 hover:border-gold-400 shadow-md shadow-gold-500/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-decoration-none">
-                        <i data-lucide="award" class="w-4 h-4 text-gold-400"></i>
-                        <span>Review Honors &amp; Merit</span>
+                    <a href="#honors" class="btn-p ghost">
+                        <i data-lucide="trophy" style="width:13px;height:13px;flex-shrink:0;"></i>
+                        <span>Honors</span>
                     </a>
-
-                    <!-- Direct CV Download Action -->
-                    <a href="{{ asset('files/CV .pdf') }}" download 
-                       class="hud-chamfer-sm inline-flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-mono font-medium tracking-wider text-slate-300 hover:text-white bg-cosmic-950/80 hover:bg-white/5 border border-white/10 hover:border-white/25 transition-all duration-300 text-decoration-none"
-                       title="Download Executive CV (PDF)">
-                        <i data-lucide="file-down" class="w-4 h-4 text-gold-400"></i>
-                        <span>Executive CV</span>
+                    <a href="{{ asset('files/CV .pdf') }}" download class="btn-p amber">
+                        <i data-lucide="file-down" style="width:13px;height:13px;flex-shrink:0;"></i>
+                        <span>Download CV</span>
                     </a>
                 </div>
 
-                <!-- 4 KPI Telemetry Cards Matrix -->
-                <div class="pt-2">
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5">
-                        
-                        <!-- KPI Card 1: Concurrency / Double-Vote Hazard -->
-                        <div class="hud-card group">
-                            <div class="hud-card-body p-3 sm:p-3.5 flex flex-col justify-between h-full bg-cosmic-900/90 border-t border-cobalt-500/20">
-                                <div class="flex items-center justify-between mb-1.5">
-                                    <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase">Hazard Rate</span>
-                                    <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-rose-400 group-hover:scale-110 transition-transform"></i>
-                                </div>
-                                <div class="font-mono text-lg sm:text-xl font-bold text-white tracking-tight">
-                                    0.000%
-                                </div>
-                                <div class="text-[11px] text-slate-400 font-sans leading-tight mt-0.5">
-                                    Double-Vote Hazard
-                                </div>
-                                <div class="font-mono text-[9px] text-cobalt-400 mt-1 truncate">
-                                    OTT + Row Locks
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- KPI Card 2: Parallel Standing -->
-                        <div class="hud-card group">
-                            <div class="hud-card-body p-3 sm:p-3.5 flex flex-col justify-between h-full bg-cosmic-900/90 border-t border-gold-500/20">
-                                <div class="flex items-center justify-between mb-1.5">
-                                    <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase">Academic</span>
-                                    <i data-lucide="crown" class="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform"></i>
-                                </div>
-                                <div class="font-mono text-lg sm:text-xl font-bold text-gold-300 tracking-tight">
-                                    Rank #1
-                                </div>
-                                <div class="text-[11px] text-slate-400 font-sans leading-tight mt-0.5">
-                                    Parallel Standing
-                                </div>
-                                <div class="font-mono text-[9px] text-gold-400 mt-1 truncate">
-                                    PPLG SMKN 1 Depok
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- KPI Card 3: National Olympiad -->
-                        <div class="hud-card group">
-                            <div class="hud-card-body p-3 sm:p-3.5 flex flex-col justify-between h-full bg-cosmic-900/90 border-t border-gold-500/20">
-                                <div class="flex items-center justify-between mb-1.5">
-                                    <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase">Competition</span>
-                                    <i data-lucide="trophy" class="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform"></i>
-                                </div>
-                                <div class="font-mono text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-1">
-                                    Gold
-                                </div>
-                                <div class="text-[11px] text-slate-400 font-sans leading-tight mt-0.5">
-                                    National Olympiad
-                                </div>
-                                <div class="font-mono text-[9px] text-cyan-400 mt-1 truncate">
-                                    Informatics &amp; CS
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- KPI Card 4: MPK Mandate -->
-                        <div class="hud-card group">
-                            <div class="hud-card-body p-3 sm:p-3.5 flex flex-col justify-between h-full bg-cosmic-900/90 border-t border-cobalt-500/20">
-                                <div class="flex items-center justify-between mb-1.5">
-                                    <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase">Governance</span>
-                                    <i data-lucide="gavel" class="w-3.5 h-3.5 text-cobalt-400 group-hover:scale-110 transition-transform"></i>
-                                </div>
-                                <div class="font-mono text-lg sm:text-xl font-bold text-white tracking-tight">
-                                    2-Period
-                                </div>
-                                <div class="text-[11px] text-slate-400 font-sans leading-tight mt-0.5">
-                                    MPK Mandate
-                                </div>
-                                <div class="font-mono text-[9px] text-cobalt-300 mt-1 truncate">
-                                    Presidium Officer
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                {{-- Achievement Data Grid --}}
+                <div style="border-top:1px solid #18181b;padding-top:24px;">
+                    <table class="ach-table">
+                        <thead>
+                            <tr>
+                                <td class="td-lbl" style="padding-bottom:10px;color:#27272a;">Metric</td>
+                                <td style="padding-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#27272a;">Value</td>
+                                <td style="padding-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#27272a;text-align:right;">Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td-lbl">Hazard Rate</td>
+                                <td>
+                                    <div class="td-val">0.000%</div>
+                                    <div class="td-sub">Double-Vote · OTT + Row Locks</div>
+                                </td>
+                                <td class="td-right"><span class="badge ok">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td class="td-lbl">Academic</td>
+                                <td>
+                                    <div class="td-val">Rank #1 Parallel</div>
+                                    <div class="td-sub">PPLG · SMKN 1 Depok</div>
+                                </td>
+                                <td class="td-right"><span class="badge warn">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td class="td-lbl">Competition</td>
+                                <td>
+                                    <div class="td-val">Gold Medal</div>
+                                    <div class="td-sub">National Olympiad · Informatics &amp; CS</div>
+                                </td>
+                                <td class="td-right"><span class="badge warn">National</span></td>
+                            </tr>
+                            <tr>
+                                <td class="td-lbl">Governance</td>
+                                <td>
+                                    <div class="td-val">2-Period Term</div>
+                                    <div class="td-sub">MPK Presidium Officer</div>
+                                </td>
+                                <td class="td-right"><span class="badge blue">Mandate</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
+            {{-- /LEFT --}}
 
-            <!-- ==============================================================
-                 RIGHT COLUMN: DUAL-LAYER CHAMFERED HUD PROFILE & TELEMETRY CHIPS
-                 ============================================================== -->
-            <div class="lg:col-span-5 flex items-center justify-center relative mt-6 lg:mt-0 animate-on-scroll">
-                
-                <!-- Outer Radial Atmosphere & Reticle HUD Framing -->
-                <div class="relative w-full max-w-sm sm:max-w-md mx-auto">
-                    
-                    <!-- Ambient Glow Behind Frame -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-cobalt-600/30 via-transparent to-gold-500/20 rounded-full blur-2xl pointer-events-none"></div>
-
-                    <!-- Dual-Layer Chamfered Polygon Container (Quad Symmetrical HUD Cut) -->
-                    <div class="hud-card-quad p-[2px] shadow-2xl shadow-cobalt-950/80 group">
-                        
-                        <div class="hud-card-body bg-cosmic-900 relative overflow-hidden p-2 sm:p-3">
-                            
-                            <!-- Avionics Corner HUD Reticles / Brackets -->
-                            <div class="hud-corner-brackets absolute inset-2 pointer-events-none z-20"></div>
-
-                            <!-- Top Telemetry Micro-Bar -->
-                            <div class="relative z-20 flex items-center justify-between px-2 py-1.5 mb-2 bg-cosmic-950/80 border border-white/10 rounded font-mono text-[10px] text-slate-400">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                    <span class="text-white font-semibold">COCKPIT_ID:</span>
-                                    <span>RNM-2026</span>
-                                </div>
-                                <div class="text-cyan-400 font-medium">
-                                    PPLG // SMKN 1 DEPOK
-                                </div>
-                            </div>
-
-                            <!-- Profile Cutout Frame with Image Switcher / Fallback Protection -->
-                            <div class="relative aspect-[4/5] w-full overflow-hidden hud-chamfer-quad bg-cosmic-950 border border-cobalt-500/30">
-                                
-                                <img src="{{ asset('images/profile/profilrappa.jpeg') }}" 
-                                     alt="Raffa Nur Musyaffa — Systems Architect & MPK Officer" 
-                                     id="heroCutoutImage" 
-                                     class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                                     onerror="this.onerror=null; this.src='{{ asset('images/profile/profile.jpeg') }}';" />
-
-                                <!-- CRT Scanline & Grid Texture Over Profile -->
-                                <div class="absolute inset-0 telemetry-scanline opacity-30 pointer-events-none"></div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-
-                                <!-- Live Viewfinder Crosshair Overlay -->
-                                <div class="absolute top-3 right-3 font-mono text-cyan-400 text-xs pointer-events-none opacity-80">
-                                    +
-                                </div>
-                                <div class="absolute bottom-3 left-3 font-mono text-cyan-400 text-xs pointer-events-none opacity-80">
-                                    +
-                                </div>
-
-                                <!-- Target Coordinates Stamp -->
-                                <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-cosmic-950/80 border border-white/10 font-mono text-[9px] text-slate-400 pointer-events-none">
-                                    SEC_ENCR: SHA-256
-                                </div>
-                            </div>
-
-                            <!-- Bottom Status Readout -->
-                            <div class="mt-2.5 px-2 py-1.5 bg-cosmic-950/80 border border-white/10 rounded font-mono text-[10px] text-slate-300 flex items-center justify-between">
-                                <div class="flex items-center gap-1.5">
-                                    <i data-lucide="activity" class="w-3 h-3 text-emerald-400"></i>
-                                    <span>SYSTEM_INTEGRITY:</span>
-                                    <span class="text-emerald-400 font-bold">100% NOMINAL</span>
-                                </div>
-                                <span class="text-slate-500 text-[9px]">DEPOK // ID</span>
-                            </div>
-
+            {{-- RIGHT: Photo --}}
+            <div style="display:flex;justify-content:center;align-items:flex-start;">
+                <div class="profile-outer">
+                    <div class="profile-shadow"></div>
+                    <div class="profile-frame">
+                        <img src="{{ asset('images/profile/profilrappa.jpeg') }}"
+                             alt="Raffa Nur Musyaffa — Backend Architect"
+                             onerror="this.onerror=null;this.src='{{ asset('images/profile/profile.jpeg') }}';">
+                        <div class="profile-fade"></div>
+                        <div class="profile-corner">
+                            <span class="status-dot" style="width:5px;height:5px;"></span>
+                            <span>RNM-2026</span>
+                        </div>
+                        <div class="profile-meta">
+                            <span>PPLG // SMKN 1 DEPOK</span>
+                            <span>-6.38° · 106.83°</span>
                         </div>
                     </div>
-
-                    <!-- ==============================================================
-                         3 FLOATING TELEMETRY CHIPS (AVIONICS HUD ATTACHMENTS)
-                         ============================================================== -->
-                    
-                    <!-- Floating Chip 1: National Gold Medalist (Top-Left / Top-Start) -->
-                    <div class="absolute -top-4 -left-3 sm:-left-6 z-30 animate-float-slow">
-                        <div class="hud-chamfer-sm px-3 py-2 bg-cosmic-900/95 backdrop-blur-xl border border-gold-400/70 shadow-lg shadow-gold-500/25 flex items-center gap-2">
-                            <div class="w-6 h-6 rounded bg-gold-500/20 border border-gold-400/50 flex items-center justify-center">
-                                <i data-lucide="trophy" class="w-3.5 h-3.5 text-gold-400"></i>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-[9px] text-gold-400 uppercase tracking-widest leading-none font-bold">Achievement</span>
-                                <span class="font-mono text-xs font-bold text-white">National Gold Medalist</span>
-                            </div>
-                        </div>
+                    <div class="profile-tag">
+                        <i data-lucide="shield-check" style="width:12px;height:12px;color:#4f46e5;flex-shrink:0;"></i>
+                        <span>E-Voting · TPS Deployed</span>
                     </div>
-
-                    <!-- Floating Chip 2: Rank 1 Parallel (Top-Right / Mid-Right) -->
-                    <div class="absolute top-1/3 -right-3 sm:-right-6 z-30 animate-float-slow" style="animation-delay: 1.8s;">
-                        <div class="hud-chamfer-sm px-3 py-2 bg-cosmic-900/95 backdrop-blur-xl border border-cobalt-400/70 shadow-lg shadow-cobalt-500/25 flex items-center gap-2">
-                            <div class="w-6 h-6 rounded bg-cobalt-500/20 border border-cobalt-400/50 flex items-center justify-center">
-                                <i data-lucide="trending-up" class="w-3.5 h-3.5 text-cobalt-400"></i>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-[9px] text-cobalt-400 uppercase tracking-widest leading-none font-bold">Academic Standing</span>
-                                <span class="font-mono text-xs font-bold text-white">Rank 1 Parallel PPLG</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Floating Chip 3: E-Voting Kiosk Architect (Bottom-Left) -->
-                    <div class="absolute -bottom-4 -left-2 sm:-left-4 z-30 animate-float-slow" style="animation-delay: 3.2s;">
-                        <div class="hud-chamfer-sm px-3 py-2 bg-cosmic-900/95 backdrop-blur-xl border border-cyan-400/70 shadow-lg shadow-cyan-500/25 flex items-center gap-2">
-                            <div class="w-6 h-6 rounded bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
-                                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400"></i>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-[9px] text-cyan-400 uppercase tracking-widest leading-none font-bold">Flagship System</span>
-                                <span class="font-mono text-xs font-bold text-white">E-Voting Kiosk Architect</span>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
             </div>
+            {{-- /RIGHT --}}
 
         </div>
     </div>

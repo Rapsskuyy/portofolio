@@ -8,19 +8,10 @@ use Illuminate\Http\Request;
 
 class GitHubSettingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if ($request->query('key') !== 'raffa') {
-                abort(403, 'Unauthorized');
-            }
-            return $next($request);
-        });
-    }
-
     public function index(Request $request)
     {
         $settings = GitHubSetting::getSettings();
+
         return view('admin.github-settings.index', compact('settings'));
     }
 
@@ -37,7 +28,7 @@ class GitHubSettingController extends Controller
         $settings = GitHubSetting::getSettings();
         $settings->update($validated);
 
-        return redirect()->route('admin.github-settings.index', ['key' => 'raffa'])
+        return redirect()->route('admin.github-settings.index')
             ->with('success', 'GitHub settings updated successfully.');
     }
 }

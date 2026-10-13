@@ -1,305 +1,243 @@
-{{-- ==========================================================================
-     COMMAND CENTER TELEMETRY FOOTER & DOUBLE-BUFFERED KINETIC MARQUEE
-     Authoritative Candidate: Raffa Nur Musyaffa (SMKN 1 Depok - PPLG)
-     Design System: Cosmic Navy (#080D1A), Royal Cobalt (#2563EB), Trophy Gold (#FACC15)
-     Iconography: Strict Zero-Emoji Standard (100% Lucide Vector Line Icons)
-     ========================================================================== --}}
+{{-- Footer — Premium Technical Editorial --}}
+<style>
+    /* ── MARQUEE ── */
+    @keyframes mq-run { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-<footer id="command-footer" class="relative z-10 border-t border-cobalt-600/30 bg-cosmic-950/95 backdrop-blur-2xl overflow-hidden">
-    
-    <!-- Anchor targets for navigation capsule -->
-    <div id="contact" class="scroll-mt-24"></div>
-    <div id="guestbook" class="scroll-mt-24"></div>
+    .mq-wrap {
+        overflow: hidden;
+        border-top: 1px solid #18181b;
+        border-bottom: 1px solid #18181b;
+        background: #0a0a0d;
+        padding: 10px 0;
+        user-select: none;
+    }
+    .mq-track {
+        display: inline-flex; width: max-content;
+        animation: mq-run 42s linear infinite;
+        will-change: transform;
+    }
+    .mq-track:hover { animation-play-state: paused; }
 
-    <!-- ==========================================================================
-         INFINITE KINETIC DOUBLE-BUFFERED TELEMETRY MARQUEE CRAWL
-         ========================================================================== -->
-    <div class="telemetry-marquee-container overflow-hidden bg-cosmic-900/90 border-y border-cobalt-500/20 py-3 select-none" aria-label="Candidate Telemetry Marquee">
-        <div class="telemetry-marquee-track font-mono text-xs tracking-widest text-slate-300 flex items-center gap-6">
-            
-            <!-- BUFFER A (Primary Stream) -->
-            <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-radar-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <i data-lucide="radio" class="w-3.5 h-3.5 text-emerald-400" aria-hidden="true"></i>
-                [SYS_STATUS: 100% NOMINAL]
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-white font-bold tracking-wider">RAFFA NUR MUSYAFFA</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cobalt-400 font-semibold flex items-center gap-1">
-                <i data-lucide="server" class="w-3.5 h-3.5 text-cobalt-400" aria-hidden="true"></i>
-                SYSTEMS ARCHITECT &amp; BACKEND ENGINEER
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-400 font-bold flex items-center gap-1">
-                <i data-lucide="trophy" class="w-3.5 h-3.5 text-gold-400" aria-hidden="true"></i>
-                NATIONAL CS GOLD MEDALIST // OLIMPIADE SAINS INFORMATIKA
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-300 font-semibold flex items-center gap-1">
-                <i data-lucide="crown" class="w-3.5 h-3.5 text-gold-300" aria-hidden="true"></i>
-                TOP PARALLEL SCHOLAR // RANK 1 PARALLEL PPLG (SMKN 1 DEPOK)
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cyan-400 font-semibold flex items-center gap-1">
-                <i data-lucide="languages" class="w-3.5 h-3.5 text-cyan-400" aria-hidden="true"></i>
-                OFFICIAL TOEIC INTERNATIONAL CERTIFIED
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cobalt-300 font-semibold flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cobalt-300" aria-hidden="true"></i>
-                E-VOTING KIOSK LEAD // COMMERCIAL TPS DEPLOYED
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-rose-400 font-semibold flex items-center gap-1">
-                <i data-lucide="lock" class="w-3.5 h-3.5 text-rose-400" aria-hidden="true"></i>
-                ACID ROW-LOCKING CONCURRENCY // ZERO DOUBLE-VOTING PROTOCOL
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-400 font-bold flex items-center gap-1">
-                <i data-lucide="milestone" class="w-3.5 h-3.5 text-gold-400" aria-hidden="true"></i>
-                TÜRKİYE BURSLARI 2027 CANDIDATE &amp; TOP PTN ADMISSION
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-emerald-400 font-medium">REAL-TIME TELEMETRY: 100% OPERATIONAL // LATENCY: &lt; 30MS</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-slate-400 font-medium">UTC+7 ASIA/JAKARTA</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-slate-300 font-medium">STRICT ZERO-EMOJI RIGOR</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
+    .mq-item {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.63rem; letter-spacing: 0.08em; text-transform: uppercase;
+        color: #2d2d30; padding: 0 26px; white-space: nowrap;
+        display: flex; align-items: center; gap: 7px;
+    }
+    .mq-item.hi     { color: #52525b; }
+    .mq-item.accent { color: #4f46e5; }
+    .mq-item.ok     { color: #166534; }
+    .mq-item.warn   { color: #854d0e; }
 
-            <!-- BUFFER B (Duplicate Stream for Seamless Kinetic Crawl) -->
-            <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-radar-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <i data-lucide="radio" class="w-3.5 h-3.5 text-emerald-400" aria-hidden="true"></i>
-                [SYS_STATUS: 100% NOMINAL]
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-white font-bold tracking-wider">RAFFA NUR MUSYAFFA</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cobalt-400 font-semibold flex items-center gap-1">
-                <i data-lucide="server" class="w-3.5 h-3.5 text-cobalt-400" aria-hidden="true"></i>
-                SYSTEMS ARCHITECT &amp; BACKEND ENGINEER
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-400 font-bold flex items-center gap-1">
-                <i data-lucide="trophy" class="w-3.5 h-3.5 text-gold-400" aria-hidden="true"></i>
-                NATIONAL CS GOLD MEDALIST // OLIMPIADE SAINS INFORMATIKA
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-300 font-semibold flex items-center gap-1">
-                <i data-lucide="crown" class="w-3.5 h-3.5 text-gold-300" aria-hidden="true"></i>
-                TOP PARALLEL SCHOLAR // RANK 1 PARALLEL PPLG (SMKN 1 DEPOK)
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cyan-400 font-semibold flex items-center gap-1">
-                <i data-lucide="languages" class="w-3.5 h-3.5 text-cyan-400" aria-hidden="true"></i>
-                OFFICIAL TOEIC INTERNATIONAL CERTIFIED
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-cobalt-300 font-semibold flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cobalt-300" aria-hidden="true"></i>
-                E-VOTING KIOSK LEAD // COMMERCIAL TPS DEPLOYED
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-rose-400 font-semibold flex items-center gap-1">
-                <i data-lucide="lock" class="w-3.5 h-3.5 text-rose-400" aria-hidden="true"></i>
-                ACID ROW-LOCKING CONCURRENCY // ZERO DOUBLE-VOTING PROTOCOL
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-gold-400 font-bold flex items-center gap-1">
-                <i data-lucide="milestone" class="w-3.5 h-3.5 text-gold-400" aria-hidden="true"></i>
-                TÜRKİYE BURSLARI 2027 CANDIDATE &amp; TOP PTN ADMISSION
-            </span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-emerald-400 font-medium">REAL-TIME TELEMETRY: 100% OPERATIONAL // LATENCY: &lt; 30MS</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-slate-400 font-medium">UTC+7 ASIA/JAKARTA</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
-            <span class="text-slate-300 font-medium">STRICT ZERO-EMOJI RIGOR</span>
-            <span class="text-slate-600" aria-hidden="true">◈</span>
+    .mq-sep {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.5rem; color: #1c1c1f;
+        padding: 0 2px; display: flex; align-items: center; flex-shrink: 0;
+    }
 
+    /* ── FOOTER ── */
+    .ft-root {
+        background: #09090b;
+        border-top: 1px solid #18181b;
+    }
+    .ft-body {
+        max-width: 1280px; margin: 0 auto; padding: 52px 28px 40px;
+    }
+    .ft-grid {
+        display: grid; grid-template-columns: 1fr; gap: 44px;
+    }
+    @media (min-width: 768px) {
+        .ft-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* contact rows */
+    .ft-contact-row {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 13px 0; border-bottom: 1px solid #18181b;
+        text-decoration: none; gap: 12px;
+        transition: background .12s;
+    }
+    .ft-contact-row:last-child { border-bottom: none; }
+
+    .ft-contact-row .c-lbl {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+        color: #3f3f46; flex-shrink: 0; width: 72px;
+    }
+    .ft-contact-row .c-val {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.74rem; color: #71717a; flex: 1;
+        transition: color .15s; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .ft-contact-row:hover .c-val { color: #fafafa; }
+
+    .ft-contact-row .c-arr {
+        color: #27272a; flex-shrink: 0;
+        transition: color .15s, transform .15s;
+    }
+    .ft-contact-row:hover .c-arr { color: #4f46e5; transform: translate(2px,-2px); }
+
+    /* cv card */
+    .ft-cv-card {
+        border: 1px solid #18181b; border-radius: 6px;
+        padding: 20px; display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .ft-btn-cv {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 10px 20px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+        color: #ca8a04; text-decoration: none;
+        border: 1px solid rgba(202,138,4,.3); border-radius: 4px; background: transparent;
+        transition: border-color .2s, background .2s;
+        white-space: nowrap;
+    }
+    .ft-btn-cv:hover { background: rgba(202,138,4,.06); border-color: rgba(202,138,4,.55); }
+
+    .ft-quick-link {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.67rem; color: #3f3f46; text-decoration: none;
+        display: flex; align-items: center; gap: 7px;
+        transition: color .15s;
+    }
+    .ft-quick-link:hover { color: #818cf8; }
+</style>
+
+<footer class="ft-root" id="command-footer">
+    <div id="contact" style="position:relative;"></div>
+
+    {{-- MARQUEE --}}
+    <div class="mq-wrap" aria-label="Portfolio highlights">
+        <div class="mq-track">
+            {{-- Buffer A --}}
+            <span class="mq-item ok">Available for Opportunities</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item hi">Raffa Nur Musyaffa</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item accent">Backend Architect &amp; Systems Engineer</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item warn">National Gold Medal — Informatics</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item hi">Rank #1 Parallel — PPLG SMKN 1 Depok</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">TOEIC International Certified</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item accent">E-Voting Kiosk TPS — Commercial Deployed</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">ACID Row-Locking Concurrency</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item warn">Türkiye Bursları 2027 Candidate</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">Latency &lt; 30ms · UTC+7</span>
+            <span class="mq-sep">·</span>
+            {{-- Buffer B --}}
+            <span class="mq-item ok">Available for Opportunities</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item hi">Raffa Nur Musyaffa</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item accent">Backend Architect &amp; Systems Engineer</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item warn">National Gold Medal — Informatics</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item hi">Rank #1 Parallel — PPLG SMKN 1 Depok</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">TOEIC International Certified</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item accent">E-Voting Kiosk TPS — Commercial Deployed</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">ACID Row-Locking Concurrency</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item warn">Türkiye Bursları 2027 Candidate</span>
+            <span class="mq-sep">·</span>
+            <span class="mq-item">Latency &lt; 30ms · UTC+7</span>
+            <span class="mq-sep">·</span>
         </div>
     </div>
 
-    <!-- ==========================================================================
-         COMMAND CENTER DIRECT MATRIX & TELEMETRY CONTROLS
-         ========================================================================== -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            
-            <!-- Left Column: Identity, Institutional Badge & Coordinates (Span 5) -->
-            <div class="md:col-span-5 space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="hud-chamfer-sm w-10 h-10 bg-gradient-to-br from-cobalt-600 to-cobalt-800 border border-cobalt-400/50 flex items-center justify-center font-mono font-bold text-white text-base shadow-lg shadow-cobalt-600/30">
-                        R
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-mono font-bold text-sm sm:text-base text-white tracking-wider flex items-center gap-1.5">
-                            RAFFA NUR MUSYAFFA
-                            <span class="px-1.5 py-0.5 rounded text-[10px] bg-cobalt-600/30 border border-cobalt-500/40 text-cobalt-300">RNM.SYS</span>
-                        </span>
-                        <span class="font-mono text-xs text-slate-400">
-                            SMKN 1 Depok — Software Engineering (PPLG)
-                        </span>
-                    </div>
-                </div>
+    {{-- BODY --}}
+    <div class="ft-body">
+        <div class="ft-grid">
 
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md font-sans">
-                    Specialized Backend Developer, Systems Architect, and National Gold Medalist in Informatics. Engineered for high-concurrency database integrity, cryptographic protocols, and Türkiye Bursları 2027 scholarship trajectory.
+            {{-- COL 1: Identity --}}
+            <div style="display:flex;flex-direction:column;gap:18px;">
+                <div style="display:flex;align-items:center;gap:9px;">
+                    <span style="width:7px;height:7px;border-radius:50%;background:#4f46e5;display:inline-block;flex-shrink:0;"></span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.9rem;color:#fafafa;letter-spacing:-0.01em;">rnm.sys</span>
+                </div>
+                <p style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#52525b;line-height:1.7;max-width:260px;margin:0;">
+                    Backend Developer and Systems Architect. Specialized in high-concurrency database integrity and cryptographic protocols.
                 </p>
-
-                <!-- Live Status & Telemetry Indicators -->
-                <div class="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cosmic-900 border border-emerald-500/30 text-emerald-400">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-radar-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                        <span>STATUS: NOMINAL</span>
-                    </div>
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cosmic-900 border border-white/10 text-slate-300">
-                        <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400" aria-hidden="true"></i>
-                        <span>UTC+7 ASIA/JAKARTA</span>
-                    </div>
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cosmic-900 border border-white/10 text-slate-300">
-                        <i data-lucide="zap" class="w-3.5 h-3.5 text-gold-400" aria-hidden="true"></i>
-                        <span>LATENCY: &lt; 30MS</span>
-                    </div>
+                <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#3f3f46;">
+                    <span class="status-dot"></span>
+                    <span>Available · Depok, ID</span>
                 </div>
             </div>
 
-            <!-- Center Column: Direct Telemetry Contact Channels (Span 4) -->
-            <div class="md:col-span-4 space-y-3">
-                <div class="font-mono text-xs font-bold text-slate-300 tracking-wider uppercase flex items-center gap-2">
-                    <i data-lucide="send" class="w-4 h-4 text-cobalt-400" aria-hidden="true"></i>
-                    <span>Direct Engineering Channels</span>
+            {{-- COL 2: Contact --}}
+            <div style="display:flex;flex-direction:column;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:#27272a;margin-bottom:18px;">
+                    Contact
                 </div>
-
-                <div class="grid grid-cols-1 gap-2.5">
-                    <!-- WhatsApp Direct -->
-                    <a href="https://wa.me/6288214156641" target="_blank" rel="noopener noreferrer" 
-                       class="hud-chamfer-sm flex items-center justify-between p-2.5 px-3.5 bg-cosmic-900/90 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 rounded-lg text-slate-200 hover:text-emerald-300 transition-all text-decoration-none group min-h-[44px]">
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="message-square" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-xs font-semibold">WhatsApp Telemetry</span>
-                                <span class="font-mono text-[10px] text-slate-400">+62 882-1415-6641</span>
-                            </div>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500 group-hover:text-emerald-400 transition-colors" aria-hidden="true"></i>
-                    </a>
-
-                    <!-- Direct Email Dispatch -->
-                    <a href="mailto:raffa.nur.musyaffa@gmail.com" 
-                       class="hud-chamfer-sm flex items-center justify-between p-2.5 px-3.5 bg-cosmic-900/90 hover:bg-cyan-950/40 border border-white/10 hover:border-cyan-500/50 rounded-lg text-slate-200 hover:text-cyan-300 transition-all text-decoration-none group min-h-[44px]">
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="mail" class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-xs font-semibold">Direct Email Dispatch</span>
-                                <span class="font-mono text-[10px] text-slate-400">raffa.nur.musyaffa@gmail.com</span>
-                            </div>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" aria-hidden="true"></i>
-                    </a>
-
-                    <!-- GitHub Repository Nexus -->
-                    <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" 
-                       class="hud-chamfer-sm flex items-center justify-between p-2.5 px-3.5 bg-cosmic-900/90 hover:bg-cobalt-950/40 border border-white/10 hover:border-cobalt-500/50 rounded-lg text-slate-200 hover:text-cobalt-300 transition-all text-decoration-none group min-h-[44px]">
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="github" class="w-4 h-4 text-cobalt-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-xs font-semibold">GitHub Repository Nexus</span>
-                                <span class="font-mono text-[10px] text-slate-400">github.com/Rapsskuyy</span>
-                            </div>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500 group-hover:text-cobalt-400 transition-colors" aria-hidden="true"></i>
-                    </a>
-
-                    <!-- Instagram Telemetry -->
-                    <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" 
-                       class="hud-chamfer-sm flex items-center justify-between p-2.5 px-3.5 bg-cosmic-900/90 hover:bg-pink-950/40 border border-white/10 hover:border-pink-500/50 rounded-lg text-slate-200 hover:text-pink-300 transition-all text-decoration-none group min-h-[44px]">
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="instagram" class="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-                            <div class="flex flex-col">
-                                <span class="font-mono text-xs font-semibold">Instagram Telemetry</span>
-                                <span class="font-mono text-[10px] text-slate-400">@rrapskuy</span>
-                            </div>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-slate-500 group-hover:text-pink-400 transition-colors" aria-hidden="true"></i>
-                    </a>
-                </div>
+                <a href="https://wa.me/6288214156641" target="_blank" rel="noopener noreferrer" class="ft-contact-row">
+                    <span class="c-lbl">WhatsApp</span>
+                    <span class="c-val">+62 882-1415-6641</span>
+                    <i data-lucide="arrow-up-right" class="c-arr" style="width:14px;height:14px;"></i>
+                </a>
+                <a href="mailto:raffa.nur.musyaffa@gmail.com" class="ft-contact-row">
+                    <span class="c-lbl">Email</span>
+                    <span class="c-val">raffa.nur.musyaffa@gmail.com</span>
+                    <i data-lucide="arrow-up-right" class="c-arr" style="width:14px;height:14px;"></i>
+                </a>
+                <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="ft-contact-row">
+                    <span class="c-lbl">GitHub</span>
+                    <span class="c-val">github.com/Rapsskuyy</span>
+                    <i data-lucide="arrow-up-right" class="c-arr" style="width:14px;height:14px;"></i>
+                </a>
+                <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" class="ft-contact-row">
+                    <span class="c-lbl">Instagram</span>
+                    <span class="c-val">@rrapskuy</span>
+                    <i data-lucide="arrow-up-right" class="c-arr" style="width:14px;height:14px;"></i>
+                </a>
             </div>
 
-            <!-- Right Column: Quick Action & Fast Dossier (Span 3) -->
-            <div class="md:col-span-3 space-y-4">
-                <div class="font-mono text-xs font-bold text-slate-300 tracking-wider uppercase flex items-center gap-2">
-                    <i data-lucide="file-check" class="w-4 h-4 text-gold-400" aria-hidden="true"></i>
-                    <span>Candidate Actions</span>
+            {{-- COL 3: CV --}}
+            <div style="display:flex;flex-direction:column;gap:18px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:#27272a;">
+                    Documents
                 </div>
-
-                <!-- Quick CV Download Card -->
-                <div class="hud-card group">
-                    <div class="hud-card-body p-4 bg-cosmic-900/90 border-t border-gold-500/40 flex flex-col justify-between gap-3">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-1.5 font-mono text-[11px] text-gold-400 font-bold">
-                                <i data-lucide="file-down" class="w-4 h-4" aria-hidden="true"></i>
-                                <span>CURRICULUM VITAE</span>
-                            </div>
-                            <p class="text-[11px] text-slate-300 leading-tight">
-                                Official verified scholarship &amp; technical dossier (PDF format).
-                            </p>
-                        </div>
-
-                        <a href="{{ asset('files/CV .pdf') }}" download 
-                           class="hud-chamfer-sm w-full py-2.5 px-3 font-mono text-xs font-bold tracking-wider text-cosmic-950 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 hover:from-gold-300 hover:to-gold-400 border border-gold-300 shadow-md shadow-gold-500/25 transition-all text-center flex items-center justify-center gap-2 text-decoration-none min-h-[44px]">
-                            <i data-lucide="download" class="w-3.5 h-3.5 text-cosmic-950" aria-hidden="true"></i>
-                            <span>DOWNLOAD CV.PDF</span>
-                        </a>
+                <div class="ft-cv-card">
+                    <div style="display:flex;flex-direction:column;gap:5px;">
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:600;color:#fafafa;">Curriculum Vitae</span>
+                        <span style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#52525b;line-height:1.55;">Official scholarship &amp; technical dossier — PDF format.</span>
                     </div>
+                    <a href="{{ asset('files/CV .pdf') }}" download class="ft-btn-cv">
+                        <i data-lucide="download" style="width:13px;height:13px;flex-shrink:0;"></i>
+                        <span>Download CV.pdf</span>
+                    </a>
                 </div>
-
-                <!-- Quick Verification Badges -->
-                <div class="p-3 rounded-xl bg-cosmic-900/70 border border-white/10 space-y-1.5 font-mono text-[10px] text-slate-400">
-                    <div class="flex items-center justify-between text-slate-300">
-                        <span>SECURITY INVARIANT:</span>
-                        <span class="text-emerald-400 font-semibold">[VERIFIED]</span>
-                    </div>
-                    <div class="flex items-center justify-between text-slate-300">
-                        <span>ICON ENGINE:</span>
-                        <span class="text-cobalt-300 font-semibold">100% LUCIDE LINE</span>
-                    </div>
-                    <div class="flex items-center justify-between text-slate-300">
-                        <span>EMOJI AUDIT:</span>
-                        <span class="text-gold-400 font-semibold">ZERO-EMOJI SPEC</span>
-                    </div>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+                    <a href="{{ route('portfolio.guestbook') }}" class="ft-quick-link">
+                        <i data-lucide="message-square" style="width:13px;height:13px;flex-shrink:0;"></i>
+                        <span>Leave a message</span>
+                    </a>
+                    <a href="{{ Request::routeIs('portfolio.home') ? '#flagship' : route('portfolio.home').'#flagship' }}" class="ft-quick-link">
+                        <i data-lucide="shield-check" style="width:13px;height:13px;flex-shrink:0;"></i>
+                        <span>View flagship project</span>
+                    </a>
                 </div>
             </div>
 
         </div>
 
-        <!-- ==========================================================================
-             BOTTOM SIGNATURE, CERTIFICATION & COPYRIGHT RIBBON
-             ========================================================================== -->
-        <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
-            
-            <div class="flex items-center gap-2 text-slate-300 text-center sm:text-left">
-                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
-                <span class="font-semibold text-slate-200">SYS_BUILD: v2026.08 // ARCHITECT: RAFFA NUR MUSYAFFA // ZERO-EMOJI CERTIFIED</span>
-            </div>
-
-            <div class="text-center sm:text-right text-slate-400">
-                <span>&copy; {{ date('Y') }} Raffa Nur Musyaffa. Built with Cyber-Telemetry Architecture &amp; Strict Zero-Emoji Philosophy.</span>
-            </div>
-
+        {{-- Bottom strip --}}
+        <div style="margin-top:44px;padding-top:20px;border-top:1px solid #18181b;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;color:#27272a;">
+                &copy; {{ date('Y') }} Raffa Nur Musyaffa
+            </span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;color:#1c1c1f;">
+                Laravel · Tailwind · Vite
+            </span>
         </div>
-
     </div>
-
 </footer>

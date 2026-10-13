@@ -1284,7 +1284,7 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-        m3GeneratorPlugin(),
+        // m3GeneratorPlugin() — disabled: was overwriting blade components on every Vite start
     ],
     server: {
         watch: {

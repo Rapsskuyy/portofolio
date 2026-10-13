@@ -102,9 +102,19 @@
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748b;
+            background: transparent;
+            border: 0;
+            color: #cbd5e1;
             cursor: pointer;
             z-index: 10;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .toggle-password:focus-visible {
+            outline: 2px solid #c4b5fd;
+            outline-offset: 2px;
+            border-radius: 8px;
         }
 
         .btn-primary-custom {
@@ -178,13 +188,17 @@
             @csrf
             <div class="input-group-custom text-start">
                 <i class="fas fa-user input-icon"></i>
-                <input type="text" name="username" class="form-control" placeholder="Username Admin" value="{{ old('username') }}" required autofocus>
+                <label class="visually-hidden" for="email">Email admin</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email Admin" value="{{ old('email') }}" autocomplete="username" required autofocus>
             </div>
 
             <div class="input-group-custom text-start">
                 <i class="fas fa-lock input-icon"></i>
-                <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Password Admin" required>
-                <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+                <label class="visually-hidden" for="passwordInput">Password</label>
+                <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Password Admin" autocomplete="current-password" required>
+                <button type="button" class="toggle-password" aria-label="Tampilkan password" aria-pressed="false" onclick="togglePasswordVisibility(this)">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                </button>
             </div>
 
             <button type="submit" class="btn-primary-custom mt-2 mb-3">
@@ -200,17 +214,21 @@
     </div>
 
     <script>
-        function togglePasswordVisibility() {
+        function togglePasswordVisibility(button) {
             const pwd = document.getElementById('passwordInput');
-            const icon = document.querySelector('.toggle-password');
+            const icon = button.querySelector('i');
             if (pwd.type === 'password') {
                 pwd.type = 'text';
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
+                button.setAttribute('aria-label', 'Sembunyikan password');
+                button.setAttribute('aria-pressed', 'true');
             } else {
                 pwd.type = 'password';
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
+                button.setAttribute('aria-label', 'Tampilkan password');
+                button.setAttribute('aria-pressed', 'false');
             }
         }
     </script>

@@ -147,6 +147,7 @@
                 <div class="nav flex-column">
                     <a class="nav-link-custom active" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
                     <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
+                    <a class="nav-link-custom" href="{{ route('admin.projects.index') }}"><i class="fas fa-images"></i> Galeri Project</a>
                     <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
                     <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
                     <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>

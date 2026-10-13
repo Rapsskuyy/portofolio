@@ -33,11 +33,10 @@ export async function runTier2BoundaryCornerTests(context = {}) {
     // =========================================================================
     // BOUNDARY 1: Empty & Null Data Fallbacks
     // =========================================================================
-    await test('T2.1.1', 'Boundary: Null/Empty GitHub Telemetry Fallback handling', () => {
-        // The portfolio controller uses Cache::remember with fallback if GitHub API fails
+    await test('T2.1.1', 'Boundary: Homepage does not depend on an external GitHub request', () => {
         const controllerCode = fs.readFileSync(path.join(process.cwd(), 'app', 'Http', 'Controllers', 'PortfolioController.php'), 'utf-8');
-        assertContains(controllerCode, 'try', 'Expected try-catch block for external telemetry API fetch');
-        assertContains(controllerCode, 'return null', 'Expected graceful null return on API failure');
+        assertTrue(!controllerCode.includes('api.github.com'), 'Homepage should not make an external GitHub API request while rendering');
+        assertTrue(!controllerCode.includes('Http::'), 'Homepage should render from portfolio data without a remote HTTP dependency');
     });
 
     await test('T2.1.2', 'Boundary: Dynamic metrics fallback formatting in Blade templates', () => {

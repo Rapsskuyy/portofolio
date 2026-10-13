@@ -10,7 +10,8 @@ use App\Http\Controllers\CodingProjectController;
 use App\Http\Controllers\PostController;
 
 // Portfolio Routes
-Route::get('/', [PortfolioController::class, 'home'])->name('portfolio.home');
+Route::get('/', [PortfolioController::class, 'index'])->name('portfolio.home');
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
 Route::get('/about', [PortfolioController::class, 'about'])->name('portfolio.about');
 Route::get('/skills', [PortfolioController::class, 'skills'])->name('portfolio.skills');
 Route::get('/experience', [PortfolioController::class, 'experience'])->name('portfolio.experience');
@@ -21,11 +22,12 @@ Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])->n
 Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])->where('path', '.*');
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Middleware\AdminAuthMiddleware;
 
 // Admin Auth Routes (Public)
 Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
-Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/login', [AuthController::class, 'login'])->middleware('throttle:5,1')->name('admin.login.submit');
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 // Admin Protected Routes
@@ -36,6 +38,12 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->
     Route::patch('/testimonials/{testimonial}/reject', [DashboardController::class, 'reject'])->name('testimonials.reject');
     Route::delete('/testimonials/{testimonial}', [DashboardController::class, 'delete'])->name('testimonials.delete');
     
+    // Gallery Projects
+    Route::get('/projects', [AdminProjectController::class, 'index'])->name('projects.index');
+    Route::post('/projects', [AdminProjectController::class, 'store'])->name('projects.store');
+    Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('projects.destroy');
+
     // Guestbook
     Route::get('/guestbook', [GuestBookController::class, 'adminIndex'])->name('guestbook.index');
     Route::delete('/guestbook/{guestbook}', [GuestBookController::class, 'destroy'])->name('guestbook.delete');
@@ -67,10 +75,4 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->
 // Guest Book Public Route
 Route::post('/guestbook', [GuestBookController::class, 'store'])->name('guestbook.store');
 
-// Legacy route redirect
-Route::get('/index', function () {
-    return redirect()->route('portfolio.home');
-})->name('portfolio.index');
-Route::get('/portfolio', function () {
-    return redirect()->route('portfolio.home');
-});
+Route::redirect('/index', '/')->name('portfolio.legacy-index');
