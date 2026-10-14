@@ -7,6 +7,8 @@ use App\Models\Skill;
 use App\Models\Project;
 use App\Models\CodingProject;
 use App\Models\Testimonial;
+use App\Models\Post;
+use App\Models\MockApi;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
