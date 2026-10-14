@@ -18,7 +18,7 @@ class PortfolioController extends Controller
         $educations = Education::all();
         $softSkills = Skill::where('type', 'soft')->get();
         $hardSkills = Skill::where('type', 'hard')->get();
-        $projects = Project::where('is_visible', true)->orderBy('order')->orderBy('id', 'asc')->get();
+        $projects = Project::whereRaw('is_visible IS TRUE')->orderBy('order')->orderBy('id', 'asc')->get();
         $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
 
         return view('portfolio.index', [
@@ -57,9 +57,9 @@ class PortfolioController extends Controller
 
     public function guestbook(): View
     {
-        $testimonials = Testimonial::where('is_approved', true)->latest()->take(6)->get();
-        $posts = Post::where('is_published', true)->latest()->get();
-        $mockApis = MockApi::where('is_active', true)->orderBy('id')->get();
+        $testimonials = Testimonial::whereRaw('is_approved IS TRUE')->latest()->take(6)->get();
+        $posts = Post::whereRaw('is_published IS TRUE')->latest()->get();
+        $mockApis = MockApi::whereRaw('is_active IS TRUE')->orderBy('id')->get();
         return view('portfolio.guestbook', compact('testimonials', 'posts', 'mockApis'));
     }
 

@@ -22,6 +22,11 @@ class Project extends Model
         'order' => 'integer',
     ];
 
+    public function scopeVisible($query)
+    {
+        return $query->whereRaw('is_visible IS TRUE');
+    }
+
     public function getFormattedImageUrlAttribute(): string
     {
         if (empty($this->image_url)) {

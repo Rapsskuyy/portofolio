@@ -87,7 +87,7 @@ class MockApiController extends Controller
 
         $api = MockApi::where('path', $path)
             ->where('method', $method)
-            ->where('is_active', true)
+            ->whereRaw('is_active IS TRUE')
             ->first();
 
         if (!$api) {

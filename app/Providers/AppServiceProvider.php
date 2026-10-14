@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\Event::listen(\Illuminate\Database\Events\ConnectionEstablished::class, function ($event) {
+            if ($event->connection->getDriverName() === 'pgsql') {
+                $event->connection->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+            }
+        });
     }
 }

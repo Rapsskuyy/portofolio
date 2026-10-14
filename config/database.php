@@ -103,11 +103,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => env('DB_SCHEMA', 'public'),
             'sslmode' => env('DB_SSLMODE', 'prefer'),
-            'options' => extension_loaded('pdo_pgsql') ? [
+            'options' => [
                 \PDO::ATTR_EMULATE_PREPARES => env('DB_EMULATE_PREPARES') !== null
                     ? filter_var(env('DB_EMULATE_PREPARES'), FILTER_VALIDATE_BOOLEAN)
                     : false,
-            ] : [],
+            ],
         ],
 
         'sqlsrv' => [

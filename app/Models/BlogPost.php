@@ -45,7 +45,7 @@ class BlogPost extends Model
 
     public function publishedPosts()
     {
-        return $this->where('is_published', true)
+        return $this->whereRaw('is_published IS TRUE')
                     ->whereNotNull('published_at')
                     ->orderBy('published_at', 'desc');
     }

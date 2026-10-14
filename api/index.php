@@ -47,6 +47,10 @@ if ($dbHost && str_contains($dbHost, 'supabase.com')) {
     }
 }
 
+putenv('DB_EMULATE_PREPARES=false');
+$_ENV['DB_EMULATE_PREPARES'] = 'false';
+$_SERVER['DB_EMULATE_PREPARES'] = 'false';
+
 foreach ([
     'CACHE_STORE' => 'array',
     'APP_CONFIG_CACHE' => $tmpPath.'/bootstrap/cache/config.php',
