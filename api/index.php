@@ -36,6 +36,17 @@ if (getenv('SESSION_DRIVER') === 'file' || getenv('SESSION_DRIVER') === false) {
     $_SERVER['SESSION_DRIVER'] = 'cookie';
 }
 
+$dbHost = getenv('DB_HOST');
+$dbUser = getenv('DB_USERNAME');
+if ($dbHost && str_contains($dbHost, 'supabase.com')) {
+    if ($dbUser === 'postgres' || $dbUser === false) {
+        $projectRef = 'xsghzynmfdkofjrwepbd';
+        putenv("DB_USERNAME=postgres.{$projectRef}");
+        $_ENV['DB_USERNAME'] = "postgres.{$projectRef}";
+        $_SERVER['DB_USERNAME'] = "postgres.{$projectRef}";
+    }
+}
+
 foreach ([
     'CACHE_STORE' => 'array',
     'APP_CONFIG_CACHE' => $tmpPath.'/bootstrap/cache/config.php',
