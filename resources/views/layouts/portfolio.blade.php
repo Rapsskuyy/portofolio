@@ -10,6 +10,11 @@
     <meta name="author" content="Raffa Nur Musyaffa">
     <meta name="theme-color" content="#09090b">
 
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -182,7 +187,7 @@
             <div class="p-nav-inner">
 
                 <a href="{{ route('portfolio.home') }}" class="p-logo">
-                    <span class="p-logo-dot"></span>
+                    <img src="{{ asset('favicon.svg') }}" alt="Logo" width="22" height="22" style="border-radius: 6px; flex-shrink: 0;">
                     <span>rnm.sys</span>
                 </a>
 
