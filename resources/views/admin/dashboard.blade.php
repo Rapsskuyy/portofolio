@@ -118,79 +118,15 @@
             padding: 12px 20px;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
 <body>
-
-    <!-- Mobile Top Header -->
-    <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
-            <div class="brand-icon">R</div>
-            <span class="fw-bold">Admin Raffa</span>
-        </div>
-        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-
+    @include('admin.partials.mobile-navigation')
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
-                <div class="brand-header">
-                    <div class="brand-icon">R</div>
-                    <div>
-                        <h6 class="fw-bold mb-0">Raffa Admin</h6>
-                        <small class="text-secondary" style="font-size: 11px;">CMS Dashboard</small>
-                    </div>
-                </div>
-
-                <div class="nav flex-column">
-                    <a class="nav-link-custom active" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                    <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                    <a class="nav-link-custom" href="{{ route('admin.projects.index') }}"><i class="fas fa-images"></i> Galeri Project</a>
-                    <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                    <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                    <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                    <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                    <hr style="border-color: var(--border-color); margin: 20px 0;">
-                    <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                    <form action="{{ route('admin.logout') }}" method="POST" class="mt-2">
-                        @csrf
-                        <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent">
-                            <i class="fas fa-sign-out-alt text-danger"></i> Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-
-            <!-- Offcanvas Mobile Drawer -->
-            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
-                <div class="offcanvas-header border-bottom border-secondary">
-                    <h5 class="offcanvas-title fw-bold">Menu Admin</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="nav flex-column">
-                        <a class="nav-link-custom active" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                        <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                        <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                        <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                        <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                        <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                        <hr>
-                        <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent mt-2">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+            @include('admin.partials.sidebar', ['active' => 'dashboard'])
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
+            <main class="col-12 col-xl-10 ms-xl-auto main-content">
                 <div class="mb-4">
                     <h3 class="fw-bold mb-1">Manajemen Testimoni</h3>
                     <p class="text-secondary small mb-0">Moderasi testimoni pengunjung yang masuk sebelum dipublikasikan ke halaman portfolio.</p>
@@ -199,13 +135,13 @@
                 @if(session('success'))
                     <div class="alert alert-success bg-success bg-opacity-20 text-success border-0 rounded-3 mb-4 alert-dismissible fade show">
                         <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Tutup notifikasi"></button>
                     </div>
                 @endif
 
                 <div class="card-custom">
                     <div class="table-responsive">
-                        <table class="table table-dark-custom align-middle">
+                        <table class="table table-dark-custom admin-mobile-table align-middle">
                             <thead>
                                 <tr>
                                     <th>Pengirim</th>
@@ -219,30 +155,30 @@
                             <tbody>
                                 @forelse($testimonials as $testimonial)
                                     <tr>
-                                        <td>
+                                        <td class="admin-table-primary" data-label="Pengirim">
                                             <div class="fw-bold">{{ $testimonial->name }}</div>
                                             <div class="text-secondary small">{{ $testimonial->position ?? 'Pengunjung Web' }}</div>
                                         </td>
-                                        <td><span class="text-secondary small">{{ $testimonial->email }}</span></td>
-                                        <td>
+                                        <td data-label="Email"><span class="text-secondary small admin-break-text">{{ $testimonial->email }}</span></td>
+                                        <td data-label="Rating">
                                             @for($i = 1; $i <= 5; $i++)
                                                 <i class="fas fa-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-secondary opacity-25' }}" style="font-size: 12px;"></i>
                                             @endfor
                                         </td>
-                                        <td>
+                                        <td data-label="Pesan">
                                             <div style="max-width: 300px;" class="text-truncate text-white-50" title="{{ $testimonial->message }}">
                                                 {{ $testimonial->message }}
                                             </div>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             @if($testimonial->is_approved)
                                                 <span class="badge bg-success bg-opacity-20 text-success border border-success border-opacity-30 px-2 py-1 rounded-2">Published</span>
                                             @else
                                                 <span class="badge bg-warning bg-opacity-20 text-warning border border-warning border-opacity-30 px-2 py-1 rounded-2">Pending</span>
                                             @endif
                                         </td>
-                                        <td class="text-end">
-                                            <div class="btn-group">
+                                        <td class="text-end" data-label="Aksi">
+                                            <div class="admin-row-actions">
                                                 @if(!$testimonial->is_approved)
                                                     <form action="{{ route('admin.testimonials.approve', $testimonial) }}" method="POST">
                                                         @csrf @method('PATCH')
@@ -261,7 +197,7 @@
 
                                                 <form action="{{ route('admin.testimonials.delete', $testimonial) }}" method="POST" onsubmit="return confirm('Hapus testimoni ini?')">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-2" title="Hapus">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-2" title="Hapus" aria-label="Hapus testimoni {{ $testimonial->name }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -269,7 +205,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
+                                    <tr class="admin-empty-row">
                                         <td colspan="6" class="text-center py-5 text-secondary">
                                             <i class="fas fa-comments fa-3x mb-3 d-block opacity-40"></i>
                                             Belum ada testimoni masuk.

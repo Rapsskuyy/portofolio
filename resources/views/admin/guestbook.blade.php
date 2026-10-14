@@ -118,78 +118,15 @@
             padding: 12px 20px;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
 <body>
-
-    <!-- Mobile Top Header -->
-    <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
-            <div class="brand-icon">R</div>
-            <span class="fw-bold">Admin Raffa</span>
-        </div>
-        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-
+    @include('admin.partials.mobile-navigation')
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
-                <div class="brand-header">
-                    <div class="brand-icon">R</div>
-                    <div>
-                        <h6 class="fw-bold mb-0">Raffa Admin</h6>
-                        <small class="text-secondary" style="font-size: 11px;">CMS Dashboard</small>
-                    </div>
-                </div>
-
-                <div class="nav flex-column">
-                    <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                    <a class="nav-link-custom active" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                    <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                    <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                    <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                    <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                    <hr style="border-color: var(--border-color); margin: 20px 0;">
-                    <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                    <form action="{{ route('admin.logout') }}" method="POST" class="mt-2">
-                        @csrf
-                        <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent">
-                            <i class="fas fa-sign-out-alt text-danger"></i> Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-
-            <!-- Mobile Offcanvas -->
-            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
-                <div class="offcanvas-header border-bottom border-secondary">
-                    <h5 class="offcanvas-title fw-bold">Menu Admin</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="nav flex-column">
-                        <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                        <a class="nav-link-custom active" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                        <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                        <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                        <a class="nav-link-custom" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                        <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                        <hr>
-                        <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent mt-2">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+            @include('admin.partials.sidebar', ['active' => 'guestbook'])
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
+            <main class="col-12 col-xl-10 ms-xl-auto main-content">
                 <div class="mb-4">
                     <h3 class="fw-bold mb-1">Manajemen Buku Tamu</h3>
                     <p class="text-secondary small mb-0">Daftar pesan dan salam dari pengunjung portfolio Anda.</p>
@@ -198,13 +135,13 @@
                 @if(session('success'))
                     <div class="alert alert-success bg-success bg-opacity-20 text-success border-0 rounded-3 mb-4 alert-dismissible fade show">
                         <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Tutup notifikasi"></button>
                     </div>
                 @endif
 
                 <div class="card-custom">
                     <div class="table-responsive">
-                        <table class="table table-dark-custom align-middle">
+                        <table class="table table-dark-custom admin-mobile-table align-middle">
                             <thead>
                                 <tr>
                                     <th>Waktu</th>
@@ -217,25 +154,27 @@
                             <tbody>
                                 @forelse($messages as $msg)
                                     <tr>
-                                        <td><span class="text-secondary small">{{ $msg->created_at ? $msg->created_at->format('d/m/Y H:i') : '-' }}</span></td>
-                                        <td><div class="fw-bold">{{ $msg->name }}</div></td>
-                                        <td><span class="text-secondary small">{{ $msg->email ?? '-' }}</span></td>
-                                        <td>
+                                        <td data-label="Waktu"><span class="text-secondary small">{{ $msg->created_at ? $msg->created_at->format('d/m/Y H:i') : '-' }}</span></td>
+                                        <td class="admin-table-primary" data-label="Pengirim"><div class="fw-bold">{{ $msg->name }}</div></td>
+                                        <td data-label="Email"><span class="text-secondary small admin-break-text">{{ $msg->email ?? '-' }}</span></td>
+                                        <td data-label="Pesan">
                                             <div style="max-width: 400px;" class="text-truncate text-white-50" title="{{ $msg->message }}">
                                                 {{ $msg->message }}
                                             </div>
                                         </td>
-                                        <td class="text-end">
+                                        <td class="text-end" data-label="Aksi">
+                                            <div class="admin-row-actions">
                                             <form action="{{ route('admin.guestbook.delete', $msg) }}" method="POST" onsubmit="return confirm('Hapus pesan buku tamu ini?')">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger rounded-2" title="Hapus">
                                                     <i class="fas fa-trash me-1"></i> Hapus
                                                 </button>
                                             </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
+                                    <tr class="admin-empty-row">
                                         <td colspan="5" class="text-center py-5 text-secondary">
                                             <i class="fas fa-book-open fa-3x mb-3 d-block opacity-40"></i>
                                             Belum ada pesan di buku tamu.

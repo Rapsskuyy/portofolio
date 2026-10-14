@@ -160,8 +160,9 @@
             color: #fff;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
-<body>
+<body class="admin-login">
 
     <div class="login-card text-center">
         <div class="brand-logo">

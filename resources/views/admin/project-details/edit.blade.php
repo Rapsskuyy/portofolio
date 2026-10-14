@@ -132,8 +132,11 @@
             padding: 12px 20px;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
 <body>
+    @include('admin.partials.mobile-navigation')
+    @if(false)
 
     <!-- Mobile Top Header -->
     <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
@@ -202,9 +205,13 @@
                 </div>
             </div>
 
+    @endif
+    <div class="container-fluid">
+        <div class="row">
+            @include('admin.partials.sidebar', ['active' => 'project-details'])
             <!-- Main Content Area -->
-            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <main class="col-12 col-xl-10 ms-xl-auto main-content">
+                <div class="admin-page-header mb-4">
                     <div class="d-flex align-items-center gap-3">
                         <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light btn-sm rounded-2">
                             <i class="fas fa-arrow-left me-1"></i> Kembali
@@ -260,7 +267,7 @@
                                             <input type="text" name="database_schema[{{ $i }}][columns]" class="form-control" placeholder="Kolom: id, name, email, created_at, ..." value="{{ $schema['columns'] ?? '' }}">
                                         </div>
                                         <div class="col-md-1 text-end">
-                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-{{ $i }}')"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('schema-{{ $i }}')" aria-label="Hapus tabel database"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -274,7 +281,7 @@
                                             <input type="text" name="database_schema[0][columns]" class="form-control" placeholder="Kolom: id, name, email, created_at, ...">
                                         </div>
                                         <div class="col-md-1 text-end">
-                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-0')"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('schema-0')" aria-label="Hapus tabel database"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +321,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-1 text-end">
-                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-{{ $j }}')"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('snippet-{{ $j }}')" aria-label="Hapus code snippet"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                     <textarea name="code_snippets[{{ $j }}][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini...">{{ $snippet['code'] ?? '' }}</textarea>
@@ -337,7 +344,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-1 text-end">
-                                            <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-0')"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('snippet-0')" aria-label="Hapus code snippet"><i class="fas fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                     <textarea name="code_snippets[0][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini..."></textarea>
@@ -356,7 +363,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 admin-form-actions">
                         <button type="submit" class="btn btn-primary px-4 py-2 rounded-3" style="background: var(--primary); border: none;"><i class="fas fa-save me-2"></i>Simpan Technical Details</button>
                         <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light px-4 py-2 rounded-3">Batal</a>
                     </div>
@@ -384,7 +391,7 @@
                         <input type="text" name="database_schema[${schemaCount}][columns]" class="form-control" placeholder="Kolom: id, name, email, ...">
                     </div>
                     <div class="col-md-1 text-end">
-                        <button type="button" class="btn btn-outline-danger" onclick="removeRow('schema-${schemaCount}')"><i class="fas fa-trash"></i></button>
+                        <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('schema-${schemaCount}')" aria-label="Hapus tabel database"><i class="fas fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </div>`;
             container.appendChild(div);
@@ -413,7 +420,7 @@
                         </select>
                     </div>
                     <div class="col-md-1 text-end">
-                        <button type="button" class="btn btn-outline-danger" onclick="removeRow('snippet-${snippetCount}')"><i class="fas fa-trash"></i></button>
+                        <button type="button" class="btn btn-outline-danger admin-remove-row" onclick="removeRow('snippet-${snippetCount}')" aria-label="Hapus code snippet"><i class="fas fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <textarea name="code_snippets[${snippetCount}][code]" class="form-control code-area" rows="6" placeholder="Paste kode di sini..."></textarea>`;

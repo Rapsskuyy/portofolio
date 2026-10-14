@@ -143,79 +143,16 @@
             padding: 12px 20px;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
 <body>
-
-    <!-- Mobile Top Header -->
-    <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
-            <div class="brand-icon">R</div>
-            <span class="fw-bold">Admin Raffa</span>
-        </div>
-        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-
+    @include('admin.partials.mobile-navigation')
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
-                <div class="brand-header">
-                    <div class="brand-icon">R</div>
-                    <div>
-                        <h6 class="fw-bold mb-0">Raffa Admin</h6>
-                        <small class="text-secondary" style="font-size: 11px;">CMS Dashboard</small>
-                    </div>
-                </div>
-
-                <div class="nav flex-column">
-                    <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                    <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                    <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                    <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                    <a class="nav-link-custom active" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                    <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                    <hr style="border-color: var(--border-color); margin: 20px 0;">
-                    <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                    <form action="{{ route('admin.logout') }}" method="POST" class="mt-2">
-                        @csrf
-                        <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent">
-                            <i class="fas fa-sign-out-alt text-danger"></i> Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-
-            <!-- Offcanvas Mobile Drawer -->
-            <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
-                <div class="offcanvas-header border-bottom border-secondary">
-                    <h5 class="offcanvas-title fw-bold">Menu Admin</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="nav flex-column">
-                        <a class="nav-link-custom" href="{{ route('admin.dashboard') }}"><i class="fas fa-comments"></i> Testimoni</a>
-                        <a class="nav-link-custom" href="{{ route('admin.guestbook.index') }}"><i class="fas fa-book"></i> Buku Tamu</a>
-                        <a class="nav-link-custom" href="{{ route('admin.coding_projects.index') }}"><i class="fas fa-laptop-code"></i> Project Coding</a>
-                        <a class="nav-link-custom" href="{{ route('admin.posts.index') }}"><i class="fas fa-newspaper"></i> Blog Posts</a>
-                        <a class="nav-link-custom active" href="{{ route('admin.mock_apis.index') }}"><i class="fas fa-server"></i> Mock APIs</a>
-                        <a class="nav-link-custom" href="{{ route('admin.project-details.index') }}"><i class="fas fa-layer-group"></i> Detail Specs</a>
-                        <hr>
-                        <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="nav-link-custom w-100 text-start text-danger border-0 bg-transparent mt-2">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+            @include('admin.partials.sidebar', ['active' => 'mock-apis'])
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <main class="col-12 col-xl-10 ms-xl-auto main-content">
+                <div class="admin-page-header mb-4">
                     <div>
                         <h3 class="fw-bold mb-1">Manajemen Mock APIs</h3>
                         <p class="text-secondary small mb-0">Kelola API endpoints interaktif yang ditampilkan pada section API Playground di portfolio.</p>
@@ -228,13 +165,13 @@
                 @if(session('success'))
                     <div class="alert alert-success bg-success bg-opacity-20 text-success border-0 rounded-3 mb-4 alert-dismissible fade show">
                         <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Tutup notifikasi"></button>
                     </div>
                 @endif
 
                 <div class="card-custom">
                     <div class="table-responsive">
-                        <table class="table table-dark-custom align-middle">
+                        <table class="table table-dark-custom admin-mobile-table align-middle">
                             <thead>
                                 <tr>
                                     <th>Method</th>
@@ -247,28 +184,28 @@
                             <tbody>
                                 @forelse($apis as $api)
                                     <tr>
-                                        <td>
+                                        <td class="admin-table-primary" data-label="Method">
                                             <span class="badge bg-{{ $api->method === 'GET' ? 'primary' : ($api->method === 'POST' ? 'success' : 'warning') }} px-2 py-1">
                                                 {{ $api->method }}
                                             </span>
                                         </td>
-                                        <td><code class="text-indigo" style="color: #a5b4fc;">/api/v1/{{ $api->path }}</code></td>
-                                        <td><span class="text-secondary small">{{ $api->description ?? '-' }}</span></td>
-                                        <td>
+                                        <td data-label="Path"><code class="text-indigo admin-break-text" style="color: #a5b4fc;">/api/v1/{{ $api->path }}</code></td>
+                                        <td data-label="Deskripsi"><span class="text-secondary small">{{ $api->description ?? '-' }}</span></td>
+                                        <td data-label="Status">
                                             @if($api->is_active)
                                                 <span class="badge bg-success bg-opacity-20 text-success border border-success border-opacity-30 px-2 py-1 rounded-2">Aktif</span>
                                             @else
                                                 <span class="badge bg-secondary bg-opacity-20 text-secondary border border-secondary border-opacity-30 px-2 py-1 rounded-2">Non-aktif</span>
                                             @endif
                                         </td>
-                                        <td class="text-end">
-                                            <div class="btn-group">
+                                        <td class="text-end" data-label="Aksi">
+                                            <div class="admin-row-actions">
                                                 <button class="btn btn-sm btn-outline-light rounded-2 me-1" data-bs-toggle="modal" data-bs-target="#editModal{{ $api->id }}">
                                                     <i class="fas fa-edit me-1"></i> Edit
                                                 </button>
                                                 <form action="{{ route('admin.mock_apis.delete', $api->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus API endpoint ini?');">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-2">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-2" aria-label="Hapus API {{ $api->path }}">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -276,6 +213,7 @@
                                         </td>
                                     </tr>
 
+                                    @if(false)
                                     <!-- Edit Modal -->
                                     <div class="modal fade" id="editModal{{ $api->id }}" tabindex="-1">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -323,8 +261,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 @empty
-                                    <tr>
+                                    <tr class="admin-empty-row">
                                         <td colspan="5" class="text-center py-5 text-secondary">
                                             <i class="fas fa-plug fa-3x mb-3 d-block opacity-40"></i>
                                             Belum ada API endpoint dibuat.
@@ -335,17 +274,20 @@
                         </table>
                     </div>
                 </div>
+                @foreach($apis as $api)
+                    @include('admin.partials.mock-api-edit-modal', ['api' => $api])
+                @endforeach
             </main>
         </div>
     </div>
 
     <!-- Add Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addApiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content modal-content-dark">
                 <div class="modal-header modal-header-dark">
-                    <h5 class="modal-title fw-bold">Tambah API Endpoint Baru</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title h5 fw-bold" id="addApiLabel">Tambah API Endpoint Baru</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup form tambah API"></button>
                 </div>
                 <form action="{{ route('admin.mock_apis.store') }}" method="POST">
                     @csrf

@@ -94,8 +94,11 @@
             padding: 12px 20px;
         }
     </style>
+    @include('admin.partials.responsive-styles')
 </head>
 <body>
+    @include('admin.partials.mobile-navigation')
+    @if(false)
 
     <!-- Mobile Top Header -->
     <div class="mobile-navbar d-md-none d-flex justify-content-between align-items-center">
@@ -164,8 +167,12 @@
                 </div>
             </div>
 
+    @endif
+    <div class="container-fluid">
+        <div class="row">
+            @include('admin.partials.sidebar', ['active' => 'project-details'])
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-10 ms-sm-auto main-content">
+            <main class="col-12 col-xl-10 ms-xl-auto main-content">
                 <div class="mb-4">
                     <h3 class="fw-bold mb-1">Project Technical Details</h3>
                     <p class="text-secondary small mb-0">Kelola rincian Arsitektur Sistem, Database Schema, dan Snippet Kode untuk modal detail project.</p>
@@ -174,12 +181,12 @@
                 @if(session('success'))
                     <div class="alert alert-success bg-success bg-opacity-20 text-success border-0 rounded-3 mb-4 alert-dismissible fade show">
                         <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Tutup notifikasi"></button>
                     </div>
                 @endif
 
                 <div class="row row-cols-1 row-cols-md-2 g-4">
-                    @foreach($projects as $project)
+                    @forelse($projects as $project)
                     <div class="col">
                         <div class="card-custom p-4 d-flex flex-column justify-content-between">
                             <div>
@@ -211,7 +218,14 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-12">
+                        <div class="card-custom p-4 text-center text-secondary">
+                            <i class="fas fa-layer-group fa-2x mb-3 d-block opacity-50" aria-hidden="true"></i>
+                            Belum ada project coding. Tambahkan project coding terlebih dahulu untuk mengisi detail teknis.
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </main>
         </div>
