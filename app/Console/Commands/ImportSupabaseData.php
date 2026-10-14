@@ -2,57 +2,64 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
+use JsonException;
+use RuntimeException;
 
 class ImportSupabaseData extends Command
 {
-    protected $signature = 'portfolio:import-supabase 
+    protected $signature = 'portfolio:import-supabase
                             {--file= : Specific backup file path}
-                            {--connection=pgsql : Database connection to use (default: pgsql)}
-                            {--admin-email= : Email for default admin user}
-                            {--admin-password= : Password for default admin user}';
+                            {--connection=pgsql : Target database connection}
+                            {--force : Confirm that the target database is the intended import target}';
 
-    protected $description = 'Import portfolio data into Supabase PostgreSQL, sync sequences, and ensure admin user';
+    protected $description = 'Import portfolio content into a migrated Supabase PostgreSQL database';
 
     public function handle(): int
     {
+        if (! $this->option('force')) {
+            $this->error('Import stopped. Re-run with --force after confirming the target Supabase database.');
+
+            return Command::FAILURE;
+        }
+
+        $filePath = $this->resolveBackupPath();
+        if ($filePath === null) {
+            return Command::FAILURE;
+        }
+
+        try {
+            $data = json_decode(File::get($filePath), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            $this->error('Backup file is not valid JSON: '.$exception->getMessage());
+
+            return Command::FAILURE;
+        }
+
+        if (! is_array($data) || ! isset($data['tables']) || ! is_array($data['tables'])) {
+            $this->error('Invalid backup file format. Expected a tables object.');
+
+            return Command::FAILURE;
+        }
+
         $connectionName = $this->option('connection');
-        $this->info("Importing portfolio data into connection [{$connectionName}]...");
-
-        $backupDir = database_path('backup');
-        $filePath = $this->option('file');
-
-        if (!$filePath) {
-            $files = File::glob($backupDir . '/portfolio_backup_*.json');
-            if (empty($files)) {
-                $this->error('No backup files found in ' . $backupDir);
-                return Command::FAILURE;
-            }
-            rsort($files);
-            $filePath = $files[0];
-        }
-
-        if (!File::exists($filePath)) {
-            $this->error("Backup file not found: {$filePath}");
-            return Command::FAILURE;
-        }
-
-        $this->line("Using backup file: {$filePath}");
-        $data = json_decode(File::get($filePath), true);
-
-        if (!isset($data['tables'])) {
-            $this->error('Invalid backup file format.');
-            return Command::FAILURE;
-        }
-
         $targetDb = DB::connection($connectionName);
 
-        // Import tables in logical order
-        $tableOrder = [
+        try {
+            $targetDb->getPdo();
+        } catch (\Throwable $exception) {
+            $this->error("Unable to connect to database connection [{$connectionName}].");
+            report($exception);
+
+            return Command::FAILURE;
+        }
+
+        $this->line("Importing portfolio content into connection [{$connectionName}] from {$filePath}...");
+
+        $tables = [
             'educations',
             'skills',
             'projects',
@@ -60,91 +67,90 @@ class ImportSupabaseData extends Command
             'project_details',
             'posts',
             'mock_apis',
+            'api_endpoints',
             'testimonials',
             'guest_books',
         ];
 
-        foreach ($tableOrder as $table) {
-            if (!isset($data['tables'][$table]) || empty($data['tables'][$table])) {
-                continue;
-            }
+        try {
+            $importedTables = $targetDb->transaction(function () use ($data, $tables, $targetDb): array {
+                $importedTables = [];
 
-            $rows = $data['tables'][$table];
-            $count = 0;
-
-            foreach ($rows as $row) {
-                // Sanitize corrupted em-dashes and characters to comply with Dapur R-02
-                foreach ($row as $k => $v) {
-                    if (is_string($v)) {
-                        $row[$k] = str_replace(['ÔÇö', '—'], ':', $v);
+                foreach ($tables as $table) {
+                    $rows = $data['tables'][$table] ?? [];
+                    if ($rows === []) {
+                        continue;
                     }
-                }
 
-                // Explicit boolean casting for PostgreSQL compatibility
-                $booleanFields = ['is_visible', 'is_approved', 'is_published', 'is_active', 'is_admin'];
-                foreach ($booleanFields as $field) {
-                    if (array_key_exists($field, $row)) {
-                        if ($targetDb->getDriverName() === 'pgsql') {
-                            $row[$field] = !empty($row[$field]) ? DB::raw('true') : DB::raw('false');
-                        } else {
-                            $row[$field] = (bool) $row[$field];
+                    if (! is_array($rows)) {
+                        throw new RuntimeException("Invalid row collection for [{$table}].");
+                    }
+
+                    foreach ($rows as $row) {
+                        if (! is_array($row) || ! array_key_exists('id', $row)) {
+                            throw new RuntimeException("Every [{$table}] row must include an id.");
                         }
+
+                        foreach (['is_visible', 'is_approved', 'is_published', 'is_active'] as $field) {
+                            if (array_key_exists($field, $row)) {
+                                $value = filter_var($row[$field], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+                                if ($value === null) {
+                                    throw new RuntimeException("Invalid boolean value for [{$table}.{$field}].");
+                                }
+
+                                $row[$field] = $value;
+                            }
+                        }
+
+                        $targetDb->table($table)->updateOrInsert(['id' => $row['id']], $row);
                     }
+
+                    $importedTables[] = $table;
+                    $this->line('  Imported '.count($rows)." row(s) into {$table}.");
                 }
 
-                $targetDb->table($table)->updateOrInsert(
-                    ['id' => $row['id']],
-                    $row
-                );
-                $count++;
-            }
-
-            $this->line("  ✓ {$table}: imported {$count} rows");
-
-            // Reset PostgreSQL sequence if applicable
-            if ($targetDb->getDriverName() === 'pgsql') {
-                try {
-                    $targetDb->statement("SELECT setval(pg_get_serial_sequence('{$table}', 'id'), COALESCE(MAX(id), 1)) FROM \"{$table}\";");
-                } catch (\Throwable $e) {
-                    // Sequence might not exist or be named differently, report safely
-                    report($e);
-                }
-            }
-        }
-
-        // Ensure Admin user
-        $adminEmail = $this->option('admin-email') ?: env('ADMIN_DEFAULT_EMAIL', 'admin@raffa.my.id');
-        $adminPassword = $this->option('admin-password') ?: env('ADMIN_DEFAULT_PASSWORD', 'AdminRaffa2026!');
-
-        $existingAdmin = $targetDb->getDriverName() === 'pgsql'
-            ? $targetDb->table('users')->whereRaw('"is_admin" = true')->first()
-            : $targetDb->table('users')->where('is_admin', true)->first();
-
-        if (!$existingAdmin) {
-            $adminId = $targetDb->table('users')->insertGetId([
-                'name' => 'Administrator',
-                'email' => $adminEmail,
-                'password' => Hash::make($adminPassword),
-                'is_admin' => $targetDb->getDriverName() === 'pgsql' ? DB::raw('true') : true,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
-            $this->info("  ✓ Created administrator account [{$adminEmail}].");
-            $this->warn("    Important: Change this password immediately after first login!");
+                return $importedTables;
+            });
 
             if ($targetDb->getDriverName() === 'pgsql') {
-                try {
-                    $targetDb->statement("SELECT setval(pg_get_serial_sequence('users', 'id'), COALESCE(MAX(id), 1)) FROM \"users\";");
-                } catch (\Throwable $e) {
-                    report($e);
+                foreach ($importedTables as $table) {
+                    $this->syncSequence($targetDb, $table);
                 }
             }
-        } else {
-            $this->line("  ✓ Administrator account already exists: {$existingAdmin->email}");
+        } catch (\Throwable $exception) {
+            $this->error('Import failed. Database changes were rolled back.');
+            report($exception);
+
+            return Command::FAILURE;
         }
 
-        $this->info('Supabase data import and sequence sync completed successfully.');
+        $this->info('Portfolio import completed. Create the admin account separately with php artisan admin:create.');
+
         return Command::SUCCESS;
+    }
+
+    private function resolveBackupPath(): ?string
+    {
+        $filePath = $this->option('file');
+
+        if (! $filePath) {
+            $files = File::glob(database_path('backup/portfolio_backup_*.json'));
+            rsort($files);
+            $filePath = $files[0] ?? null;
+        }
+
+        if (! $filePath || ! File::exists($filePath)) {
+            $this->error('No portfolio backup file was found. Run portfolio:export-data first or pass --file.');
+
+            return null;
+        }
+
+        return $filePath;
+    }
+
+    private function syncSequence(Connection $connection, string $table): void
+    {
+        $connection->statement("SELECT setval(pg_get_serial_sequence('{$table}', 'id'), COALESCE(MAX(id), 1), true) FROM \"{$table}\"");
     }
 }

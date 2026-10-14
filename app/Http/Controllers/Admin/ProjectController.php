@@ -12,6 +12,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderBy('order')->orderBy('id', 'asc')->get();
+
         return view('admin.projects', compact('projects'));
     }
 
@@ -33,8 +34,13 @@ class ProjectController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'project_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $file->getClientOriginalExtension();
+            $filename = 'project_'.time().'_'.bin2hex(random_bytes(4)).'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('projects', $filename, $diskName);
+
+            if ($path === false) {
+                throw new \RuntimeException('Project image could not be stored.');
+            }
+
             $validated['image_url'] = Storage::disk($diskName)->url($path);
         }
 
@@ -66,8 +72,13 @@ class ProjectController extends Controller
             $this->cleanupOldImage($project->image_url, $diskName);
 
             $file = $request->file('image');
-            $filename = 'project_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $file->getClientOriginalExtension();
+            $filename = 'project_'.time().'_'.bin2hex(random_bytes(4)).'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('projects', $filename, $diskName);
+
+            if ($path === false) {
+                throw new \RuntimeException('Project image could not be stored.');
+            }
+
             $validated['image_url'] = Storage::disk($diskName)->url($path);
         }
 
@@ -91,11 +102,7 @@ class ProjectController extends Controller
 
     protected function resolveStorageDisk(): string
     {
-        if (config('filesystems.default') === 'supabase' || !empty(env('SUPABASE_STORAGE_BUCKET'))) {
-            return 'supabase';
-        }
-
-        return config('filesystems.disks.public') ? 'public' : 'local';
+        return config('filesystems.default') === 'supabase' ? 'supabase' : 'public';
     }
 
     protected function cleanupOldImage(?string $imageUrl, string $diskName): void
@@ -108,13 +115,9 @@ class ProjectController extends Controller
             $parsedPath = parse_url($imageUrl, PHP_URL_PATH);
             if ($parsedPath) {
                 $filename = basename($parsedPath);
-                $storagePath = 'projects/' . $filename;
-                try {
-                    if (Storage::disk($diskName)->exists($storagePath)) {
-                        Storage::disk($diskName)->delete($storagePath);
-                    }
-                } catch (\Throwable $e) {
-                    report($e);
+                $storagePath = 'projects/'.$filename;
+                if (Storage::disk($diskName)->exists($storagePath) && ! Storage::disk($diskName)->delete($storagePath)) {
+                    throw new \RuntimeException('Existing project image could not be removed.');
                 }
             }
         }

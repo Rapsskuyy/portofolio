@@ -63,6 +63,25 @@ class AdminProjectGalleryTest extends TestCase
         ]);
     }
 
+    public function test_admin_uses_the_supabase_disk_when_it_is_the_configured_default(): void
+    {
+        Storage::fake('supabase');
+        config()->set('filesystems.default', 'supabase');
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $response = $this->actingAs($admin)
+            ->post(route('admin.projects.store'), [
+                'title' => 'Supabase Gallery',
+                'description' => 'Storage disk test',
+                'image' => UploadedFile::fake()->image('supabase.png'),
+            ]);
+
+        $response->assertRedirect(route('admin.projects.index'));
+        $files = Storage::disk('supabase')->allFiles('projects');
+        $this->assertNotEmpty($files);
+        $this->assertTrue(collect($files)->contains(fn (string $file): bool => str_starts_with($file, 'projects/project_')));
+    }
+
     public function test_admin_can_update_a_gallery_project(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);

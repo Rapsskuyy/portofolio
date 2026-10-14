@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 class ExportPortfolioData extends Command
 {
     protected $signature = 'portfolio:export-data {--output= : Custom file path for the backup}';
+
     protected $description = 'Backup current portfolio data and image inventory to JSON before migrating to Supabase';
 
     public function handle(): int
@@ -16,7 +17,6 @@ class ExportPortfolioData extends Command
         $this->info('Starting portfolio data export...');
 
         $tables = [
-            'users',
             'educations',
             'skills',
             'projects',
@@ -40,19 +40,20 @@ class ExportPortfolioData extends Command
                     return (array) $row;
                 })->toArray();
                 $exportData['tables'][$table] = $rows;
-                $this->line("  - {$table}: " . count($rows) . " rows");
+                $this->line("  - {$table}: ".count($rows).' rows');
             }
         }
 
         $backupDir = database_path('backup');
-        if (!File::isDirectory($backupDir)) {
+        if (! File::isDirectory($backupDir)) {
             File::makeDirectory($backupDir, 0755, true);
         }
 
-        $filename = $this->option('output') ?: $backupDir . '/portfolio_backup_' . date('Ymd_His') . '.json';
+        $filename = $this->option('output') ?: $backupDir.'/portfolio_backup_'.date('Ymd_His').'.json';
         File::put($filename, json_encode($exportData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 
         $this->info("Backup successfully written to: {$filename}");
+
         return Command::SUCCESS;
     }
 }
