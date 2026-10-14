@@ -1,14 +1,14 @@
 <div class="modal fade" id="editModal{{ $project->id }}" tabindex="-1" aria-labelledby="editProjectLabel{{ $project->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content modal-content-dark">
-            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-grow-1 overflow-hidden" style="min-height: 0;">
                 @csrf
                 @method('PUT')
-                <div class="modal-header modal-header-dark">
+                <div class="modal-header modal-header-dark flex-shrink-0">
                     <h2 class="modal-title h5 fw-bold" id="editProjectLabel{{ $project->id }}">Edit Item Galeri: {{ $project->title }}</h2>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup form edit galeri"></button>
                 </div>
-                <div class="modal-body p-4">
+                <div class="modal-body p-4" style="overflow-y: auto; max-height: calc(100dvh - 12rem);">
                     <div class="row g-3">
                         <div class="col-md-8">
                             <label class="form-label small text-secondary">Judul Item / Event</label>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer modal-footer-dark">
+                <div class="modal-footer modal-footer-dark flex-shrink-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" style="background: var(--primary); border: none;">Simpan Perubahan</button>
                 </div>

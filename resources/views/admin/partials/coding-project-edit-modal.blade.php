@@ -5,10 +5,10 @@
                 <h2 class="modal-title h5 fw-bold" id="editCodingProjectLabel{{ $project->id }}"><i class="fas fa-edit text-primary me-2" aria-hidden="true"></i>Edit Project: {{ $project->title }}</h2>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup form edit project"></button>
             </div>
-            <form action="{{ route('admin.coding_projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.coding_projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-grow-1 overflow-hidden" style="min-height: 0;">
                 @csrf
                 @method('PUT')
-                <div class="modal-body p-4">
+                <div class="modal-body p-4" style="overflow-y: auto; max-height: calc(100dvh - 12rem);">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Judul Project</label>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer modal-footer-dark">
+                <div class="modal-footer modal-footer-dark flex-shrink-0">
                     <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-1" aria-hidden="true"></i> Simpan Perubahan</button>
                 </div>

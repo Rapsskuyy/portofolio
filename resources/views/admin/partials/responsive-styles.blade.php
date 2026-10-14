@@ -154,14 +154,59 @@
         min-height: 7rem;
     }
 
-    .modal-dialog-scrollable .modal-content,
-    .modal-content {
+    .modal-dialog-scrollable {
         max-height: calc(100dvh - 2rem);
     }
 
+    .modal-dialog-scrollable .modal-content,
+    .modal-content {
+        max-height: calc(100dvh - 2rem);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .modal-content > form {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: 100%;
+        overflow: hidden;
+    }
+
+    .modal-dialog-scrollable .modal-body,
+    .modal-content > form > .modal-body,
     .modal-body {
-        overflow-y: auto;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: calc(100dvh - 12rem);
+    }
+
+    .modal-header,
+    .modal-footer {
+        flex-shrink: 0;
+    }
+
+    .modal-body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 4px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
     }
 
     .note-toolbar {

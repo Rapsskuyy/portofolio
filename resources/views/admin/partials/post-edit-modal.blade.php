@@ -5,9 +5,9 @@
                 <h2 class="modal-title h5 fw-bold" id="editPostLabel{{ $post->id }}">Edit Artikel: {{ $post->title }}</h2>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup form edit artikel"></button>
             </div>
-            <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+            <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" class="d-flex flex-column flex-grow-1 overflow-hidden" style="min-height: 0;">
                 @csrf @method('PUT')
-                <div class="modal-body p-4">
+                <div class="modal-body p-4" style="overflow-y: auto; max-height: calc(100dvh - 12rem);">
                     <div class="row g-3">
                         <div class="col-md-8">
                             <label class="form-label">Judul Artikel</label>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer modal-footer-dark">
+                <div class="modal-footer modal-footer-dark flex-shrink-0">
                     <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary px-4">Simpan Perubahan</button>
                 </div>
