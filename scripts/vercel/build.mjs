@@ -32,6 +32,10 @@ const staticRoutes = [
     { src: '^/projects/(.*)$', dest: '/public/projects/$1' },
     { src: '^/files/(.*)$', dest: '/public/files/$1' },
     { src: '^/favicon\\.ico$', dest: '/public/favicon.ico' },
+    { src: '^/favicon\\.svg$', dest: '/public/favicon.svg' },
+    { src: '^/favicon\\.png$', dest: '/public/favicon.png' },
+    { src: '^/favicon-(.*)\\.png$', dest: '/public/favicon-$1.png' },
+    { src: '^/apple-touch-icon\\.png$', dest: '/public/apple-touch-icon.png' },
     { src: '^/robots\\.txt$', dest: '/public/robots.txt' },
 ];
 
