@@ -18,7 +18,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}">
 </head>
 
@@ -92,28 +92,28 @@
                             <div class="tech-marquee-container">
                                 <div class="tech-marquee">
                                     <div class="marquee-group">
-                                        <div class="tech-icon" title="VS Code"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="GitHub"><img src="https://cdn.simpleicons.org/github/white" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
                                         <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Canva"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Figma"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Unity Hub"><img src="https://cdn.simpleicons.org/unity/white" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Apache NetBeans"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netbeans/netbeans-original.svg" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Eclipse IDE"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Team Viewer"><img src="https://cdn.simpleicons.org/teamviewer/white" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Blender"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
                                     </div>
                                     <div class="marquee-group" aria-hidden="true">
-                                        <div class="tech-icon" title="VS Code"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="GitHub"><img src="https://cdn.simpleicons.org/github/white" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
                                         <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Canva"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Figma"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Unity Hub"><img src="https://cdn.simpleicons.org/unity/white" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Apache NetBeans"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netbeans/netbeans-original.svg" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Eclipse IDE"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Team Viewer"><img src="https://cdn.simpleicons.org/teamviewer/white" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Blender"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
+                                        <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@
                     <div class="masonry-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         <div class="project-card-modern">
                             <div class="project-image-wrapper">
-                                <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" class="project-image" loading="lazy" decoding="async" width="400" height="280">
+                                <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" class="project-image" loading="lazy" decoding="async">
                                 <div class="project-overlay">
                                     <div class="project-info">
                                         <h3 class="project-title">{{ $project->title }}</h3>
@@ -353,7 +353,7 @@
                          data-snippet="{{ $codingProject->code_snippet }}"
                          data-github="{{ $codingProject->github_url }}">
                         <div class="project-image-container">
-                            <img src="{{ $codingProject->formatted_image_url }}" alt="{{ $codingProject->title }}" class="project-img" loading="lazy" decoding="async" width="400" height="240">
+                            <img src="{{ $codingProject->formatted_image_url }}" alt="{{ $codingProject->title }}" class="project-img" loading="lazy" decoding="async">
                             @if($codingProject->year)
                             <div class="project-year-badge">{{ $codingProject->year }}</div>
                             @endif
@@ -667,8 +667,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/portfolio.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{{ asset('js/portfolio.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
