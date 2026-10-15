@@ -51,6 +51,16 @@ class PublicPortfolioSafetyTest extends TestCase
             ->assertSee('responseBody.textContent = JSON.stringify(data, null, 4);', false);
     }
 
+    public function test_homepage_does_not_load_nonessential_scripts_during_initial_render(): void
+    {
+        $this->get(route('portfolio.home'))
+            ->assertOk()
+            ->assertSee('rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"', false)
+            ->assertDontSee('bootstrap.bundle.min.js', false)
+            ->assertDontSee('setInterval(() => {', false)
+            ->assertDontSee('cdn.jsdelivr.net/npm/sweetalert2@11', false);
+    }
+
     public function test_public_write_routes_are_rate_limited(): void
     {
         $this->assertContains('throttle:5,1', Route::getRoutes()->getByName('testimonial.store')->gatherMiddleware());

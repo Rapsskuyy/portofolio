@@ -17,8 +17,10 @@
     <link rel="preload" as="image" href="{{ asset('images/profile/profilrappa.webp') }}" fetchpriority="high">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261015-natural-ratio">
 </head>
 
@@ -667,32 +669,10 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="{{ asset('js/portfolio.js') }}?v=20261015-natural-ratio" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileImage = document.getElementById('heroProfileImage');
-            if(profileImage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const images = [
-                    "{{ asset('images/profile/profilrappa.webp') }}",
-                    "{{ asset('images/profile/profile.webp') }}",
-                    "{{ asset('images/profile/rapoy122345.webp') }}"
-                ];
-                let currentIndex = 0;
-                setInterval(() => {
-                    profileImage.style.opacity = 0;
-                    setTimeout(() => {
-                        currentIndex = (currentIndex + 1) % images.length;
-                        profileImage.src = images[currentIndex];
-                        profileImage.style.opacity = 1;
-                    }, 500);
-                }, 3700);
-            }
-        });
-    </script>
 
-    <!-- SweetAlert2 Toast Notification Script -->
+    @if(session('success') || session('success_guestbook') || (isset($errors) && $errors->any()))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const Toast = Swal.mixin({
@@ -724,5 +704,6 @@
             @endif
         });
     </script>
+    @endif
 </body>
 </html>
