@@ -52,7 +52,7 @@ $_ENV['DB_EMULATE_PREPARES'] = 'false';
 $_SERVER['DB_EMULATE_PREPARES'] = 'false';
 
 foreach ([
-    'CACHE_STORE' => 'array',
+    'CACHE_STORE' => 'database',
     'APP_CONFIG_CACHE' => $tmpPath.'/bootstrap/cache/config.php',
     'APP_EVENTS_CACHE' => $tmpPath.'/bootstrap/cache/events.php',
     'APP_PACKAGES_CACHE' => $tmpPath.'/bootstrap/cache/packages.php',

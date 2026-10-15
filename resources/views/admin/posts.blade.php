@@ -210,7 +210,7 @@
                                                 <span class="badge bg-secondary bg-opacity-20 text-secondary border border-secondary border-opacity-30 px-2 py-1 rounded-2">Draft</span>
                                             @endif
                                         </td>
-                                        <td data-label="Dilihat"><span class="text-secondary small"><i class="fas fa-eye me-1"></i>{{ $post->views ?? 0 }}</span></td>
+                                        <td data-label="Dilihat"><span class="text-secondary small"><i class="fas fa-eye me-1"></i>{{ $post->views_count }}</span></td>
                                         <td data-label="Tanggal"><span class="text-secondary small">{{ $post->created_at ? $post->created_at->format('d/m/Y') : '-' }}</span></td>
                                         <td class="text-end" data-label="Aksi">
                                             <div class="admin-row-actions">
@@ -227,48 +227,6 @@
                                         </td>
                                     </tr>
 
-                                    @if(false)
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="editModal{{ $post->id }}" tabindex="-1">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                                            <div class="modal-content modal-content-dark">
-                                                <div class="modal-header modal-header-dark">
-                                                    <h5 class="modal-title fw-bold">Edit Artikel - {{ $post->title }}</h5>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
-                                                    @csrf @method('PUT')
-                                                    <div class="modal-body p-4">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-8">
-                                                                <label class="form-label">Judul Artikel</label>
-                                                                <input type="text" name="title" class="form-control" value="{{ $post->title }}" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label class="form-label">Kategori</label>
-                                                                <input type="text" name="category" class="form-control" value="{{ $post->category }}">
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <label class="form-label">Konten Artikel</label>
-                                                                <textarea name="content" class="form-control summernote" rows="8" required>{!! $post->content !!}</textarea>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form-check form-switch mt-2">
-                                                                    <input class="form-check-input" type="checkbox" name="is_published" value="1" id="publishCheck{{ $post->id }}" {{ $post->is_published ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="publishCheck{{ $post->id }}">Publikasikan Langsung</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer modal-footer-dark">
-                                                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-primary px-4">Simpan Perubahan</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endif
                                 @empty
                                     <tr class="admin-empty-row">
                                         <td colspan="6" class="text-center py-5 text-secondary">

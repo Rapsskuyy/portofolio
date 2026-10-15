@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CodingProject;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class CodingProjectController extends Controller
 {
@@ -25,9 +27,9 @@ class CodingProjectController extends Controller
             'title' => 'required|string|max:200',
             'description' => 'required|string',
             'image_url' => 'nullable|string|max:500',
-            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
-            'demo_url' => 'nullable|string|max:500',
-            'github_url' => 'nullable|string|max:500',
+            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'demo_url' => 'nullable|url|max:500',
+            'github_url' => 'nullable|url|max:500',
             'technologies' => 'nullable|string',
             'category' => 'required|string|max:50',
             'type' => 'required|string|in:school,internship,personal',
@@ -38,9 +40,11 @@ class CodingProjectController extends Controller
             'code_snippet' => 'nullable|string',
         ]);
 
-        // Handle Image File Upload
         if ($request->hasFile('image_file')) {
-            $validated['image_url'] = $this->storeOptimizedImage($request->file('image_file'));
+            $validated['image_url'] = $this->storeOptimizedImage(
+                $request->file('image_file'),
+                $this->resolveStorageDisk(),
+            );
         }
 
         // Convert comma-separated technologies to array
@@ -62,9 +66,9 @@ class CodingProjectController extends Controller
             'title' => 'required|string|max:200',
             'description' => 'required|string',
             'image_url' => 'nullable|string|max:500',
-            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
-            'demo_url' => 'nullable|string|max:500',
-            'github_url' => 'nullable|string|max:500',
+            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'demo_url' => 'nullable|url|max:500',
+            'github_url' => 'nullable|url|max:500',
             'technologies' => 'nullable|string',
             'category' => 'required|string|max:50',
             'type' => 'required|string|in:school,internship,personal',
@@ -75,9 +79,11 @@ class CodingProjectController extends Controller
             'code_snippet' => 'nullable|string',
         ]);
 
-        // Handle Image File Upload
         if ($request->hasFile('image_file')) {
-            $validated['image_url'] = $this->storeOptimizedImage($request->file('image_file'));
+            $diskName = $this->resolveStorageDisk();
+            $newImageUrl = $this->storeOptimizedImage($request->file('image_file'), $diskName);
+            $this->cleanupOldImage($codingProject->image_url, $diskName);
+            $validated['image_url'] = $newImageUrl;
         }
 
         if (!empty($validated['technologies'])) {
@@ -89,41 +95,70 @@ class CodingProjectController extends Controller
         return back()->with('success', 'Project berhasil diperbarui!');
     }
 
-    /**
-     * Store and optionally optimize uploaded image to WebP format.
-     */
-    protected function storeOptimizedImage($file): string
+    protected function storeOptimizedImage(UploadedFile $file, string $diskName): string
     {
-        $destinationPath = public_path('images/coding-projects');
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0777, true);
-        }
-
         $extension = strtolower($file->getClientOriginalExtension());
-        $basename = 'project_' . time() . '_' . uniqid();
+        $prefix = 'coding_project_'.time().'_'.bin2hex(random_bytes(4));
 
         if (in_array($extension, ['jpg', 'jpeg', 'png']) && function_exists('imagewebp')) {
             $sourcePath = $file->getRealPath();
-            $image = ($extension === 'png') ? @imagecreatefrompng($sourcePath) : @imagecreatefromjpeg($sourcePath);
+            $image = ($extension === 'png') ? imagecreatefrompng($sourcePath) : imagecreatefromjpeg($sourcePath);
             if ($image !== false) {
                 if ($extension === 'png') {
                     imagepalettetotruecolor($image);
                     imagealphablending($image, true);
                     imagesavealpha($image, true);
                 }
-                $targetFile = $basename . '.webp';
-                $targetPath = $destinationPath . DIRECTORY_SEPARATOR . $targetFile;
-                if (imagewebp($image, $targetPath, 82)) {
+                $tempPath = tempnam(sys_get_temp_dir(), 'webp_');
+                if ($tempPath !== false && imagewebp($image, $tempPath, 82)) {
                     imagedestroy($image);
-                    return 'images/coding-projects/' . $targetFile;
+                    $path = 'coding-projects/'.$prefix.'.webp';
+                    $stream = fopen($tempPath, 'r');
+                    $stored = Storage::disk($diskName)->put($path, $stream);
+                    fclose($stream);
+                    unlink($tempPath);
+
+                    if (! $stored) {
+                        throw new \RuntimeException('Coding project image could not be stored.');
+                    }
+
+                    return Storage::disk($diskName)->url($path);
                 }
                 imagedestroy($image);
+                if (isset($tempPath) && $tempPath !== false && file_exists($tempPath)) {
+                    unlink($tempPath);
+                }
             }
         }
 
-        $filename = $basename . '.' . $extension;
-        $file->move($destinationPath, $filename);
-        return 'images/coding-projects/' . $filename;
+        $path = $file->storeAs('coding-projects', $prefix.'.'.$extension, $diskName);
+        if ($path === false) {
+            throw new \RuntimeException('Coding project image could not be stored.');
+        }
+
+        return Storage::disk($diskName)->url($path);
+    }
+
+    protected function resolveStorageDisk(): string
+    {
+        return config('filesystems.default') === 'supabase' ? 'supabase' : 'public';
+    }
+
+    protected function cleanupOldImage(?string $imageUrl, string $diskName): void
+    {
+        if (empty($imageUrl) || ! str_contains($imageUrl, '/coding-projects/')) {
+            return;
+        }
+
+        $parsedPath = parse_url($imageUrl, PHP_URL_PATH);
+        if (! $parsedPath) {
+            return;
+        }
+
+        $storagePath = 'coding-projects/'.basename($parsedPath);
+        if (Storage::disk($diskName)->exists($storagePath) && ! Storage::disk($diskName)->delete($storagePath)) {
+            throw new \RuntimeException('Existing coding project image could not be removed.');
+        }
     }
 
     /**
@@ -131,6 +166,7 @@ class CodingProjectController extends Controller
      */
     public function destroy(Request $request, CodingProject $codingProject)
     {
+        $this->cleanupOldImage($codingProject->image_url, $this->resolveStorageDisk());
         $codingProject->delete();
         return back()->with('success', 'Project berhasil dihapus!');
     }

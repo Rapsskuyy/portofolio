@@ -390,12 +390,12 @@
 
                         <div class="project-actions-premium">
                             @if($codingProject->demo_url)
-                            <a href="{{ $codingProject->demo_url }}" target="_blank" class="btn-action-premium">
+                            <a href="{{ $codingProject->demo_url }}" target="_blank" rel="noopener noreferrer" class="btn-action-premium">
                                 <i class="fas fa-external-link-alt"></i> Demo
                             </a>
                             @endif
                             @if($codingProject->github_url)
-                            <a href="{{ $codingProject->github_url }}" target="_blank" class="btn-action-premium btn-action-secondary">
+                            <a href="{{ $codingProject->github_url }}" target="_blank" rel="noopener noreferrer" class="btn-action-premium btn-action-secondary">
                                 <i class="fab fa-github"></i> Source
                             </a>
                             @endif

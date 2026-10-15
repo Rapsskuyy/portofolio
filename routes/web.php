@@ -16,10 +16,14 @@ Route::get('/about', [PortfolioController::class, 'about'])->name('portfolio.abo
 Route::get('/skills', [PortfolioController::class, 'skills'])->name('portfolio.skills');
 Route::get('/experience', [PortfolioController::class, 'experience'])->name('portfolio.experience');
 Route::get('/guestbook', [PortfolioController::class, 'guestbook'])->name('portfolio.guestbook');
-Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])->name('testimonial.store');
+Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])
+    ->middleware('throttle:5,1')
+    ->name('testimonial.store');
 
 // Public Mock API Endpoint
-Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])->where('path', '.*');
+Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])
+    ->where('path', '.*')
+    ->middleware('throttle:60,1');
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
@@ -73,6 +77,8 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->
 });
 
 // Guest Book Public Route
-Route::post('/guestbook', [GuestBookController::class, 'store'])->name('guestbook.store');
+Route::post('/guestbook', [GuestBookController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('guestbook.store');
 
 Route::redirect('/index', '/')->name('portfolio.legacy-index');

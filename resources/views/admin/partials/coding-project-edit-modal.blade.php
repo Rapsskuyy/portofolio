@@ -40,8 +40,8 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label"><i class="fas fa-upload me-1 text-info" aria-hidden="true"></i> Upload Gambar (Dari Explorer Computer)</label>
-                            <input type="file" name="image_file" class="form-control" accept="image/*">
-                            <small class="text-secondary">Pilih file image (PNG, JPG, WEBP, SVG) maks 5MB.</small>
+                            <input type="file" name="image_file" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
+                            <small class="text-secondary">Pilih file image (PNG, JPG, GIF, atau WEBP) maks 5MB.</small>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Atau Path/URL Gambar Manual</label>
@@ -49,11 +49,11 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Live Demo URL</label>
-                            <input type="text" name="demo_url" class="form-control" value="{{ $project->demo_url }}">
+                            <input type="url" name="demo_url" class="form-control" value="{{ $project->demo_url }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">GitHub Repository URL</label>
-                            <input type="text" name="github_url" class="form-control" value="{{ $project->github_url }}">
+                            <input type="url" name="github_url" class="form-control" value="{{ $project->github_url }}">
                         </div>
                         <div class="col-12"><hr class="my-2 border-secondary"></div>
                         <div class="col-12"><h3 class="h6 fw-bold text-indigo"><i class="fas fa-code me-2" aria-hidden="true"></i>Spesifikasi Teknis Backend</h3></div>

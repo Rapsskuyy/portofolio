@@ -39,8 +39,8 @@
             <li><a href="#contact" class="nav-dot" data-tooltip="Contact" aria-label="Contact"><span></span></a></li>
         </ul>
         <div class="social-links-sidebar">
-            <a href="https://github.com/Rapsskuyy" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/rrapskuy/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         </div>
         <!-- Theme Toggle -->
         <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">
@@ -76,7 +76,7 @@
                             <a href="#projects" class="btn-primary-custom">
                                 <i class="fas fa-layer-group"></i> View Projects
                             </a>
-                            <a href="https://github.com/Rapsskuyy" target="_blank" class="btn-github-hero">
+                            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="btn-github-hero">
                                 <i class="fab fa-github"></i> GitHub Profile
                             </a>
                             <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-cv">
@@ -605,10 +605,10 @@
                     <div class="footer-right">
                         <h4 class="footer-title">Follow Me</h4>
                         <div class="footer-social">
-                            <a href="https://github.com/Rapsskuyy" target="_blank" class="social-link" title="GitHub">
+                            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://www.instagram.com/rrapskuy/" target="_blank" class="social-link" title="Instagram">
+                            <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>

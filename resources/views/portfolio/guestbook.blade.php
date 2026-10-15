@@ -246,7 +246,7 @@
         <div class="blog-modal-meta text-muted mb-4">
             <span><i class="fas fa-calendar me-2"></i>{{ $post->created_at->format('d M Y') }}</span>
         </div>
-        <div class="blog-modal-content text-white-50">{!! $post->content !!}</div>
+        <div class="blog-modal-content text-white-50">{!! $post->safe_content !!}</div>
     </div>
 </div>
 @endforeach
@@ -254,13 +254,51 @@
 
 @section('scripts')
 <script>
-    // Slider testimoials logic (reusing if exists in portfolio.js)
+    function openBlogModal(postId) {
+        document.getElementById(`blogModal${postId}`)?.classList.add('active');
+    }
+
+    function closeBlogModal(postId) {
+        document.getElementById(`blogModal${postId}`)?.classList.remove('active');
+    }
+
+    function openGuestbookModal() {
+        document.getElementById('guestbookModal')?.classList.add('active');
+    }
+
+    function closeGuestbookModal() {
+        document.getElementById('guestbookModal')?.classList.remove('active');
+    }
+
+    function selectEndpoint(element) {
+        document.querySelectorAll('.api-endpoint-item').forEach((item) => item.classList.remove('active'));
+        element.classList.add('active');
+
+        document.getElementById('currentMethod').textContent = element.dataset.method;
+        document.getElementById('currentEndpoint').textContent = element.dataset.endpoint;
+        document.getElementById('sendBtn').disabled = false;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
-        // Auto initialize slide selector and playground endpoints
         const firstApiEl = document.querySelector('.api-endpoint-item');
         if (firstApiEl) {
             selectEndpoint(firstApiEl);
         }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeGuestbookModal();
+                document.querySelectorAll('.blog-modal-overlay.active').forEach((modal) => modal.classList.remove('active'));
+            }
+        });
+
+        document.querySelectorAll('.modal-overlay, .blog-modal-overlay').forEach((overlay) => {
+            overlay.addEventListener('click', (event) => {
+                if (event.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
     });
 
     // Send API Request custom execution
@@ -293,7 +331,7 @@
             return response.json();
         })
         .then(data => {
-            responseBody.innerHTML = `<code class="api-code">${JSON.stringify(data, null, 4)}</code>`;
+            responseBody.textContent = JSON.stringify(data, null, 4);
         })
         .catch(err => {
             const duration = Math.round(performance.now() - startTime);
