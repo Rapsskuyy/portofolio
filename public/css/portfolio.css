@@ -1001,7 +1001,8 @@ html {
 
 .project-image {
     width: 100%;
-    height: auto;
+    height: auto !important;
+    aspect-ratio: auto !important;
     display: block;
     object-fit: cover;
     transition: transform 0.5s;
