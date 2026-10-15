@@ -20,6 +20,7 @@ const excludedProjectEntries = new Set([
     '.vercel',
     'node_modules',
     'scripts',
+    'static-site',
     'tests',
     'vercel.json',
 ]);
