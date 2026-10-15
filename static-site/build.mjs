@@ -36,6 +36,15 @@ await cp(sourcePublicDirectory, outputDirectory, {
 
 const backendOrigin = exportUrl ? new URL(exportUrl).origin.replace(/\/$/, '') : null;
 
+function makeStaticHtml(html) {
+    const withoutBackendOrigin = backendOrigin ? html.replaceAll(backendOrigin, '') : html;
+
+    return withoutBackendOrigin
+        .replace(/<input\b[^>]*\bname="_token"[^>]*>\s*/gi, '')
+        .replace(/<link\b[^>]*\bhref="\/?build\/assets\/app-[^"]+\.css"[^>]*>\s*/gi, '<link rel="stylesheet" href="/build/assets/public.css">\n')
+        .replace(/<script\b[^>]*\bsrc="\/?build\/assets\/app-[^"]+\.js"[^>]*><\/script>\s*/gi, '');
+}
+
 for (const [pathname, html] of Object.entries(snapshot.pages)) {
     if (typeof html !== 'string' || !html.includes('<html')) {
         throw new Error(`Invalid rendered HTML for ${pathname}.`);
@@ -45,8 +54,7 @@ for (const [pathname, html] of Object.entries(snapshot.pages)) {
         ? join(outputDirectory, 'index.html')
         : join(outputDirectory, pathname.replace(/^\//, ''), 'index.html');
 
-    const staticHtml = (backendOrigin ? html.replaceAll(backendOrigin, '') : html)
-        .replace(/<input\b[^>]*\bname="_token"[^>]*>\s*/gi, '');
+    const staticHtml = makeStaticHtml(html);
 
     await mkdir(dirname(destination), { recursive: true });
     await writeFile(destination, staticHtml);
