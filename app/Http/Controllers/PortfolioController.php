@@ -52,7 +52,7 @@ class PortfolioController extends Controller
 
     public function experience(): View
     {
-        $projects = Project::all();
+        $projects = Project::whereRaw('is_visible IS TRUE')->orderBy('order')->orderBy('id', 'asc')->get();
         $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
         return view('portfolio.experience', compact('projects', 'codingProjects'));
     }
