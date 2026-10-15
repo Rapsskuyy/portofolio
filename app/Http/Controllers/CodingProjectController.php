@@ -40,14 +40,7 @@ class CodingProjectController extends Controller
 
         // Handle Image File Upload
         if ($request->hasFile('image_file')) {
-            $file = $request->file('image_file');
-            $destinationPath = public_path('images/coding-projects');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0777, true);
-            }
-            $filename = 'project_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move($destinationPath, $filename);
-            $validated['image_url'] = 'images/coding-projects/' . $filename;
+            $validated['image_url'] = $this->storeOptimizedImage($request->file('image_file'));
         }
 
         // Convert comma-separated technologies to array
@@ -84,14 +77,7 @@ class CodingProjectController extends Controller
 
         // Handle Image File Upload
         if ($request->hasFile('image_file')) {
-            $file = $request->file('image_file');
-            $destinationPath = public_path('images/coding-projects');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0777, true);
-            }
-            $filename = 'project_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move($destinationPath, $filename);
-            $validated['image_url'] = 'images/coding-projects/' . $filename;
+            $validated['image_url'] = $this->storeOptimizedImage($request->file('image_file'));
         }
 
         if (!empty($validated['technologies'])) {
@@ -101,6 +87,43 @@ class CodingProjectController extends Controller
         $codingProject->update($validated);
 
         return back()->with('success', 'Project berhasil diperbarui!');
+    }
+
+    /**
+     * Store and optionally optimize uploaded image to WebP format.
+     */
+    protected function storeOptimizedImage($file): string
+    {
+        $destinationPath = public_path('images/coding-projects');
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0777, true);
+        }
+
+        $extension = strtolower($file->getClientOriginalExtension());
+        $basename = 'project_' . time() . '_' . uniqid();
+
+        if (in_array($extension, ['jpg', 'jpeg', 'png']) && function_exists('imagewebp')) {
+            $sourcePath = $file->getRealPath();
+            $image = ($extension === 'png') ? @imagecreatefrompng($sourcePath) : @imagecreatefromjpeg($sourcePath);
+            if ($image !== false) {
+                if ($extension === 'png') {
+                    imagepalettetotruecolor($image);
+                    imagealphablending($image, true);
+                    imagesavealpha($image, true);
+                }
+                $targetFile = $basename . '.webp';
+                $targetPath = $destinationPath . DIRECTORY_SEPARATOR . $targetFile;
+                if (imagewebp($image, $targetPath, 82)) {
+                    imagedestroy($image);
+                    return 'images/coding-projects/' . $targetFile;
+                }
+                imagedestroy($image);
+            }
+        }
+
+        $filename = $basename . '.' . $extension;
+        $file->move($destinationPath, $filename);
+        return 'images/coding-projects/' . $filename;
     }
 
     /**

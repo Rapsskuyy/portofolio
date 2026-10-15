@@ -33,15 +33,7 @@ class ProjectController extends Controller
         $diskName = $this->resolveStorageDisk();
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = 'project_'.time().'_'.bin2hex(random_bytes(4)).'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('projects', $filename, $diskName);
-
-            if ($path === false) {
-                throw new \RuntimeException('Project image could not be stored.');
-            }
-
-            $validated['image_url'] = Storage::disk($diskName)->url($path);
+            $validated['image_url'] = $this->storeOptimizedImage($request->file('image'), $diskName);
         }
 
         $validated['is_visible'] = $request->boolean('is_visible', true);
@@ -70,16 +62,7 @@ class ProjectController extends Controller
 
         if ($request->hasFile('image')) {
             $this->cleanupOldImage($project->image_url, $diskName);
-
-            $file = $request->file('image');
-            $filename = 'project_'.time().'_'.bin2hex(random_bytes(4)).'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('projects', $filename, $diskName);
-
-            if ($path === false) {
-                throw new \RuntimeException('Project image could not be stored.');
-            }
-
-            $validated['image_url'] = Storage::disk($diskName)->url($path);
+            $validated['image_url'] = $this->storeOptimizedImage($request->file('image'), $diskName);
         }
 
         $validated['is_visible'] = $request->boolean('is_visible');
@@ -98,6 +81,54 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Project galeri berhasil dihapus.');
+    }
+
+    /**
+     * Store and optionally optimize uploaded image to WebP format.
+     */
+    protected function storeOptimizedImage($file, string $diskName): string
+    {
+        $extension = strtolower($file->getClientOriginalExtension());
+        $prefix = 'project_'.time().'_'.bin2hex(random_bytes(4));
+
+        if (in_array($extension, ['jpg', 'jpeg', 'png']) && function_exists('imagewebp')) {
+            $sourcePath = $file->getRealPath();
+            $image = ($extension === 'png') ? @imagecreatefrompng($sourcePath) : @imagecreatefromjpeg($sourcePath);
+            if ($image !== false) {
+                if ($extension === 'png') {
+                    imagepalettetotruecolor($image);
+                    imagealphablending($image, true);
+                    imagesavealpha($image, true);
+                }
+                $tempPath = tempnam(sys_get_temp_dir(), 'webp_');
+                if (imagewebp($image, $tempPath, 82)) {
+                    imagedestroy($image);
+                    $filename = $prefix.'.webp';
+                    $path = 'projects/'.$filename;
+                    $stream = fopen($tempPath, 'r');
+                    $stored = Storage::disk($diskName)->put($path, $stream);
+                    if (is_resource($stream)) {
+                        fclose($stream);
+                    }
+                    @unlink($tempPath);
+                    if ($stored) {
+                        return Storage::disk($diskName)->url($path);
+                    }
+                } else {
+                    imagedestroy($image);
+                    @unlink($tempPath);
+                }
+            }
+        }
+
+        $filename = $prefix.'.'.$file->getClientOriginalExtension();
+        $path = $file->storeAs('projects', $filename, $diskName);
+
+        if ($path === false) {
+            throw new \RuntimeException('Project image could not be stored.');
+        }
+
+        return Storage::disk($diskName)->url($path);
     }
 
     protected function resolveStorageDisk(): string

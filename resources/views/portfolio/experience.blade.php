@@ -335,7 +335,7 @@
                 @forelse($projects as $project)
                 <div class="project-card-premium">
                     <div class="project-img-wrapper">
-                        <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" onerror="this.src='{{ asset('images/projects/default.png') }}'">
+                        <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" loading="lazy" decoding="async" onerror="this.src='{{ asset('images/projects/default.png') }}'">
                     </div>
                     <div class="project-content-premium">
                         <h3 class="project-title-premium">{{ $project->title }}</h3>
@@ -374,17 +374,7 @@
                 @forelse($codingProjects as $codingProject)
                 <div class="project-card-premium">
                     <div class="project-img-wrapper">
-                        @php
-                            $imagePath = $codingProject->image_url;
-                            if (strpos($imagePath, 'storage/') === 0 || strpos($imagePath, 'images/') === 0) {
-                                $imageUrl = asset($imagePath);
-                            } elseif (strpos($imagePath, 'coding-projects/') === 0) {
-                                $imageUrl = asset('images/' . $imagePath);
-                            } else {
-                                $imageUrl = asset('images/coding-projects/' . $imagePath);
-                            }
-                        @endphp
-                        <img src="{{ $imageUrl }}" alt="{{ $codingProject->title }}" onerror="this.src='{{ asset('images/projects/default.png') }}'">
+                        <img src="{{ $codingProject->formatted_image_url }}" alt="{{ $codingProject->title }}" loading="lazy" decoding="async" onerror="this.src='{{ asset('images/projects/default.png') }}'">
                     </div>
                     <div class="project-content-premium">
                         <h3 class="project-title-premium">{{ $codingProject->title }}</h3>
