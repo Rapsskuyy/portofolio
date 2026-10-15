@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/public-api/:path*", "destination": "https://admin.raffanm17.my.id/public-api/:path*" },
+    { "source": "/api/v1/:path*", "destination": "https://admin.raffanm17.my.id/api/v1/:path*" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.(css|js|svg|png|jpg|jpeg|webp|woff2|pdf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

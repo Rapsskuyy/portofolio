@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+    public function __construct(private readonly PublicSitePublisher $publisher) {}
+
     public function index()
     {
         $projects = Project::orderBy('order')->orderBy('id', 'asc')->get();
@@ -41,7 +44,7 @@ class ProjectController extends Controller
 
         Project::create($validated);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project galeri berhasil ditambahkan.');
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_created'));
     }
 
     public function update(Request $request, Project $project)
@@ -70,7 +73,7 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project galeri berhasil diperbarui.');
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_updated'));
     }
 
     public function destroy(Project $project)
@@ -80,7 +83,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project galeri berhasil dihapus.');
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_deleted'));
     }
 
     /**

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\MockApi;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class MockApiController extends Controller
 {
+    public function __construct(private readonly PublicSitePublisher $publisher) {}
+
     /**
      * Admin: List all mock APIs
      */
@@ -40,7 +43,7 @@ class MockApiController extends Controller
 
         MockApi::create($validated);
 
-        return back()->with('success', 'Mock API berhasil ditambahkan!');
+        return back()->with('success', $this->publisher->trigger('mock_api_created'));
     }
 
     /**
@@ -66,7 +69,7 @@ class MockApiController extends Controller
 
         $mockApi->update($validated);
 
-        return back()->with('success', 'Mock API berhasil diperbarui!');
+        return back()->with('success', $this->publisher->trigger('mock_api_updated'));
     }
 
     /**
@@ -75,7 +78,7 @@ class MockApiController extends Controller
     public function destroy(Request $request, MockApi $mockApi)
     {
         $mockApi->delete();
-        return back()->with('success', 'Mock API berhasil dihapus!');
+        return back()->with('success', $this->publisher->trigger('mock_api_deleted'));
     }
 
     /**

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "data": {
+    "projects": []
+  },
+  "pages": {
+    "/": "<!doctype html><html lang=\"en\"><head><title>Home</title></head><body><main id=\"home\">Home</main></body></html>",
+    "/portfolio": "<!doctype html><html lang=\"en\"><head><title>Portfolio</title></head><body><main>Portfolio</main></body></html>",
+    "/about": "<!doctype html><html lang=\"en\"><head><title>About</title></head><body><main>About</main></body></html>",
+    "/skills": "<!doctype html><html lang=\"en\"><head><title>Skills</title></head><body><main>Skills</main></body></html>",
+    "/experience": "<!doctype html><html lang=\"en\"><head><title>Experience</title></head><body><main>Experience</main></body></html>",
+    "/guestbook": "<!doctype html><html lang=\"en\"><head><title>Guestbook</title></head><body><form><input type=\"hidden\" name=\"_token\" value=\"fixture-csrf\" autocomplete=\"off\"></form><main>Guestbook</main></body></html>"
+  }
+}

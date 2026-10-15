@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct(private readonly PublicSitePublisher $publisher) {}
+
     /**
      * Admin: List all posts
      */
@@ -31,7 +34,7 @@ class PostController extends Controller
         
         Post::create($validated);
 
-        return back()->with('success', 'Blog post berhasil ditambahkan!');
+        return back()->with('success', $this->publisher->trigger('post_created'));
     }
 
     /**
@@ -48,7 +51,7 @@ class PostController extends Controller
 
         $post->update($validated);
 
-        return back()->with('success', 'Blog post berhasil diperbarui!');
+        return back()->with('success', $this->publisher->trigger('post_updated'));
     }
 
     /**
@@ -57,6 +60,6 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post)
     {
         $post->delete();
-        return back()->with('success', 'Blog post berhasil dihapus!');
+        return back()->with('success', $this->publisher->trigger('post_deleted'));
     }
 }

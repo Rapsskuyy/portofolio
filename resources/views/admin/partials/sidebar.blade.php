@@ -32,6 +32,13 @@
         @endforeach
 
         <hr class="admin-nav-divider">
+        <form action="{{ route('admin.public-site.publish') }}" method="POST" class="mt-2">
+            @csrf
+            <button type="submit" class="nav-link-custom w-100 text-start text-info border-0 bg-transparent">
+                <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                <span>Publish website</span>
+            </button>
+        </form>
         <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank" rel="noopener">
             <i class="fas fa-external-link-alt" aria-hidden="true"></i>
             <span>Lihat Website</span>
@@ -73,6 +80,13 @@
             @endforeach
 
             <hr class="admin-nav-divider">
+            <form action="{{ route('admin.public-site.publish') }}" method="POST" class="mt-2">
+                @csrf
+                <button type="submit" class="nav-link-custom w-100 text-start text-info border-0 bg-transparent">
+                    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                    <span>Publish website</span>
+                </button>
+            </form>
             <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank" rel="noopener">
                 <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                 <span>Lihat Website</span>

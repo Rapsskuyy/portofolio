@@ -8,6 +8,23 @@ use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\MockApiController;
 use App\Http\Controllers\CodingProjectController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Internal\PublicSiteExportController;
+use App\Http\Controllers\PublicSubmissionController;
+use App\Http\Controllers\Admin\PublicSitePublicationController;
+
+// Build-only export for the separate static Vercel project. It is intentionally
+// not a public content API and requires a server-side bearer token.
+Route::get('/_internal/public-site-export', PublicSiteExportController::class)
+    ->name('internal.public-site-export');
+
+Route::prefix('public-api')->name('public-api.')->group(function () {
+    Route::post('/testimonials', [PublicSubmissionController::class, 'storeTestimonial'])
+        ->middleware('throttle:5,1')
+        ->name('testimonials.store');
+    Route::post('/guestbook', [PublicSubmissionController::class, 'storeGuestbook'])
+        ->middleware('throttle:5,1')
+        ->name('guestbook.store');
+});
 
 // Portfolio Routes
 Route::get('/', [PortfolioController::class, 'index'])->name('portfolio.home');
@@ -36,6 +53,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 // Admin Protected Routes
 Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->group(function () {
+    Route::post('/publish-public-site', PublicSitePublicationController::class)->name('public-site.publish');
     // Testimonials
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::patch('/testimonials/{testimonial}/approve', [DashboardController::class, 'approve'])->name('testimonials.approve');

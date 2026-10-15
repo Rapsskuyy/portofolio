@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\CodingProject;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class CodingProjectController extends Controller
 {
+    public function __construct(private readonly PublicSitePublisher $publisher) {}
+
     /**
      * Admin: List all coding projects
      */
@@ -54,7 +57,7 @@ class CodingProjectController extends Controller
 
         CodingProject::create($validated);
 
-        return back()->with('success', 'Project berhasil ditambahkan!');
+        return back()->with('success', $this->publisher->trigger('coding_project_created'));
     }
 
     /**
@@ -92,7 +95,7 @@ class CodingProjectController extends Controller
 
         $codingProject->update($validated);
 
-        return back()->with('success', 'Project berhasil diperbarui!');
+        return back()->with('success', $this->publisher->trigger('coding_project_updated'));
     }
 
     protected function storeOptimizedImage(UploadedFile $file, string $diskName): string
@@ -168,6 +171,6 @@ class CodingProjectController extends Controller
     {
         $this->cleanupOldImage($codingProject->image_url, $this->resolveStorageDisk());
         $codingProject->delete();
-        return back()->with('success', 'Project berhasil dihapus!');
+        return back()->with('success', $this->publisher->trigger('coding_project_deleted'));
     }
 }

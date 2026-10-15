@@ -1448,6 +1448,21 @@ html {
     z-index: 9999;
 }
 
+.public-form-status {
+    min-height: 1.5rem;
+    margin: 0.9rem 0 0;
+    color: var(--text-secondary, #cbd5e1);
+    font-size: 0.9rem;
+}
+
+.public-form-status.is-success {
+    color: #bbf7d0;
+}
+
+.public-form-status.is-error {
+    color: #fecaca;
+}
+
 .modal-overlay.active {
     display: flex;
 }

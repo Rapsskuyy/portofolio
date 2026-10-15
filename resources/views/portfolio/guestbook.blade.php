@@ -157,7 +157,7 @@
         <!-- Testimonial Form (Glassmorphic) -->
         <div class="testimonial-form-section glass-card p-5 rounded-4 mt-5">
             <h3 class="form-section-title text-white mb-4"><i class="far fa-comment-dots text-primary me-2"></i>Share Your Experience</h3>
-            <form action="{{ route('testimonial.store') }}" method="POST" class="modern-form">
+            <form action="{{ route('public-api.testimonials.store') }}" method="POST" class="modern-form" data-public-form>
                 @csrf
                 <div class="form-row">
                     <div class="form-group mb-3">
@@ -184,6 +184,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn-primary-custom border-0 w-100 py-3">Submit Testimonial</button>
+                <p class="public-form-status" data-form-status role="status" aria-live="polite"></p>
             </form>
         </div>
     </div>
@@ -218,7 +219,7 @@
     <div class="modal-container glass-card">
         <button class="modal-close" onclick="closeGuestbookModal()"><i class="fas fa-times"></i></button>
         <h3 class="modal-title text-white mb-4"><i class="fas fa-envelope-open-text text-primary me-2"></i>Leave a Private Message</h3>
-        <form action="{{ route('guestbook.store') }}" method="POST" class="modern-form">
+        <form action="{{ route('public-api.guestbook.store') }}" method="POST" class="modern-form" data-public-form>
             @csrf
             <div class="form-group mb-3">
                 <input type="text" class="form-control bg-dark border-secondary text-white" name="name" placeholder="Your Name *" required value="{{ old('name') }}">
@@ -230,6 +231,7 @@
                 <textarea class="form-control bg-dark border-secondary text-white" name="message" rows="5" placeholder="Your Message *" required maxlength="1000">{{ old('message') }}</textarea>
             </div>
             <button type="submit" class="btn-primary-custom border-0 w-100 py-3">Send Message</button>
+            <p class="public-form-status" data-form-status role="status" aria-live="polite"></p>
         </form>
     </div>
 </div>
@@ -253,6 +255,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/public-forms.js') }}" defer></script>
 <script>
     function openBlogModal(postId) {
         document.getElementById(`blogModal${postId}`)?.classList.add('active');

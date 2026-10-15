@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ProjectDetail;
 use App\Models\CodingProject;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 
 class ProjectDetailController extends Controller
 {
+    public function __construct(private readonly PublicSitePublisher $publisher) {}
+
     public function index(Request $request)
     {
         $projects = CodingProject::with('projectDetail')->orderBy('order')->get();
@@ -36,6 +39,6 @@ class ProjectDetailController extends Controller
         );
 
         return redirect()->route('admin.project-details.index')
-            ->with('success', 'Spesifikasi teknis project berhasil diperbarui.');
+            ->with('success', $this->publisher->trigger('project_detail_updated'));
     }
 }
