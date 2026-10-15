@@ -3277,5 +3277,114 @@ html {
     }
 }
 
+/* ==========================================================================
+   EXPANDABLE SECTIONS (GALLERY & MY PROJECTS)
+   ========================================================================== */
+.expand-controls-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+}
+
+.btn-expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 13px 30px;
+    background: rgba(15, 23, 42, 0.75);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 48px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.btn-expand-toggle:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
+    border-color: rgba(99, 102, 241, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(99, 102, 241, 0.28);
+}
+
+.btn-expand-toggle:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 3px;
+}
+
+.btn-expand-badge {
+    background: rgba(99, 102, 241, 0.22);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    line-height: 1.2;
+}
+
+.btn-expand-toggle:hover .btn-expand-badge {
+    background: rgba(99, 102, 241, 0.45);
+    color: #ffffff;
+    border-color: rgba(99, 102, 241, 0.7);
+}
+
+.btn-expand-icon {
+    font-size: 0.85rem;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-expand-toggle[aria-expanded="true"] .btn-expand-icon {
+    transform: rotate(180deg);
+}
+
+/* Item Collapsed State */
+.expand-item-collapsed {
+    display: none !important;
+}
+
+/* Smooth Entrance when Expanded */
+.expand-item-animating {
+    animation: expandFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes expandFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-expand-toggle,
+    .btn-expand-icon {
+        transition: none;
+    }
+    .expand-item-animating {
+        animation: none !important;
+    }
+}
+
+
 
 

@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', adjustMasonry, { passive: true });
     adjustMasonry();
     initTheme();
+    initExpandableSections();
 
     if (!prefersReducedMotion()) {
         window.addEventListener('scroll', () => {
@@ -273,3 +274,142 @@ function openProjectDetails(card, trigger) {
     if (githubButton) githubButton.href = github || '#';
     openModal(document.getElementById('projectDetailModal'), trigger);
 }
+
+function initExpandableSections() {
+    const sections = [
+        {
+            sectionId: 'gallery',
+            gridSelector: '.masonry-grid',
+            itemSelector: '.masonry-item',
+            controlsId: 'galleryExpandControls',
+            buttonId: 'galleryExpandBtn',
+            badgeId: 'galleryExpandBadge',
+            desktopLimit: 3,
+            tabletLimit: 2,
+            mobileLimit: 2,
+            itemLabel: 'Foto'
+        },
+        {
+            sectionId: 'projects',
+            gridSelector: '.projects-grid',
+            itemSelector: '.project-card-new',
+            controlsId: 'projectsExpandControls',
+            buttonId: 'projectsExpandBtn',
+            badgeId: 'projectsExpandBadge',
+            desktopLimit: 3,
+            tabletLimit: 2,
+            mobileLimit: 2,
+            itemLabel: 'Proyek'
+        }
+    ];
+
+    sections.forEach((config) => {
+        const sectionEl = document.getElementById(config.sectionId);
+        if (!sectionEl) return;
+
+        const grid = sectionEl.querySelector(config.gridSelector);
+        const controls = document.getElementById(config.controlsId);
+        const button = document.getElementById(config.buttonId);
+        const badge = document.getElementById(config.badgeId);
+        const textSpan = button ? button.querySelector('.btn-expand-text') : null;
+
+        if (!grid || !controls || !button) return;
+
+        const items = Array.from(grid.querySelectorAll(config.itemSelector));
+        if (items.length === 0) return;
+
+        let isExpanded = false;
+
+        function getActiveLimit() {
+            const width = window.innerWidth;
+            if (width >= 1200) {
+                return config.desktopLimit;
+            } else if (width > 768) {
+                return config.tabletLimit;
+            } else {
+                return config.mobileLimit;
+            }
+        }
+
+        function applyVisibility(animate = false) {
+            const limit = getActiveLimit();
+            const total = items.length;
+            const hiddenCount = Math.max(0, total - limit);
+
+            if (total <= limit) {
+                controls.classList.add('d-none');
+                items.forEach((item) => {
+                    item.classList.remove('expand-item-collapsed', 'expand-item-animating');
+                    item.style.opacity = '1';
+                    item.style.transform = 'none';
+                });
+                return;
+            }
+
+            controls.classList.remove('d-none');
+
+            if (isExpanded) {
+                button.setAttribute('aria-expanded', 'true');
+                if (textSpan) textSpan.textContent = 'Tampilkan Lebih Sedikit';
+                if (badge) {
+                    badge.textContent = '';
+                    badge.classList.add('d-none');
+                }
+
+                items.forEach((item) => {
+                    const wasHidden = item.classList.contains('expand-item-collapsed');
+                    item.classList.remove('expand-item-collapsed');
+                    if (wasHidden && animate) {
+                        item.classList.add('expand-item-animating');
+                        window.setTimeout(() => {
+                            item.classList.remove('expand-item-animating');
+                        }, 500);
+                    }
+                    item.style.opacity = '1';
+                    item.style.transform = 'none';
+                });
+            } else {
+                button.setAttribute('aria-expanded', 'false');
+                if (textSpan) textSpan.textContent = 'Lihat Selengkapnya';
+                if (badge) {
+                    badge.textContent = `+${hiddenCount} ${config.itemLabel}`;
+                    badge.classList.remove('d-none');
+                }
+
+                items.forEach((item, index) => {
+                    if (index >= limit) {
+                        item.classList.add('expand-item-collapsed');
+                        item.classList.remove('expand-item-animating');
+                    } else {
+                        item.classList.remove('expand-item-collapsed', 'expand-item-animating');
+                        item.style.opacity = '1';
+                        item.style.transform = 'none';
+                    }
+                });
+            }
+        }
+
+        button.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            applyVisibility(true);
+
+            if (!isExpanded) {
+                const sectionRect = sectionEl.getBoundingClientRect();
+                if (sectionRect.top < -50) {
+                    sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                applyVisibility(false);
+            }, 150);
+        }, { passive: true });
+
+        applyVisibility(false);
+    });
+}
+

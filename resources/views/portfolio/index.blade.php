@@ -284,7 +284,7 @@
                     <span class="title-text">Gallery</span>
                 </h2>
 
-                <div class="masonry-grid">
+                <div class="masonry-grid" id="galleryGrid">
                     @forelse($projects as $index => $project)
                     <div class="masonry-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         <div class="project-card-modern">
@@ -313,6 +313,16 @@
                     </div>
                     @endforelse
                 </div>
+
+                @if(count($projects) > 2)
+                <div class="expand-controls-wrapper d-none" id="galleryExpandControls">
+                    <button type="button" class="btn-expand-toggle" id="galleryExpandBtn" aria-expanded="false" aria-controls="galleryGrid">
+                        <span class="btn-expand-text">Lihat Selengkapnya</span>
+                        <span class="btn-expand-badge d-none" id="galleryExpandBadge"></span>
+                        <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+                @endif
             </div>
         </section>
 
@@ -326,7 +336,7 @@
 
                 <p class="section-subtitle">Applied portfolio showcasing Backend Systems, Fullstack Web Applications, Mobile Tools, and 3D Modeling from Grade 10 to Present</p>
 
-                <div class="projects-grid">
+                <div class="projects-grid" id="projectsGrid">
                     @forelse($codingProjects as $codingProject)
                     <article class="project-card-new"
                          data-title="{{ $codingProject->title }}" 
@@ -401,6 +411,16 @@
                     </div>
                     @endforelse
                 </div>
+
+                @if(count($codingProjects) > 2)
+                <div class="expand-controls-wrapper d-none" id="projectsExpandControls">
+                    <button type="button" class="btn-expand-toggle" id="projectsExpandBtn" aria-expanded="false" aria-controls="projectsGrid">
+                        <span class="btn-expand-text">Lihat Selengkapnya</span>
+                        <span class="btn-expand-badge d-none" id="projectsExpandBadge"></span>
+                        <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+                @endif
             </div>
         </section>
 
