@@ -10,7 +10,7 @@ Set these server-only environment variables in the Laravel project:
 
 - Existing production-only database, Storage, and `APP_KEY` values.
 - `APP_ENV=production`, `APP_DEBUG=false`, and the eventual `APP_URL=https://admin.raffanm17.my.id`.
-- `PUBLIC_CONTENT_EXPORT_TOKEN`, a long unique random secret.
+- `CONTENT_EXPORT_TOKEN`, a long unique random secret.
 - `PUBLIC_SITE_DEPLOY_HOOK_URL`, the Vercel deploy hook created in the static public project.
 
 Keep `SESSION_SECURE_COOKIE=true` in production and leave `SESSION_DOMAIN` scoped to the admin host unless there is a documented reason to share it. Never expose database credentials, Supabase service-role keys, Storage S3 keys, or the deploy hook in browser variables.
@@ -21,8 +21,8 @@ Create a second Vercel project with **Root Directory** `static-site` and no fram
 
 Set these build-time environment variables in that project:
 
-- `PUBLIC_CONTENT_EXPORT_URL=https://<backend-preview-or-admin-domain>/_internal/public-site-export`
-- `PUBLIC_CONTENT_EXPORT_TOKEN`, exactly matching the backend secret.
+- `CONTENT_EXPORT_URL=https://<backend-preview-or-admin-domain>/_internal/public-site-export`
+- `CONTENT_EXPORT_TOKEN`, exactly matching the backend secret.
 
 They are build credentials only. Do not prefix them with `VITE_`, and do not place them in source files. The generated browser output contains rendered HTML and `public-content.json`, never the export token.
 

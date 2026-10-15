@@ -1,14 +1,14 @@
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, extname, join, resolve } from 'node:path';
 
-const exportUrl = process.env.PUBLIC_CONTENT_EXPORT_URL;
-const exportToken = process.env.PUBLIC_CONTENT_EXPORT_TOKEN;
+const exportUrl = process.env.CONTENT_EXPORT_URL;
+const exportToken = process.env.CONTENT_EXPORT_TOKEN;
 const exportFile = process.env.PUBLIC_CONTENT_EXPORT_FILE;
 const sourcePublicDirectory = resolve('../public');
 const outputDirectory = resolve('dist');
 
 if (!exportFile && (!exportUrl || !exportToken)) {
-    throw new Error('PUBLIC_CONTENT_EXPORT_URL and PUBLIC_CONTENT_EXPORT_TOKEN are required for the static build.');
+    throw new Error('CONTENT_EXPORT_URL and CONTENT_EXPORT_TOKEN are required for the static build.');
 }
 
 const snapshot = exportFile
