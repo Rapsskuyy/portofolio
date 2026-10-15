@@ -284,7 +284,7 @@ function initExpandableSections() {
             controlsId: 'galleryExpandControls',
             buttonId: 'galleryExpandBtn',
             badgeId: 'galleryExpandBadge',
-            desktopLimit: 3,
+            desktopLimit: 9,
             tabletLimit: 2,
             mobileLimit: 2,
             itemLabel: 'Foto'
@@ -296,7 +296,7 @@ function initExpandableSections() {
             controlsId: 'projectsExpandControls',
             buttonId: 'projectsExpandBtn',
             badgeId: 'projectsExpandBadge',
-            desktopLimit: 3,
+            desktopLimit: 9,
             tabletLimit: 2,
             mobileLimit: 2,
             itemLabel: 'Proyek'

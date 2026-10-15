@@ -527,59 +527,53 @@
         @endif
         @endforeach
 
-        <!-- Experience Section - Horizontal Timeline -->
-        <section id="experience" class="experience-horizontal">
+        <!-- Experience Section - 2x2 Grid Layout -->
+        <section id="experience" class="experience-section">
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">06.</span>
                     <span class="title-text">Experience</span>
                 </h2>
 
-                <div class="timeline-horizontal">
-                    <div class="timeline-track">
-                        <!-- Experience 1 -->
-                        <div class="timeline-item-h">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card-h">
-                                <span class="timeline-year">2022-2023</span>
-                                <h3 class="timeline-title">Political & Civic Affairs Commission Member</h3>
-                                <p class="timeline-org">SMP Student Council (OSIS)</p>
-                                <p class="timeline-desc">Organized student social and civic engagement programs, fostering school community participation.</p>
-                            </div>
+                <div class="experience-grid-2x2">
+                    <!-- Experience 1 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2022-2023</span>
+                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
                         </div>
+                        <h3 class="experience-title">Political & Civic Affairs Commission Member</h3>
+                        <p class="experience-desc">Organized student social and civic engagement programs, fostering school community participation.</p>
+                    </div>
 
-                        <!-- Experience 2 -->
-                        <div class="timeline-item-h">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card-h">
-                                <span class="timeline-year">2023-2024</span>
-                                <h3 class="timeline-title">Vice President II</h3>
-                                <p class="timeline-org">SMP Student Council (OSIS)</p>
-                                <p class="timeline-desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
-                            </div>
+                    <!-- Experience 2 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2023-2024</span>
+                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
                         </div>
+                        <h3 class="experience-title">Vice President II</h3>
+                        <p class="experience-desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
+                    </div>
 
-                        <!-- Experience 3 -->
-                        <div class="timeline-item-h">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card-h">
-                                <span class="timeline-year">2024-2025</span>
-                                <h3 class="timeline-title">Commission B Member</h3>
-                                <p class="timeline-org">MPK SMKN 1 Depok (Student Representative Council)</p>
-                                <p class="timeline-desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
-                            </div>
+                    <!-- Experience 3 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2024-2025</span>
+                            <span class="experience-org-badge"><i class="fas fa-university" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
                         </div>
+                        <h3 class="experience-title">Commission B Member</h3>
+                        <p class="experience-desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
+                    </div>
 
-                        <!-- Experience 4 -->
-                        <div class="timeline-item-h">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card-h">
-                                <span class="timeline-year">2025-2026</span>
-                                <h3 class="timeline-title">Senior Member, Commission B</h3>
-                                <p class="timeline-org">MPK SMKN 1 Depok (Student Representative Council)</p>
-                                <p class="timeline-desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
-                            </div>
+                    <!-- Experience 4 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2025-2026</span>
+                            <span class="experience-org-badge"><i class="fas fa-award" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
                         </div>
+                        <h3 class="experience-title">Senior Member, Commission B</h3>
+                        <p class="experience-desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
                     </div>
                 </div>
             </div>

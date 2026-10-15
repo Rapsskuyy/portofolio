@@ -482,7 +482,7 @@
                 controlsId: 'organisasiExpandControls',
                 buttonId: 'organisasiExpandBtn',
                 badgeId: 'organisasiExpandBadge',
-                desktopLimit: 3,
+                desktopLimit: 9,
                 tabletLimit: 2,
                 mobileLimit: 2,
                 itemLabel: 'Kegiatan'
@@ -494,7 +494,7 @@
                 controlsId: 'sekolahExpandControls',
                 buttonId: 'sekolahExpandBtn',
                 badgeId: 'sekolahExpandBadge',
-                desktopLimit: 3,
+                desktopLimit: 9,
                 tabletLimit: 2,
                 mobileLimit: 2,
                 itemLabel: 'Projek'
