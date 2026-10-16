@@ -166,11 +166,40 @@ html {
     height: 100vh;
     position: relative;
     overflow: hidden;
+    background: radial-gradient(circle at 35% 25%, rgba(99, 102, 241, 0.38) 0%, rgba(168, 85, 247, 0.22) 28%, rgba(56, 189, 248, 0.12) 55%, rgba(10, 15, 29, 0.95) 85%, #0a0f1d 100%);
+}
+
+.hero-fullscreen::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.22);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-fullscreen::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10, 15, 29, 0.5) 45%, rgba(10, 15, 29, 0.95) 85%, #0a0f1d 100%);
+    pointer-events: none;
+    z-index: 5;
 }
 
 .hero-split-container {
     display: flex;
     height: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-left {
@@ -178,7 +207,7 @@ html {
     display: flex;
     align-items: center;
     padding: 0 80px;
-    background: var(--dark);
+    background: transparent;
 }
 
 .hero-content {
@@ -392,7 +421,7 @@ html {
 
 .hero-right {
     flex: 1;
-    background: var(--dark-light);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -531,7 +560,14 @@ html {
 
 /* ===== ABOUT SECTION NEW DESIGN ===== */
 .about-section-new {
-    background: var(--dark);
+    position: relative;
+    background: radial-gradient(circle at 18% 22%, rgba(99, 102, 241, 0.09) 0%, transparent 55%), var(--dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px 40px 0 0;
+    margin-top: -50px;
+    z-index: 6;
+    box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.75);
+    padding: 100px 0 80px;
 }
 
 .about-container-new {
@@ -843,7 +879,9 @@ html {
 
 @media (max-width: 768px) {
     .about-section-new {
-        padding: 60px 0;
+        padding: 70px 0 50px;
+        margin-top: -35px;
+        border-radius: 28px 28px 0 0;
     }
     
     .about-intro-card,
@@ -882,7 +920,7 @@ html {
 
 /* ===== EDUCATION MODERN ===== */
 .education-modern {
-    background: var(--dark);
+    background: radial-gradient(circle at 82% 28%, rgba(56, 189, 248, 0.08) 0%, transparent 55%), var(--dark);
 }
 
 .education-grid {
@@ -929,7 +967,7 @@ html {
 
 /* ===== SKILLS CIRCULAR ===== */
 .skills-circular {
-    background: var(--dark);
+    background: radial-gradient(circle at 50% 35%, rgba(168, 85, 247, 0.08) 0%, transparent 60%), var(--dark);
 }
 
 .skills-container {
@@ -1006,7 +1044,7 @@ html {
 
 /* ===== GALLERY MASONRY ===== */
 .gallery-masonry {
-    background: var(--dark);
+    background: radial-gradient(circle at 80% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 55%), var(--dark);
 }
 
 .masonry-grid {
@@ -1081,7 +1119,7 @@ html {
 /* ===== EXPERIENCE SECTION (2x2 GRID) ===== */
 .experience-section,
 .experience-horizontal {
-    background: var(--dark);
+    background: radial-gradient(circle at 30% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%), var(--dark);
 }
 
 .experience-grid-2x2 {
@@ -1192,7 +1230,7 @@ html {
 /* ===== TESTIMONIALS CAROUSEL ===== */
 .testimonials-carousel {
     padding: 90px 0 80px;
-    background: var(--dark);
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.09) 0%, transparent 60%), var(--dark);
 }
 
 .testimonials-slider {
@@ -2290,7 +2328,7 @@ html {
 
 /* ===== CODING PROJECTS SECTION ===== */
 .projects-section {
-    background: var(--dark);
+    background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.09) 0%, transparent 55%), var(--dark);
 }
 
 .section-subtitle {
