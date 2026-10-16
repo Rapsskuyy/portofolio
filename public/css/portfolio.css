@@ -36,10 +36,14 @@ html {
     outline-offset: 3px;
 }
 
-/* Prevent accidental text selection across the public portfolio. */
-.main-content {
-    -webkit-user-select: none;
-    user-select: none;
+/* Keep the public portfolio click-focused instead of leaving accidental text highlights. */
+.main-content,
+.main-content *,
+#projectDetailModal,
+#projectDetailModal * {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none;
 }
 
 /* ===== SIDEBAR NAVIGATION ===== */

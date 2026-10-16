@@ -21,7 +21,7 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261015-natural-ratio">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261016-no-text-selection">
 </head>
 
 <body>
