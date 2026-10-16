@@ -3,6 +3,7 @@ import { dirname, extname, join, resolve } from 'node:path';
 
 const exportUrl = process.env.CONTENT_EXPORT_URL;
 const exportToken = process.env.CONTENT_EXPORT_TOKEN;
+const vercelProtectionBypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
 const exportFile = process.env.PUBLIC_CONTENT_EXPORT_FILE;
 const sourcePublicDirectory = resolve('../public');
 const outputDirectory = resolve('dist');
@@ -14,7 +15,13 @@ if (!exportFile && (!exportUrl || !exportToken)) {
 const snapshot = exportFile
     ? JSON.parse(await readFile(resolve(exportFile), 'utf8'))
     : await fetch(exportUrl, {
-        headers: { Authorization: `Bearer ${exportToken}`, Accept: 'application/json' },
+        headers: {
+            Authorization: `Bearer ${exportToken}`,
+            Accept: 'application/json',
+            ...(vercelProtectionBypass
+                ? { 'x-vercel-protection-bypass': vercelProtectionBypass }
+                : {}),
+        },
     }).then(async (response) => {
         if (!response.ok) {
             throw new Error(`Public content export failed with HTTP ${response.status}.`);

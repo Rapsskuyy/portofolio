@@ -23,6 +23,7 @@ Set these build-time environment variables in that project:
 
 - `CONTENT_EXPORT_URL=https://<backend-preview-or-admin-domain>/_internal/public-site-export`
 - `CONTENT_EXPORT_TOKEN`, exactly matching the backend secret.
+- `VERCEL_AUTOMATION_BYPASS_SECRET`, only when the backend preview uses Vercel Deployment Protection. Generate it through Vercel's Protection Bypass for Automation controls, then store it as a Secret in this static project.
 
 They are build credentials only. Do not prefix them with `VITE_`, and do not place them in source files. The generated browser output contains rendered HTML and `public-content.json`, never the export token.
 
