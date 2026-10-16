@@ -6,8 +6,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/public-api/:path*", "destination": "https://portofolio-git-codex-static-preview-rrapskuys-projects.vercel.app/public-api/:path*" },
-    { "source": "/api/v1/:path*", "destination": "https://portofolio-git-codex-static-preview-rrapskuys-projects.vercel.app/api/v1/:path*" }
+    { "source": "/public-api/:path*", "destination": "https://admin.raffanm17.my.id/public-api/:path*" },
+    { "source": "/api/v1/:path*", "destination": "https://admin.raffanm17.my.id/api/v1/:path*" }
   ],
   "headers": [
     {
