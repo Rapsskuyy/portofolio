@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.next-btn')?.addEventListener('click', () => track?.scrollBy({ left: 530, behavior: prefersReducedMotion() ? 'auto' : 'smooth' }));
 
     const fadeItems = [
-        ['.section-title-modern', 'translateY(24px)', 0],
-        ['.about-intro-card', 'translateY(24px)', 0.08],
-        ['.info-card', 'translateY(24px)', 0.12],
-        ['.education-card-modern', 'translateY(24px)', 0.08],
-        ['.skill-circle-item', 'translateY(20px)', 0.05],
-        ['.masonry-item', 'scale(0.96)', 0.04],
-        ['.project-card-new', 'translateY(24px)', 0.06],
-        ['.timeline-item-h', 'translateY(24px)', 0.08],
+        ['.section-title-modern', 'translateY(16px)', 0],
+        ['.about-intro-card', 'translateY(16px)', 0.05],
+        ['.info-card', 'translateY(16px)', 0.08],
+        ['.education-card-modern', 'translateY(16px)', 0.05],
+        ['.skill-circle-item', 'translateY(14px)', 0.03],
+        ['.masonry-item', 'translateY(16px)', 0.03],
+        ['.project-card-new', 'translateY(16px)', 0.04],
+        ['.timeline-item-h', 'translateY(16px)', 0.05],
     ];
     if (prefersReducedMotion()) {
         document.querySelectorAll(fadeItems.map(([selector]) => selector).join(',')).forEach((element) => {
@@ -90,12 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.style.transform = 'none';
                 animationObserver.unobserve(entry.target);
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
         fadeItems.forEach(([selector, transform, delay]) => {
             document.querySelectorAll(selector).forEach((element, index) => {
+                const itemDelay = Math.min(index * delay, 0.2);
                 element.style.opacity = '0';
                 element.style.transform = transform;
-                element.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * delay}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * delay}s`;
+                element.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${itemDelay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${itemDelay}s`;
                 animationObserver.observe(element);
             });
         });

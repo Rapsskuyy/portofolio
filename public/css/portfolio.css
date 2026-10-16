@@ -168,18 +168,6 @@ html {
     overflow: hidden;
 }
 
-.hero-fullscreen::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    background: linear-gradient(to bottom, transparent, var(--dark));
-    pointer-events: none;
-    z-index: 5;
-}
-
 .hero-split-container {
     display: flex;
     height: 100%;
@@ -506,7 +494,7 @@ html {
     50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* ===== MODERN SECTION ARCHITECTURE & AMBIENT TRANSITIONS ===== */
+/* ===== UNIFIED CANVAS ARCHITECTURE ===== */
 .about-section-new,
 .education-modern,
 .skills-circular,
@@ -514,44 +502,9 @@ html {
 .projects-section,
 .experience-section {
     position: relative;
-    padding: 85px 0 75px;
+    padding: 90px 0 80px;
+    background: var(--dark);
     scroll-margin-top: 0;
-}
-
-.about-section-new::before,
-.education-modern::before,
-.skills-circular::before,
-.gallery-masonry::before,
-.projects-section::before,
-.experience-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(850px, 90%);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.45), rgba(168, 85, 247, 0.35), transparent);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.about-section-new::after,
-.education-modern::after,
-.skills-circular::after,
-.gallery-masonry::after,
-.projects-section::after,
-.experience-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(650px, 80%);
-    height: 90px;
-    background: radial-gradient(ellipse at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
 }
 
 /* ===== SECTION TITLE MODERN ===== */
@@ -562,7 +515,6 @@ html {
     margin-bottom: 40px;
     padding-top: 0;
     position: relative;
-    z-index: 3;
 }
 
 .title-number {
@@ -597,16 +549,19 @@ html {
 }
 
 .about-intro-card {
-    background: var(--dark-light);
+    background: rgba(21, 28, 46, 0.7);
     border-radius: 20px;
     padding: 40px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-intro-card:hover {
-    border-color: var(--primary);
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4);
 }
 
 .intro-header {
@@ -651,16 +606,19 @@ html {
 
 /* Strengths Card */
 .about-strengths-card {
-    background: var(--dark-light);
+    background: rgba(21, 28, 46, 0.7);
     border-radius: 20px;
     padding: 40px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-strengths-card:hover {
-    border-color: var(--primary);
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4);
 }
 
 .strengths-header {
@@ -738,16 +696,19 @@ html {
 }
 
 .info-card {
-    background: var(--dark-light);
-    border-radius: 16px;
+    background: rgba(21, 28, 46, 0.7);
+    border-radius: 18px;
     padding: 25px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4);
 }
 
 .info-card-icon {
@@ -921,7 +882,7 @@ html {
 
 /* ===== EDUCATION MODERN ===== */
 .education-modern {
-    background: linear-gradient(180deg, rgba(21, 28, 46, 0.4) 0%, rgba(21, 28, 46, 0.85) 15%, rgba(21, 28, 46, 0.85) 85%, rgba(21, 28, 46, 0.4) 100%), var(--dark);
+    background: var(--dark);
 }
 
 .education-grid {
@@ -931,16 +892,23 @@ html {
 }
 
 .education-card-modern {
-    background: var(--dark);
+    background: rgba(21, 28, 46, 0.7);
     padding: 35px;
     border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 4px solid var(--primary);
-    transition: all 0.3s;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .education-card-modern:hover {
-    transform: translateX(10px);
-    border-left-width: 8px;
+    background: rgba(21, 28, 46, 0.85);
+    border-color: rgba(99, 102, 241, 0.35);
+    border-left-color: var(--primary);
+    border-left-width: 6px;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5);
 }
 
 .education-year {
@@ -1038,7 +1006,7 @@ html {
 
 /* ===== GALLERY MASONRY ===== */
 .gallery-masonry {
-    background: linear-gradient(180deg, rgba(21, 28, 46, 0.4) 0%, rgba(21, 28, 46, 0.85) 15%, rgba(21, 28, 46, 0.85) 85%, rgba(21, 28, 46, 0.4) 100%), var(--dark);
+    background: var(--dark);
 }
 
 .masonry-grid {
@@ -1052,14 +1020,19 @@ html {
 }
 
 .project-card-modern {
-    background: var(--dark);
+    background: rgba(21, 28, 46, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     overflow: hidden;
-    transition: all 0.3s;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card-modern:hover {
-    transform: translateY(-10px);
+    transform: translateY(-6px);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5);
 }
 
 .project-image-wrapper {
@@ -1218,8 +1191,8 @@ html {
 
 /* ===== TESTIMONIALS CAROUSEL ===== */
 .testimonials-carousel {
-    padding: 100px 0;
-    background: var(--dark-light);
+    padding: 90px 0 80px;
+    background: var(--dark);
 }
 
 .testimonials-slider {
@@ -1254,10 +1227,19 @@ html {
 }
 
 .testimonial-card-modern {
-    background: var(--dark);
+    background: rgba(21, 28, 46, 0.7);
     padding: 40px;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-card-modern:hover {
+    border-color: rgba(99, 102, 241, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5);
 }
 
 .quote-icon {
@@ -1416,7 +1398,10 @@ html {
 }
 
 .chat-messages {
-    background: var(--dark-light);
+    background: rgba(21, 28, 46, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 30px;
     max-height: 600px;
@@ -1535,13 +1520,14 @@ html {
 }
 
 .modal-container {
-    background: var(--dark-light);
+    background: rgba(21, 28, 46, 0.95);
     border-radius: 20px;
     padding: 40px;
     max-width: 600px;
     width: 90%;
     position: relative;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
 .modal-close {
@@ -1570,9 +1556,9 @@ html {
 
 /* ===== FOOTER ===== */
 .footer-modern {
-    background: var(--dark-light);
+    background: var(--dark);
     padding: 80px 0 30px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-content {
@@ -2311,8 +2297,8 @@ html {
     text-align: center;
     color: var(--gray);
     font-size: 18px;
-    margin-top: -15px;
-    margin-bottom: 40px;
+    margin-top: -10px;
+    margin-bottom: 35px;
 }
 
 .projects-grid {
@@ -2322,19 +2308,21 @@ html {
 }
 
 .project-card-new {
-    background: var(--dark-light);
-    border-radius: 16px;
+    background: rgba(21, 28, 46, 0.7);
+    border-radius: 18px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
 }
 
 .project-card-new:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary);
-    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+    transform: translateY(-6px);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
 }
 
 .project-image-container {

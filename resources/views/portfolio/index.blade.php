@@ -21,7 +21,7 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261016-smooth-transitions">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261016-natural-flow">
 </head>
 
 <body>
@@ -669,7 +669,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/portfolio.js') }}?v=20261016-smooth-transitions" defer></script>
+    <script src="{{ asset('js/portfolio.js') }}?v=20261016-natural-flow" defer></script>
 
     @if(session('success') || session('success_guestbook') || (isset($errors) && $errors->any()))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
