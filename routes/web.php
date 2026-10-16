@@ -41,6 +41,9 @@ Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])
 Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])
     ->where('path', '.*')
     ->middleware('throttle:60,1');
+Route::match(['get', 'post'], '/v1/{path}', [MockApiController::class, 'handleRequest'])
+    ->where('path', '.*')
+    ->middleware('throttle:60,1');
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
