@@ -142,12 +142,12 @@
     @include('admin.partials.mobile-navigation')
     <div class="container-fluid">
         <div class="row">
-            @include('admin.partials.sidebar', ['active' => 'project-details'])
+            @include('admin.partials.sidebar', ['active' => 'coding-projects'])
             <!-- Main Content Area -->
             <main class="col-12 col-xl-10 ms-xl-auto main-content">
                 <div class="admin-page-header mb-4">
                     <div class="d-flex align-items-center gap-3">
-                        <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light btn-sm rounded-2">
+                        <a href="{{ route('admin.coding_projects.index') }}" class="btn btn-outline-light btn-sm rounded-2">
                             <i class="fas fa-arrow-left me-1"></i> Kembali
                         </a>
                         <h3 class="fw-bold mb-0">{{ $codingProject->title }}</h3>
@@ -299,7 +299,7 @@
 
                     <div class="d-flex gap-2 admin-form-actions">
                         <button type="submit" class="btn btn-primary px-4 py-2 rounded-3" style="background: var(--primary); border: none;"><i class="fas fa-save me-2"></i>Simpan Technical Details</button>
-                        <a href="{{ route('admin.project-details.index') }}" class="btn btn-outline-light px-4 py-2 rounded-3">Batal</a>
+                        <a href="{{ route('admin.coding_projects.index') }}" class="btn btn-outline-light px-4 py-2 rounded-3">Batal</a>
                     </div>
                 </form>
             </main>

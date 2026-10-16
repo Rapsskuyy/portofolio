@@ -9,4 +9,8 @@ return [
 
     /* A server-side Vercel deploy hook for the separate static project. */
     'deploy_hook_url' => env('PUBLIC_SITE_DEPLOY_HOOK_URL'),
+
+    /* The live public static CDN URL for the portfolio. */
+    'public_url' => env('PUBLIC_SITE_ORIGIN', 'https://www.raffanm17.my.id'),
 ];
+

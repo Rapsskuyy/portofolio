@@ -6,7 +6,6 @@
         ['key' => 'coding-projects', 'route' => 'admin.coding_projects.index', 'icon' => 'fa-laptop-code', 'label' => 'Project Coding'],
         ['key' => 'posts', 'route' => 'admin.posts.index', 'icon' => 'fa-newspaper', 'label' => 'Blog Posts'],
         ['key' => 'mock-apis', 'route' => 'admin.mock_apis.index', 'icon' => 'fa-server', 'label' => 'Mock APIs'],
-        ['key' => 'project-details', 'route' => 'admin.project-details.index', 'icon' => 'fa-layer-group', 'label' => 'Detail Specs'],
     ];
 @endphp
 
@@ -39,7 +38,7 @@
                 <span>Publish website</span>
             </button>
         </form>
-        <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank" rel="noopener">
+        <a class="nav-link-custom" href="{{ config('public-site.public_url') }}" target="_blank" rel="noopener">
             <i class="fas fa-external-link-alt" aria-hidden="true"></i>
             <span>Lihat Website</span>
         </a>
@@ -87,7 +86,7 @@
                     <span>Publish website</span>
                 </button>
             </form>
-            <a class="nav-link-custom" href="{{ route('portfolio.index') }}" target="_blank" rel="noopener">
+            <a class="nav-link-custom" href="{{ config('public-site.public_url') }}" target="_blank" rel="noopener">
                 <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                 <span>Lihat Website</span>
             </a>

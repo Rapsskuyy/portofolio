@@ -73,4 +73,19 @@ class AdminAuthenticationTest extends TestCase
         $this->post(route('admin.login.submit'), $payload)
             ->assertTooManyRequests();
     }
+
+    public function test_admin_sidebar_links_to_public_cdn_site_and_omits_redundant_specs_menu(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'admin@example.test',
+            'is_admin' => true,
+        ]);
+
+        $response = $this->actingAs($admin)->get(route('admin.dashboard'));
+
+        $response->assertOk();
+        $response->assertSee(config('public-site.public_url'));
+        $response->assertDontSee('Detail Specs');
+    }
 }
+

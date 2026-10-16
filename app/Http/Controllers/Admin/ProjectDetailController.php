@@ -38,7 +38,7 @@ class ProjectDetailController extends Controller
             $validated
         );
 
-        return redirect()->route('admin.project-details.index')
+        return redirect()->route('admin.coding_projects.index')
             ->with('success', $this->publisher->trigger('project_detail_updated'));
     }
 }

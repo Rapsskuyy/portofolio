@@ -269,6 +269,9 @@
                                                 <button class="btn btn-sm btn-outline-light rounded-2 me-1" data-bs-toggle="modal" data-bs-target="#editModal{{ $project->id }}">
                                                     <i class="fas fa-edit me-1"></i> Edit
                                                 </button>
+                                                <a href="{{ route('admin.project-details.edit', $project->id) }}" class="btn btn-sm btn-outline-info rounded-2 me-1" title="Kelola Technical Specs">
+                                                    <i class="fas fa-layer-group me-1"></i> Specs
+                                                </a>
                                                 <form action="{{ route('admin.coding_projects.delete', $project->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus project ini?');">
                                                     @csrf
                                                     @method('DELETE')
