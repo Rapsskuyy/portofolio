@@ -36,6 +36,12 @@ html {
     outline-offset: 3px;
 }
 
+/* Prevent accidental text selection across the public portfolio. */
+.main-content {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 /* ===== SIDEBAR NAVIGATION ===== */
 .sidebar-nav {
     position: fixed;

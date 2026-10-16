@@ -22,6 +22,11 @@ class Project extends Model
         'order' => 'integer',
     ];
 
+    public function getTitleAttribute($value): string
+    {
+        return str_replace(['ÔÇö', 'â€“', 'â€”'], '-', (string) $value);
+    }
+
     public function scopeVisible($query)
     {
         return $query->whereRaw('is_visible IS TRUE');

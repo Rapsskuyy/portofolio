@@ -22,6 +22,19 @@ class PublicSiteExportTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_project_titles_repair_legacy_dash_encoding(): void
+    {
+        $project = Project::create([
+            'title' => "Master of Ceremony ÔÇö One's Harmony 2.0",
+            'description' => 'Gallery project',
+            'image_url' => 'gallery.webp',
+            'is_visible' => true,
+            'order' => 1,
+        ]);
+
+        $this->assertSame("Master of Ceremony - One's Harmony 2.0", $project->title);
+    }
+
     public function test_export_contains_only_public_records_and_no_testimonial_email(): void
     {
         config()->set('public-site.export_token', 'static-build-secret');
