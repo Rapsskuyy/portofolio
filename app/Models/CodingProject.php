@@ -28,6 +28,11 @@ class CodingProject extends Model
         'order' => 'integer',
     ];
 
+    public function getTitleAttribute($value): string
+    {
+        return str_replace(['ÔÇö', 'â€“', 'â€”'], '-', (string) $value);
+    }
+
     public function getTechnologiesArray()
     {
         if (is_null($this->technologies)) {

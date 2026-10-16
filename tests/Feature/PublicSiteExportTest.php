@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\CodingProject;
 use App\Models\Testimonial;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -33,6 +34,15 @@ class PublicSiteExportTest extends TestCase
         ]);
 
         $this->assertSame("Master of Ceremony - One's Harmony 2.0", $project->title);
+    }
+
+    public function test_coding_project_titles_repair_legacy_dash_encoding(): void
+    {
+        $project = new CodingProject([
+            'title' => 'Course Platform UI/UX ÔÇö PT Komari',
+        ]);
+
+        $this->assertSame('Course Platform UI/UX - PT Komari', $project->title);
     }
 
     public function test_export_contains_only_public_records_and_no_testimonial_email(): void
