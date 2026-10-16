@@ -68,10 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.next-btn')?.addEventListener('click', () => track?.scrollBy({ left: 530, behavior: prefersReducedMotion() ? 'auto' : 'smooth' }));
 
     const fadeItems = [
-        ['.education-card-modern', 'translateX(-30px)', 0.1],
-        ['.masonry-item', 'scale(0.9)', 0.05],
-        ['.project-card-new', 'translateY(30px)', 0.08],
-        ['.timeline-item-h', 'translateY(30px)', 0.1],
+        ['.section-title-modern', 'translateY(24px)', 0],
+        ['.about-intro-card', 'translateY(24px)', 0.08],
+        ['.info-card', 'translateY(24px)', 0.12],
+        ['.education-card-modern', 'translateY(24px)', 0.08],
+        ['.skill-circle-item', 'translateY(20px)', 0.05],
+        ['.masonry-item', 'scale(0.96)', 0.04],
+        ['.project-card-new', 'translateY(24px)', 0.06],
+        ['.timeline-item-h', 'translateY(24px)', 0.08],
     ];
     if (prefersReducedMotion()) {
         document.querySelectorAll(fadeItems.map(([selector]) => selector).join(',')).forEach((element) => {
@@ -91,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll(selector).forEach((element, index) => {
                 element.style.opacity = '0';
                 element.style.transform = transform;
-                element.style.transition = `opacity 0.6s ease ${index * delay}s, transform 0.6s ease ${index * delay}s`;
+                element.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * delay}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * delay}s`;
                 animationObserver.observe(element);
             });
         });
