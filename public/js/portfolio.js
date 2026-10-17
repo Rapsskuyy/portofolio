@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPortfolioSplash(prefersReducedMotion);
     initSidebarRail(sidebarNav);
     initMobileMoreNav();
+    initLanguageToggle();
     initHeroProfileRotation(prefersReducedMotion);
 
     navLinks.forEach((link) => {
@@ -61,16 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     updateActiveNav();
 
-    const roles = ['Backend Engineer', 'Web Developer', 'Problem Solver', 'Team Player', 'Student Leader'];
+    let roles = window.portfolioI18n?.get('hero.roles') || ['Backend Engineer', 'Software Engineering Student', 'System Architecture Enthusiast'];
     const roleEl = document.getElementById('roleRotator');
+    if (roleEl && roles.length && !roles.includes(roleEl.textContent.trim())) roleEl.textContent = roles[0];
+    let roleIndex = Math.max(0, roles.indexOf(roleEl?.textContent.trim()));
+    window.addEventListener('portfolio:language-changed', (event) => {
+        roles = event.detail?.roles || roles;
+        roleIndex = 0;
+        if (roleEl) roleEl.textContent = roles[roleIndex] || '';
+    });
     if (roleEl && !prefersReducedMotion()) {
-        let index = roles.indexOf(roleEl.textContent.trim());
-        if (index === -1) index = 0;
+        if (roleIndex < 0) roleIndex = 0;
         window.setInterval(() => {
             roleEl.classList.add('is-swapping');
             window.setTimeout(() => {
-                index = (index + 1) % roles.length;
-                roleEl.textContent = roles[index];
+                roleIndex = (roleIndex + 1) % roles.length;
+                roleEl.textContent = roles[roleIndex];
                 roleEl.classList.remove('is-swapping');
             }, 220);
         }, 3400);
@@ -434,6 +441,66 @@ function initTheme() {
     applyTheme(localStorage.getItem('portfolio-theme') || 'dark');
 }
 
+function initLanguageToggle() {
+    const translations = window.portfolioTranslations;
+    if (!translations?.en || !translations?.id) return;
+
+    const getValue = (language, key) => key.split('.').reduce((value, part) => value?.[part], translations[language]);
+    const buttons = [document.getElementById('languageToggle'), document.getElementById('mobileLanguageToggle')].filter(Boolean);
+    let language = 'en';
+    try {
+        language = window.localStorage.getItem('portfolio-language') === 'id' ? 'id' : 'en';
+    } catch (_) {
+        language = 'en';
+    }
+
+    const applyLanguage = (nextLanguage) => {
+        language = nextLanguage === 'id' ? 'id' : 'en';
+        document.documentElement.lang = language;
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+            const value = getValue(language, element.dataset.i18n);
+            if (typeof value === 'string') element.textContent = value;
+        });
+        document.querySelectorAll('[data-i18n-nav]').forEach((link) => {
+            const value = getValue(language, `nav.${link.dataset.i18nNav}`);
+            const label = link.querySelector('.nav-dot-label');
+            if (label && typeof value === 'string') label.textContent = value;
+        });
+        document.querySelectorAll('[data-i18n-label]').forEach((element) => {
+            const value = getValue(language, element.dataset.i18nLabel);
+            if (typeof value === 'string') {
+                element.setAttribute('aria-label', value);
+                element.title = value;
+            }
+        });
+        const title = getValue(language, 'meta.title');
+        if (typeof title === 'string') document.title = title;
+
+        const targetLanguage = language === 'en' ? 'id' : 'en';
+        const label = targetLanguage.toUpperCase();
+        buttons.forEach((button) => {
+            const labelElement = button.querySelector('span') || button;
+            labelElement.textContent = label;
+            const labelText = language === 'id' ? 'Ganti bahasa' : 'Switch language';
+            button.setAttribute('aria-label', `${labelText} (${targetLanguage.toUpperCase()})`);
+            button.title = labelText;
+        });
+
+        try {
+            window.localStorage.setItem('portfolio-language', language);
+        } catch (_) {
+            // Storage can be unavailable in private browsing; the current page still updates.
+        }
+        window.portfolioI18n = { get: (key) => getValue(language, key), language };
+        window.dispatchEvent(new CustomEvent('portfolio:language-changed', {
+            detail: { language, roles: getValue(language, 'hero.roles') },
+        }));
+    };
+
+    buttons.forEach((button) => button.addEventListener('click', () => applyLanguage(language === 'en' ? 'id' : 'en')));
+    applyLanguage(language);
+}
+
 function toggleTheme() {
     const nextTheme = (document.body.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
     applyTheme(nextTheme);
@@ -449,12 +516,16 @@ function applyTheme(theme) {
 function openProjectDetails(card, trigger) {
     if (!card) return;
     const getData = (name) => card.getAttribute(`data-${name}`) || '';
+    const getLocalizedData = (name) => {
+        const key = card.getAttribute(`data-i18n-${name}-key`);
+        return key && window.portfolioI18n?.get(key) || getData(name);
+    };
     const setText = (id, value) => {
         const element = document.getElementById(id);
         if (element) element.textContent = value;
     };
-    setText('modal-proj-title', getData('title'));
-    setText('modal-proj-desc', getData('desc'));
+    setText('modal-proj-title', getLocalizedData('title'));
+    setText('modal-proj-desc', getLocalizedData('desc'));
 
     const techContainer = document.getElementById('modal-proj-tech');
     if (techContainer) {

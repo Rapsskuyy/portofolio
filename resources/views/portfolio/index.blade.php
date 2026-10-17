@@ -4,27 +4,27 @@
     @php
         $portfolioCssVersion = filemtime(public_path('css/portfolio.css')) ?: 'dev';
         $portfolioJsVersion = filemtime(public_path('js/portfolio.js')) ?: 'dev';
+        $portfolioTranslations = [
+            'en' => require resource_path('lang/en/portfolio.php'),
+            'id' => require resource_path('lang/id/portfolio.php'),
+        ];
     @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Raffa Nur Musyaffa - Portfolio & Scholarship Dossier</title>
+    <title data-i18n="meta.title">Raffa Nur Musyaffa - Portfolio & Scholarship Dossier</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
-    <!-- Resource Preconnects & High-Priority LCP Preload -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- Keep the hero image discoverable early; Bootstrap and font styles load after first paint. -->
     <link rel="preload" as="image" href="{{ asset('images/profile/profilrappa_original_raw.webp') }}" fetchpriority="high">
 
-    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" media="print" onload="this.onload=null;this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.onload=null;this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v={{ $portfolioCssVersion }}">
 </head>
@@ -34,7 +34,7 @@
         <div class="portfolio-splash__content">
             <span class="portfolio-splash__eyebrow">Hello</span>
             <strong class="portfolio-splash__name">Raffa Nur Musyaffa</strong>
-            <button type="button" class="portfolio-splash__skip" id="portfolioSplashSkip">Skip intro <span aria-hidden="true">â†’</span></button>
+            <button type="button" class="portfolio-splash__skip" id="portfolioSplashSkip"><span data-i18n="meta.skipIntro">Skip intro</span> <span aria-hidden="true">â†’</span></button>
         </div>
     </div>
 
@@ -54,37 +54,40 @@
             </svg>
             <span>
                 <i class="fas fa-bars" aria-hidden="true"></i>
-                Menu
+                <span data-i18n="meta.menu">Menu</span>
             </span>
         </button>
         <ul class="nav-menu">
-            <li><a href="#home" class="nav-dot active" aria-current="location"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Home</span></a></li>
-            <li><a href="#about" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">About</span></a></li>
-            <li><a href="#education" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Education</span></a></li>
-            <li><a href="#skills" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Skills</span></a></li>
-            <li><a href="#gallery" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Gallery</span></a></li>
-            <li><a href="#projects" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Projects</span></a></li>
-            <li><a href="#experience" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Experience</span></a></li>
-            <li><a href="#contact" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Contact</span></a></li>
+            <li><a href="#home" class="nav-dot active" aria-current="location" data-i18n-nav="home"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Home</span></a></li>
+            <li><a href="#about" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.about">About</span></a></li>
+            <li><a href="#education" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.education">Education</span></a></li>
+            <li><a href="#skills" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.skills">Skills</span></a></li>
+            <li><a href="#gallery" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.gallery">Gallery</span></a></li>
+            <li><a href="#projects" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.projects">Projects</span></a></li>
+            <li><a href="#experience" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.experience">Experience</span></a></li>
+            <li><a href="#contact" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.contact">Contact</span></a></li>
         </ul>
         <div class="social-links-sidebar">
             <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
             <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's Instagram profile"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div>
-        <button class="theme-toggle-btn" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle color theme" title="Toggle Theme">
+        <button class="theme-toggle-btn" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Theme" data-i18n-label="meta.themeToggle">
             <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="language-toggle-btn" id="languageToggle" type="button" aria-label="Switch language" title="Switch language">
+            <span id="languageToggleLabel">ID</span>
         </button>
     </nav>
 
     <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav" aria-label="Primary portfolio navigation">
-        <a href="#home" class="mobile-nav-link active"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
-        <a href="#about" class="mobile-nav-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code" aria-hidden="true"></i><span>Projects</span></a>
-        <a href="#experience" class="mobile-nav-link"><i class="fas fa-users" aria-hidden="true"></i><span>Experience</span></a>
-        <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+        <a href="#home" class="mobile-nav-link active"><i class="fas fa-home" aria-hidden="true"></i><span data-i18n="nav.home">Home</span></a>
+        <a href="#about" class="mobile-nav-link"><i class="fas fa-user" aria-hidden="true"></i><span data-i18n="nav.about">About</span></a>
+        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
+        <a href="#experience" class="mobile-nav-link"><i class="fas fa-users" aria-hidden="true"></i><span data-i18n="nav.experience">Experience</span></a>
+        <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope" aria-hidden="true"></i><span data-i18n="nav.contact">Contact</span></a>
         <button type="button" class="mobile-nav-more-toggle" id="mobileMoreToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMorePanel">
-            <i class="fas fa-ellipsis-h" aria-hidden="true"></i><span>More</span>
+            <i class="fas fa-ellipsis-h" aria-hidden="true"></i><span data-i18n="nav.more">More</span>
         </button>
     </nav>
 
@@ -92,7 +95,7 @@
         <div class="mobile-more-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileMoreTitle">
             <div class="mobile-more-header">
                 <div>
-                    <span class="mobile-more-kicker">Navigate</span>
+                    <span class="mobile-more-kicker" data-i18n="nav.exploreGroup">Explore</span>
                     <h2 id="mobileMoreTitle">Portfolio</h2>
                 </div>
                 <button type="button" class="mobile-more-close" data-mobile-more-close aria-label="Close navigation menu">
@@ -100,15 +103,18 @@
                 </button>
             </div>
             <div class="mobile-more-links">
-                <p class="mobile-more-group-label">Explore</p>
-                <a href="#home" class="mobile-more-link"><i class="fas fa-house" aria-hidden="true"></i><span>Home</span></a>
-                <a href="#about" class="mobile-more-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-                <a href="#education" class="mobile-more-link"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Education</span></a>
-                <a href="#skills" class="mobile-more-link"><i class="fas fa-chart-bar" aria-hidden="true"></i><span>Skills</span></a>
-                <p class="mobile-more-group-label">Work</p>
-                <a href="#gallery" class="mobile-more-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
-                <a href="#projects" class="mobile-more-link"><i class="fas fa-code" aria-hidden="true"></i><span>Projects</span></a>
-                <a href="#experience" class="mobile-more-link"><i class="fas fa-users" aria-hidden="true"></i><span>Experience</span></a>
+                <p class="mobile-more-group-label" data-i18n="nav.exploreGroup">Explore</p>
+                <a href="#home" class="mobile-more-link"><i class="fas fa-house" aria-hidden="true"></i><span data-i18n="nav.home">Home</span></a>
+                <a href="#about" class="mobile-more-link"><i class="fas fa-user" aria-hidden="true"></i><span data-i18n="nav.about">About</span></a>
+                <a href="#education" class="mobile-more-link"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span data-i18n="nav.education">Education</span></a>
+                <a href="#skills" class="mobile-more-link"><i class="fas fa-chart-bar" aria-hidden="true"></i><span data-i18n="nav.skills">Skills</span></a>
+                <p class="mobile-more-group-label" data-i18n="nav.workGroup">Work</p>
+                <a href="#gallery" class="mobile-more-link"><i class="fas fa-images" aria-hidden="true"></i><span data-i18n="nav.gallery">Gallery</span></a>
+                <a href="#projects" class="mobile-more-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
+                <a href="#experience" class="mobile-more-link"><i class="fas fa-users" aria-hidden="true"></i><span data-i18n="nav.experience">Experience</span></a>
+                <button type="button" class="mobile-language-toggle" id="mobileLanguageToggle" aria-label="Switch language">
+                    <i class="fas fa-language" aria-hidden="true"></i><span id="mobileLanguageToggleLabel">ID</span>
+                </button>
             </div>
         </div>
     </div>
@@ -128,24 +134,24 @@
             <div class="hero-split-container">
                 <div class="hero-left">
                     <div class="hero-content hero-content--focused">
-                        <span class="hero-greeting">Hello, I'm</span>
+                        <span class="hero-greeting" data-i18n="hero.greeting">Hello, I'm</span>
                         <h1 class="hero-name">Raffa Nur<br>Musyaffa</h1>
                         <div class="hero-role-wrapper">
-                            <span class="hero-role-label">I'm a</span>
+                            <span class="hero-role-label" data-i18n="hero.rolePrefix">I'm a</span>
                             <span class="hero-role" id="roleRotator">Backend Engineer</span>
                         </div>
                         <div class="hero-buttons">
                             <a href="#projects" class="btn-primary-custom">
-                                <i class="fas fa-layer-group"></i> View Projects
+                                <i class="fas fa-layer-group"></i> <span data-i18n="hero.btnProjects">View Projects</span>
                             </a>
                             <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-cv">
-                                <i class="fas fa-download"></i> Download CV
+                                <i class="fas fa-download"></i> <span data-i18n="hero.btnCv">Download CV</span>
                             </a>
                             <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="btn-github-hero">
-                                <i class="fab fa-github"></i> GitHub
+                                <i class="fab fa-github"></i> <span data-i18n="hero.btnGithub">GitHub</span>
                             </a>
                             <a href="#contact" class="btn-secondary-custom">
-                                <i class="fas fa-paper-plane"></i> Say Hello
+                                <i class="fas fa-paper-plane"></i> <span data-i18n="hero.btnHello">Say Hello</span>
                             </a>
                         </div>
                     </div>
@@ -157,20 +163,20 @@
                         <!-- Floating cards positioned above the profile image -->
                         <div class="floating-card card-top-1">
                             <i class="fas fa-code"></i>
-                            <span>Backend Dev</span>
+                            <span data-i18n="hero.floatingCards.card1">Backend Dev</span>
                         </div>
                         <div class="floating-card card-top-2">
                             <i class="fas fa-users"></i>
-                            <span>Team Player</span>
+                            <span data-i18n="hero.floatingCards.card2">Team Player</span>
                         </div>
                         <div class="floating-card card-top-3">
                             <i class="fas fa-lightbulb"></i>
-                            <span>Problem Solver</span>
+                            <span data-i18n="hero.floatingCards.card3">Problem Solver</span>
                         </div>
                     </div>
                 </div>
                 <div class="hero-tech-stack">
-                    <span class="tech-stack-label">Software & Tools I Use:</span>
+                    <span class="tech-stack-label" data-i18n="hero.toolsLabel">Software & Tools I Use:</span>
                     <div class="tech-marquee-container">
                         <div class="tech-marquee">
                             <div class="marquee-group">
@@ -202,7 +208,7 @@
                 </div>
             </div>
             <div class="scroll-indicator">
-                <span>Scroll Down</span>
+                <span data-i18n="hero.scrollDown">Scroll Down</span>
                 <i class="fas fa-arrow-down"></i>
             </div>
         </section>
@@ -211,8 +217,8 @@
         <section id="about" class="about-section-new" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">01.</span>
-                    <span class="title-text">About Me</span>
+                    <span class="title-number" data-i18n="about.sectionNum">01.</span>
+                    <span class="title-text" data-i18n="about.sectionTitle">About Me</span>
                 </h2>
 
                 <div class="about-container-new">
@@ -220,16 +226,16 @@
                     <div class="about-main-content">
                         <div class="about-intro-card">
                             <div class="intro-header">
-                                <h3 class="intro-title">Hello!</h3>
-                                <div class="intro-badge">Student Developer & Scholar Aspirant</div>
+                                <h3 class="intro-title" data-i18n="about.introTitle">Hello!</h3>
+                                <div class="intro-badge" data-i18n="about.badge">Student Developer & Scholar Aspirant</div>
                             </div>
 
                             <div class="intro-body">
-                                <p class="intro-text">
+                                <p class="intro-text" data-i18n="about.bio1">
                                     I am <strong>Raffa Nur Musyaffa</strong>, an 11th-grade student at <strong>SMKN 1 Depok</strong> majoring in Software Engineering and Game Development (PPLG).
                                 </p>
 
-                                <p class="intro-text">
+                                <p class="intro-text" data-i18n="about.bio2">
                                     I have a deep commitment to programming, particularly in <strong>Backend Engineering and Systems Architecture</strong>. Beyond academic coursework, I actively serve in school governance organizations (MPK & OSIS), cultivating strong leadership, public communication, and collaborative problem-solving skills.
                                 </p>
 
@@ -246,8 +252,8 @@
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="info-card-content">
-                                <h4>Study Goal</h4>
-                                <p>I hope to earn a university scholarship to study Computer Science or Software Engineering and work toward becoming a Backend Systems Engineer.</p>
+                                <h4 data-i18n="about.studyGoalTitle">Study Goal</h4>
+                                <p data-i18n="about.studyGoalDesc">I hope to earn a university scholarship to study Computer Science or Software Engineering and work toward becoming a Backend Systems Engineer.</p>
                             </div>
                         </div>
                     </div>
@@ -259,19 +265,27 @@
         <section id="education" class="education-modern" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">02.</span>
-                    <span class="title-text">Education</span>
+                    <span class="title-number" data-i18n="education.sectionNum">02.</span>
+                    <span class="title-text" data-i18n="education.sectionTitle">Education</span>
                 </h2>
 
                 <div class="education-grid">
+                    @php
+                        $educationTranslationKeys = [
+                            'SDN Cibubur 10' => 'sd',
+                            'SMPN 15 Depok' => 'smp',
+                            'SMKN 1 Depok' => 'smk',
+                        ];
+                    @endphp
                     @forelse($educations as $education)
+                    @php $educationTranslationKey = $educationTranslationKeys[$education->institution] ?? null; @endphp
                     <div class="education-card-modern">
                         <div class="education-year">{{ $education->start_year }} - {{ $education->end_year ?? 'Now' }}</div>
                         <h3 class="education-institution">{{ $education->institution }}</h3>
-                        <p class="education-degree">{{ $education->degree }}</p>
-                        <p class="education-field">{{ $education->field_of_study }}</p>
+                        <p class="education-degree" @if($educationTranslationKey) data-i18n="education.{{ $educationTranslationKey }}.degree" @endif>{{ $education->degree }}</p>
+                        <p class="education-field" @if($educationTranslationKey) data-i18n="education.{{ $educationTranslationKey }}.field" @endif>{{ $education->field_of_study }}</p>
                         @if($education->description)
-                        <p class="education-desc">{{ $education->description }}</p>
+                        <p class="education-desc" @if($educationTranslationKey) data-i18n="education.{{ $educationTranslationKey }}.desc" @endif>{{ $education->description }}</p>
                         @endif
                     </div>
                     @empty
@@ -285,8 +299,8 @@
         <section id="skills" class="skills-circular" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">03.</span>
-                    <span class="title-text">Skills</span>
+                    <span class="title-number" data-i18n="skills.sectionNum">03.</span>
+                    <span class="title-text" data-i18n="skills.sectionTitle">Skills</span>
                 </h2>
 
                 <div class="skills-panels">
@@ -295,8 +309,8 @@
                         <div class="skills-panel-header">
                             <i class="fas fa-user-tie" aria-hidden="true"></i>
                             <div>
-                                <h3 class="skills-panel-title">Soft Skills &amp; Leadership</h3>
-                                <p class="skills-panel-sub">Interpersonal &amp; organizational competencies</p>
+                                <h3 class="skills-panel-title" data-i18n="skills.softTitle">Soft Skills &amp; Leadership</h3>
+                                <p class="skills-panel-sub" data-i18n="skills.softSub">Interpersonal &amp; organizational competencies</p>
                             </div>
                         </div>
                         <ul class="skills-list" role="list">
@@ -327,8 +341,8 @@
                         <div class="skills-panel-header">
                             <i class="fas fa-code" aria-hidden="true"></i>
                             <div>
-                                <h3 class="skills-panel-title">Technical &amp; Engineering Stack</h3>
-                                <p class="skills-panel-sub">Languages, frameworks &amp; tools</p>
+                                <h3 class="skills-panel-title" data-i18n="skills.hardTitle">Technical &amp; Engineering Stack</h3>
+                                <p class="skills-panel-sub" data-i18n="skills.hardSub">Languages, frameworks &amp; tools</p>
                             </div>
                         </div>
                         <ul class="skills-list" role="list">
@@ -360,20 +374,31 @@
         <section id="gallery" class="gallery-masonry" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">04.</span>
-                    <span class="title-text">Gallery</span>
+                    <span class="title-number" data-i18n="gallery.sectionNum">04.</span>
+                    <span class="title-text" data-i18n="gallery.sectionTitle">Gallery</span>
                 </h2>
 
                 <div class="masonry-grid" id="galleryGrid">
+                    @php
+                        $galleryTranslationKeys = [
+                            "Master of Ceremony — One's Harmony 2.0" => 'item1',
+                            'Event Committee — Bulan Bahasa 2025' => 'item2',
+                            "Logistics Committee — One's Harmony 2025" => 'item3',
+                            'Master of Ceremony — Project Kolaborasi Nusantara' => 'item4',
+                            'Orientation Committee — MPLS SMKN 1 Depok' => 'item5',
+                            'Organizing Chairman — Student Council Plenary Assembly 2025' => 'item6',
+                        ];
+                    @endphp
                     @forelse($projects as $index => $project)
+                    @php $galleryTranslationKey = $galleryTranslationKeys[$project->title] ?? null; @endphp
                     <div class="masonry-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         <div class="project-card-modern">
                             <div class="project-image-wrapper">
                                 <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" class="project-image" loading="lazy" decoding="async">
                                 <div class="project-overlay">
                                     <div class="project-info">
-                                        <h3 class="project-title">{{ $project->title }}</h3>
-                                        <p class="project-description">{{ $project->description }}</p>
+                                        <h3 class="project-title" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.title" @endif>{{ $project->title }}</h3>
+                                        <p class="project-description" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.desc" @endif>{{ $project->description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -397,7 +422,7 @@
                 @if(count($projects) > 2)
                 <div class="expand-controls-wrapper d-none" id="galleryExpandControls">
                     <button type="button" class="btn-expand-toggle" id="galleryExpandBtn" aria-expanded="false" aria-controls="galleryGrid">
-                        <span class="btn-expand-text">Lihat Selengkapnya</span>
+                        <span class="btn-expand-text" data-i18n="gallery.viewMore">View More</span>
                         <span class="btn-expand-badge d-none" id="galleryExpandBadge"></span>
                         <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
                     </button>
@@ -410,17 +435,39 @@
         <section id="projects" class="projects-section" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">05.</span>
-                    <span class="title-text">My Projects</span>
+                    <span class="title-number" data-i18n="projects.sectionNum">05.</span>
+                    <span class="title-text" data-i18n="projects.sectionTitle">My Projects</span>
                 </h2>
 
-                <p class="section-subtitle">Applied portfolio showcasing Backend Systems, Fullstack Web Applications, Mobile Tools, and 3D Modeling from Grade 10 to Present</p>
+                <p class="section-subtitle" data-i18n="projects.subtitle">Applied portfolio showcasing Backend Systems, Fullstack Web Applications, Mobile Tools, and 3D Modeling from Grade 10 to Present</p>
 
                 <div class="projects-grid" id="projectsGrid">
+                    @php
+                        $projectTranslationKeys = [
+                            'System E-vote' => 'evote',
+                            '3D Classroom Environment' => 'classroom3d',
+                            '3D Fantasy Sword Asset' => 'sword3d',
+                            'Portfolio UI/UX Concept' => 'portoUi',
+                            'Course Platform UI/UX — PT Komari' => 'komariUi',
+                            "McDonald's Landing Page Clone" => 'mcdClone',
+                            'SMKN 1 Depok School Canteen App' => 'canteenApp',
+                            'Wandek Airlines Ticketing System' => 'wandekAirlines',
+                            'PT Komari Online Learning Portal' => 'komariPortal',
+                            'Sarpras School Asset Borrowing System' => 'sarpras',
+                            'Notes Management RESTful API' => 'notesApi',
+                            'Interactive Laravel AI Chatbot' => 'chatbot',
+                            'Student Academic Assessment & CRUD System' => 'assessmentCrud',
+                        ];
+                    @endphp
                     @forelse($codingProjects as $codingProject)
+                    @php $projectTranslationKey = $projectTranslationKeys[$codingProject->title] ?? null; @endphp
                     <article class="project-card-new"
                          data-title="{{ $codingProject->title }}" 
                          data-desc="{{ $codingProject->description }}"
+                         @if($projectTranslationKey)
+                         data-i18n-title-key="projects.items.{{ $projectTranslationKey }}.title"
+                         data-i18n-desc-key="projects.items.{{ $projectTranslationKey }}.desc"
+                         @endif
                          data-tech="{{ is_array($codingProject->technologies) ? implode(',', $codingProject->technologies) : '' }}"
                          data-arch="{{ $codingProject->architecture_diagram }}"
                          data-schema="{{ $codingProject->database_schema }}"
@@ -435,13 +482,13 @@
 
                         <div class="project-content-new">
                             <div class="project-header-new">
-                                <h3 class="project-title-new">{{ $codingProject->title }}</h3>
+                                <h3 class="project-title-new" @if($projectTranslationKey) data-i18n="projects.items.{{ $projectTranslationKey }}.title" @endif>{{ $codingProject->title }}</h3>
                                 @if($codingProject->category)
                                 <span class="project-category">{{ ucfirst($codingProject->category) }}</span>
                                 @endif
                             </div>
 
-                            <p class="project-description-new">{{ $codingProject->description }}</p>
+                            <p class="project-description-new" @if($projectTranslationKey) data-i18n="projects.items.{{ $projectTranslationKey }}.desc" @endif>{{ $codingProject->description }}</p>
 
                             @if($codingProject->technologies && count($codingProject->getTechnologiesArray()) > 0)
                             <div class="project-tech-stack">
@@ -453,7 +500,7 @@
 
                             <div class="project-links-new">
                                 <button type="button" class="project-link-btn detail-btn project-card-open" data-project-modal-trigger aria-label="Open project summary for {{ $codingProject->title }}">
-                                    <i class="fas fa-eye" aria-hidden="true"></i> Quick View
+                                    <i class="fas fa-eye" aria-hidden="true"></i> <span data-i18n="projects.quickView">Quick View</span>
                                 </button>
                                 @if($codingProject->demo_url)
                                 <a href="{{ $codingProject->demo_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn demo-btn">
@@ -462,7 +509,7 @@
                                 @endif
                                 @if($codingProject->github_url)
                                 <a href="{{ $codingProject->github_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn github-btn">
-                                    <i class="fab fa-github"></i> Repository
+                                    <i class="fab fa-github"></i> <span data-i18n="projects.repo">Repository</span>
                                 </a>
                                 @endif
                                 @if($codingProject->projectDetail)
@@ -484,7 +531,7 @@
                 @if(count($codingProjects) > 2)
                 <div class="expand-controls-wrapper d-none" id="projectsExpandControls">
                     <button type="button" class="btn-expand-toggle" id="projectsExpandBtn" aria-expanded="false" aria-controls="projectsGrid">
-                        <span class="btn-expand-text">Lihat Selengkapnya</span>
+                        <span class="btn-expand-text" data-i18n="projects.viewMore">View More</span>
                         <span class="btn-expand-badge d-none" id="projectsExpandBadge"></span>
                         <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
                     </button>
@@ -600,8 +647,8 @@
         <section id="experience" class="experience-section" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number">06.</span>
-                    <span class="title-text">Experience</span>
+                    <span class="title-number" data-i18n="experience.sectionNum">06.</span>
+                    <span class="title-text" data-i18n="experience.sectionTitle">Experience</span>
                 </h2>
 
                 <div class="experience-grid-2x2">
@@ -611,8 +658,8 @@
                             <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2022-2023</span>
                             <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
                         </div>
-                        <h3 class="experience-title">Political & Civic Affairs Commission Member</h3>
-                        <p class="experience-desc">Organized student social and civic engagement programs, fostering school community participation.</p>
+                        <h3 class="experience-title" data-i18n="experience.exp1.role">Political & Civic Affairs Commission Member</h3>
+                        <p class="experience-desc" data-i18n="experience.exp1.desc">Organized student social and civic engagement programs, fostering school community participation.</p>
                     </div>
 
                     <!-- Experience 2 -->
@@ -621,8 +668,8 @@
                             <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2023-2024</span>
                             <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
                         </div>
-                        <h3 class="experience-title">Vice President II</h3>
-                        <p class="experience-desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
+                        <h3 class="experience-title" data-i18n="experience.exp2.role">Vice President II</h3>
+                        <p class="experience-desc" data-i18n="experience.exp2.desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
                     </div>
 
                     <!-- Experience 3 -->
@@ -631,8 +678,8 @@
                             <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2024-2025</span>
                             <span class="experience-org-badge"><i class="fas fa-university" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
                         </div>
-                        <h3 class="experience-title">Commission B Member</h3>
-                        <p class="experience-desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
+                        <h3 class="experience-title" data-i18n="experience.exp3.role">Commission B Member</h3>
+                        <p class="experience-desc" data-i18n="experience.exp3.desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
                     </div>
 
                     <!-- Experience 4 -->
@@ -641,8 +688,8 @@
                             <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2025-2026</span>
                             <span class="experience-org-badge"><i class="fas fa-award" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
                         </div>
-                        <h3 class="experience-title">Senior Member, Commission B</h3>
-                        <p class="experience-desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
+                        <h3 class="experience-title" data-i18n="experience.exp4.role">Senior Member, Commission B</h3>
+                        <p class="experience-desc" data-i18n="experience.exp4.desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
                     </div>
                 </div>
             </div>
@@ -653,14 +700,14 @@
             <div class="container-fluid px-4">
                 <div class="footer-content">
                     <div class="footer-left footer-identity">
-                        <h3 class="footer-name">Raffa Nur Musyaffa</h3>
-                        <p class="footer-tagline">Aspiring Backend Systems Engineer | SMKN 1 Depok</p>
-                        <p class="footer-description">Passionate about creating efficient backend solutions and always eager to learn new technologies.</p>
+                        <h3 class="footer-name" data-i18n="footer.name">Raffa Nur Musyaffa</h3>
+                        <p class="footer-tagline" data-i18n="footer.tagline">Aspiring Backend Systems Engineer | SMKN 1 Depok</p>
+                        <p class="footer-description" data-i18n="footer.desc">Passionate about creating efficient backend solutions and always eager to learn new technologies.</p>
                     </div>
 
                     <div class="footer-actions">
                         <section class="footer-contact-group" aria-labelledby="footer-contact-title">
-                            <h4 class="footer-title" id="footer-contact-title">Contact</h4>
+                            <h4 class="footer-title" id="footer-contact-title" data-i18n="footer.contactTitle">Contact</h4>
                             <div class="footer-contact">
                                 <a href="mailto:raffanurmusyaffa0712@gmail.com" class="contact-item">
                                     <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -672,13 +719,13 @@
                                 </a>
                                 <div class="contact-item">
                                     <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                    <span>Depok, West Java, Indonesia</span>
+                                    <span data-i18n="footer.location">Depok, West Java, Indonesia</span>
                                 </div>
                             </div>
                         </section>
 
                         <section class="footer-social-group" aria-labelledby="footer-social-title">
-                            <h4 class="footer-title" id="footer-social-title">Follow Me</h4>
+                            <h4 class="footer-title" id="footer-social-title" data-i18n="footer.followTitle">Follow Me</h4>
                             <div class="footer-social">
                                 <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Open Raffa's GitHub profile">
                                     <i class="fab fa-github" aria-hidden="true"></i>
@@ -688,7 +735,7 @@
                                 </a>
                             </div>
                             <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-footer">
-                                <i class="fas fa-download" aria-hidden="true"></i> Download CV
+                                <i class="fas fa-download" aria-hidden="true"></i> <span data-i18n="footer.downloadCv">Download CV</span>
                             </a>
                         </section>
                     </div>
@@ -697,9 +744,9 @@
                 <div class="footer-bottom">
                     <p class="copyright">&copy; {{ date('Y') }} Raffa Nur Musyaffa. All rights reserved.</p>
                     <nav class="footer-nav" aria-label="Footer navigation">
-                        <a href="#home">Home</a>
-                        <a href="#projects">Projects</a>
-                        <a href="#contact">Contact</a>
+                        <a href="#home" data-i18n="nav.home">Home</a>
+                        <a href="#projects" data-i18n="nav.projects">Projects</a>
+                        <a href="#contact" data-i18n="nav.contact">Contact</a>
                     </nav>
                 </div>
             </div>
@@ -747,6 +794,9 @@
         </div>
     </div>
 
+    <script>
+        window.portfolioTranslations = @json($portfolioTranslations);
+    </script>
     <script src="{{ asset('js/portfolio.js') }}?v={{ $portfolioJsVersion }}" defer></script>
 
     @if(session('success') || session('success_guestbook') || (isset($errors) && $errors->any()))
