@@ -40,7 +40,7 @@
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar-nav" aria-label="Portfolio sections">
-        <div class="logo" title="Raffa Nur Musyaffa">
+        <button type="button" class="logo sidebar-menu-toggle" id="sidebarMenuToggle" title="Open portfolio menu" aria-label="Open portfolio menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMorePanel">
             <svg class="logo-svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raffa Logo">
                 <path d="M6 5H16.5C19.5376 5 22 7.46243 22 10.5C22 13.0978 20.1947 15.2736 17.75 15.8454L22.5 23H17.2L12.8 16H10.5V23H6V5Z" fill="url(#rLogoGrad)"/>
                 <path d="M10.5 8.5V12.5H16C17.1046 12.5 18 11.6046 18 10.5C18 9.39543 17.1046 8.5 16 8.5H10.5Z" fill="#0a0f1d"/>
@@ -52,7 +52,11 @@
                     </linearGradient>
                 </defs>
             </svg>
-        </div>
+            <span>
+                <i class="fas fa-bars" aria-hidden="true"></i>
+                Menu
+            </span>
+        </button>
         <ul class="nav-menu">
             <li><a href="#home" class="nav-dot active" aria-current="location"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Home</span></a></li>
             <li><a href="#about" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">About</span></a></li>
@@ -67,20 +71,47 @@
             <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
             <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's Instagram profile"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div>
-        <!-- Theme Toggle -->
         <button class="theme-toggle-btn" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle color theme" title="Toggle Theme">
             <i class="fas fa-sun" id="themeIcon"></i>
         </button>
     </nav>
 
     <!-- Mobile Bottom Navigation Bar -->
-    <nav class="mobile-bottom-nav">
-        <a href="#home" class="mobile-nav-link active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="#about" class="mobile-nav-link"><i class="fas fa-user"></i><span>About</span></a>
-        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code"></i><span>Projects</span></a>
-        <a href="#experience" class="mobile-nav-link"><i class="fas fa-users"></i><span>Experience</span></a>
-        <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope"></i><span>Contact</span></a>
+    <nav class="mobile-bottom-nav" aria-label="Primary portfolio navigation">
+        <a href="#home" class="mobile-nav-link active"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
+        <a href="#about" class="mobile-nav-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
+        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code" aria-hidden="true"></i><span>Projects</span></a>
+        <a href="#experience" class="mobile-nav-link"><i class="fas fa-users" aria-hidden="true"></i><span>Experience</span></a>
+        <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+        <button type="button" class="mobile-nav-more-toggle" id="mobileMoreToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMorePanel">
+            <i class="fas fa-ellipsis-h" aria-hidden="true"></i><span>More</span>
+        </button>
     </nav>
+
+    <div class="mobile-more-overlay" id="mobileMorePanel" hidden aria-hidden="true">
+        <div class="mobile-more-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileMoreTitle">
+            <div class="mobile-more-header">
+                <div>
+                    <span class="mobile-more-kicker">Navigate</span>
+                    <h2 id="mobileMoreTitle">Portfolio</h2>
+                </div>
+                <button type="button" class="mobile-more-close" data-mobile-more-close aria-label="Close navigation menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="mobile-more-links">
+                <p class="mobile-more-group-label">Explore</p>
+                <a href="#home" class="mobile-more-link"><i class="fas fa-house" aria-hidden="true"></i><span>Home</span></a>
+                <a href="#about" class="mobile-more-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
+                <a href="#education" class="mobile-more-link"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Education</span></a>
+                <a href="#skills" class="mobile-more-link"><i class="fas fa-chart-bar" aria-hidden="true"></i><span>Skills</span></a>
+                <p class="mobile-more-group-label">Work</p>
+                <a href="#gallery" class="mobile-more-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
+                <a href="#projects" class="mobile-more-link"><i class="fas fa-code" aria-hidden="true"></i><span>Projects</span></a>
+                <a href="#experience" class="mobile-more-link"><i class="fas fa-users" aria-hidden="true"></i><span>Experience</span></a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">

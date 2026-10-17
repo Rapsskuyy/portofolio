@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const prefersReducedMotion = () => motionQuery.matches;
-    const navLinks = document.querySelectorAll('.nav-dot, .mobile-nav-link');
+    const navLinks = document.querySelectorAll('.nav-dot, .mobile-nav-link, .mobile-more-link');
     const sections = document.querySelectorAll('section[id], footer[id]');
     const sidebarNav = document.querySelector('.sidebar-nav');
 
     initPortfolioSplash(prefersReducedMotion);
     initSidebarRail(sidebarNav);
+    initMobileMoreNav();
     initHeroProfileRotation(prefersReducedMotion);
 
     navLinks.forEach((link) => {
@@ -295,6 +296,64 @@ function initSidebarRail(sidebarNav) {
         event.preventDefault();
         sidebarNav.classList.remove('is-expanded');
         if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    });
+}
+
+function initMobileMoreNav() {
+    const toggles = [
+        document.getElementById('mobileMoreToggle'),
+        document.getElementById('sidebarMenuToggle'),
+    ].filter(Boolean);
+    const overlay = document.getElementById('mobileMorePanel');
+    const closeButton = overlay?.querySelector('[data-mobile-more-close]');
+    if (!toggles.length || !overlay || !closeButton) return;
+
+    let previousFocus = null;
+
+    const setOpen = (isOpen) => {
+        if (isOpen) {
+            previousFocus = document.activeElement;
+            overlay.hidden = false;
+            overlay.setAttribute('aria-hidden', 'false');
+            toggles.forEach((toggle) => toggle.setAttribute('aria-expanded', 'true'));
+            document.body.classList.add('mobile-more-open');
+            window.requestAnimationFrame(() => {
+                overlay.classList.add('is-open');
+                closeButton.focus();
+            });
+            return;
+        }
+
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        toggles.forEach((toggle) => toggle.setAttribute('aria-expanded', 'false'));
+        document.body.classList.remove('mobile-more-open');
+        window.setTimeout(() => {
+            if (!overlay.classList.contains('is-open')) overlay.hidden = true;
+        }, 220);
+        if (previousFocus instanceof HTMLElement) previousFocus.focus();
+        previousFocus = null;
+    };
+
+    toggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => setOpen(!overlay.classList.contains('is-open')));
+    });
+    closeButton.addEventListener('click', () => setOpen(false));
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) setOpen(false);
+    });
+    overlay.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 1200) document.querySelector('.sidebar-nav')?.classList.remove('is-expanded');
+    }, { passive: true });
+    document.addEventListener('keydown', (event) => {
+        if (!overlay.classList.contains('is-open')) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            setOpen(false);
+            return;
+        }
+        if (event.key === 'Tab') trapFocus(event, overlay);
     });
 }
 
