@@ -20,7 +20,8 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preload" as="image" href="{{ asset('images/profile/profilrappa.webp') }}" fetchpriority="high">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -121,7 +122,7 @@
                 <div class="hero-right">
                     <div class="hero-image-wrapper">
                         <div class="hero-image-bg"></div>
-                        <img src="{{ asset('images/profile/profilrappa.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" decoding="sync" data-hero-images='@json($heroProfileImages)' onerror="this.src='{{ asset('images/profile/profilrappa.jpeg') }}'">
+                        <img src="{{ asset('images/profile/profilrappa.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" loading="eager" decoding="async" data-hero-images='@json($heroProfileImages)' onerror="this.src='{{ asset('images/profile/profilrappa.jpeg') }}'">
                         <!-- Floating cards positioned above the profile image -->
                         <div class="floating-card card-top-1">
                             <i class="fas fa-code"></i>

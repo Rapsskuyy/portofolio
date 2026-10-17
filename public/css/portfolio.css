@@ -4922,10 +4922,11 @@ body.splash-active {
 
 .footer-content {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(420px, 0.8fr);
+    grid-template-columns: minmax(340px, 0.8fr) minmax(600px, 1.2fr);
     align-items: start;
-    gap: clamp(36px, 7vw, 112px);
+    gap: clamp(48px, 5vw, 80px);
     margin-bottom: 44px;
+    min-width: 0;
 }
 
 .footer-identity {
@@ -4957,11 +4958,18 @@ body.splash-active {
 
 .footer-actions {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(190px, 0.85fr);
+    grid-template-columns: minmax(360px, 1fr) minmax(170px, 220px);
     align-items: start;
     gap: clamp(24px, 3vw, 48px);
     padding-left: clamp(24px, 4vw, 56px);
     border-left: 1px solid rgba(148, 163, 184, 0.28);
+    min-width: 0;
+}
+
+.footer-contact-group,
+.footer-social-group,
+.contact-item span {
+    min-width: 0;
 }
 
 .footer-title {
@@ -4981,6 +4989,10 @@ body.splash-active {
     color: #cbd5e1;
     font-size: 0.9rem;
     line-height: 1.45;
+}
+
+.contact-item span {
+    overflow-wrap: anywhere;
 }
 
 a.contact-item:hover {

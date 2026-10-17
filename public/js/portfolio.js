@@ -273,7 +273,8 @@ function initPortfolioSplash(prefersReducedMotion) {
     skipButton.addEventListener('click', dismiss, { once: true });
     document.addEventListener('keydown', handleSplashKeydown);
     window.requestAnimationFrame(() => skipButton.focus());
-    dismissTimer = window.setTimeout(dismiss, 1150);
+    const splashDuration = window.innerWidth <= 768 ? 700 : 900;
+    dismissTimer = window.setTimeout(dismiss, splashDuration);
 }
 
 function initSidebarRail(sidebarNav) {

@@ -9,13 +9,14 @@ use App\Models\CodingProject;
 use App\Models\Testimonial;
 use App\Models\Post;
 use App\Models\MockApi;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class PortfolioController extends Controller
 {
-    public function index(): View
+    public function index(): Response
     {
         $educations = Education::all();
         $softSkills = Skill::where('type', 'soft')->get();
@@ -23,16 +24,16 @@ class PortfolioController extends Controller
         $projects = Project::whereRaw('is_visible IS TRUE')->orderBy('order')->orderBy('id', 'asc')->get();
         $codingProjects = CodingProject::with('projectDetail')->orderBy('order')->orderBy('year', 'desc')->get();
 
-        return view('portfolio.index', [
+        return response()->view('portfolio.index', [
             'educations'     => $educations,
             'softSkills'     => $softSkills,
             'hardSkills'     => $hardSkills,
             'projects'       => $projects,
             'codingProjects' => $codingProjects,
-        ]);
+        ])->header('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
     }
 
-    public function home(): View
+    public function home(): Response
     {
         return $this->index();
     }
