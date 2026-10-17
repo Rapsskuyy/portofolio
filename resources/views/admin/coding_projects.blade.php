@@ -352,7 +352,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Atau Path/URL Gambar Manual</label>
-                                <input type="text" name="image_url" class="form-control" placeholder="Contoh: images/coding-projects/demo.png">
+                                <input type="text" name="image_url" class="form-control" placeholder="Contoh: images/coding-projects/demo.webp">
                             </div>
 
                             <div class="col-md-6">

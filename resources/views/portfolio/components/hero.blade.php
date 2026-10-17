@@ -267,9 +267,9 @@
                 <div class="profile-outer">
                     <div class="profile-shadow"></div>
                     <div class="profile-frame">
-                        <img src="{{ asset('images/profile/profilrappa.jpeg') }}"
+                        <img src="{{ asset('images/profile/profilrappa_original_raw.webp') }}"
                              alt="Raffa Nur Musyaffa — Backend Architect"
-                             onerror="this.onerror=null;this.src='{{ asset('images/profile/profile.jpeg') }}';">
+                             onerror="this.onerror=null;this.src='{{ asset('images/profile/profile.webp') }}';">
                         <div class="profile-fade"></div>
                         <div class="profile-corner">
                             <span class="status-dot" style="width:5px;height:5px;"></span>

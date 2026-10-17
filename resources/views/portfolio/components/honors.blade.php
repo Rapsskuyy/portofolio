@@ -91,7 +91,7 @@
                                 
                                 <!-- Proof Thumbnail -->
                                 <div class="sm:col-span-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-gold-400/40 shadow-md bg-cosmic-950 group/img">
-                                    <img src="{{ asset('images/projects/olimpiade_sains.jpg') }}" 
+                                    <img src="{{ asset('images/projects/olimpiade_sains.webp') }}"
                                          alt="National Gold Medalist Certificate - Raffa Nur Musyaffa" 
                                          class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
                                          onerror="this.style.display='none';">
@@ -324,7 +324,7 @@
                                 
                                 <!-- Proof Thumbnail -->
                                 <div class="sm:col-span-4 relative aspect-[4/3] rounded-lg overflow-hidden border border-cobalt-400/40 shadow-md bg-cosmic-950 group/img">
-                                    <img src="{{ asset('images/projects/triwulan.jpg') }}" 
+                                    <img src="{{ asset('images/projects/triwulan.webp') }}"
                                          alt="MPK Parliamentary Assembly - Raffa Nur Musyaffa" 
                                          class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
                                          onerror="this.style.display='none';">

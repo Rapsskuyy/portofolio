@@ -20,7 +20,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => '3D Modeling Ruang Kelas',
                 'description' => 'Modeling 3D barang-barang yang ada di kelas seperti meja, bangku, papan tulis, lemari, buku, dan vas bunga. Dibuat dengan detail untuk simulasi ruang kelas yang realistis.',
-                'image_url' => 'kelas.png',
+                'image_url' => 'kelas.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['3D Modeling', 'Blender'],
@@ -34,7 +34,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => '3D Modeling Pedang',
                 'description' => 'Modeling 3D pedang dengan detail tekstur and material yang realistis. Project ini menunjukkan kemampuan dalam membuat objek 3D dengan detail yang kompleks.',
-                'image_url' => 'pedang.png',
+                'image_url' => 'pedang.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['3D Modeling', 'Blender'],
@@ -48,7 +48,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'UI/UX Design Portfolio Website',
                 'description' => 'Design UI/UX untuk website portfolio pribadi pertama saya. Dibuat menggunakan Figma dengan fokus pada user experience dan tampilan yang modern dan menarik.',
-                'image_url' => 'porto1.png',
+                'image_url' => 'porto1.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Figma', 'UI/UX Design'],
@@ -62,7 +62,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'UI/UX Design Web Kursus PT Komari',
                 'description' => 'Design UI/UX untuk website kursus PT Komari. Design ini mencakup halaman landing, katalog kursus, dan sistem pendaftaran dengan interface yang user-friendly.',
-                'image_url' => 'web1.png',
+                'image_url' => 'web1.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Figma', 'UI/UX Design'],
@@ -76,7 +76,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'MCD - HTML CSS Tugas',
                 'description' => 'Tugas kelas 10 membuat tampilan website menggunakan HTML dan CSS. Project ini menunjukkan pemahaman fundamental dalam pembuatan halaman web statis dengan styling yang baik.',
-                'image_url' => 'mcd.png',
+                'image_url' => 'mcd.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['HTML', 'CSS'],
@@ -90,7 +90,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'Canteen SMK N 1 Depok',
                 'description' => 'Aplikasi Android untuk manajemen penjualan makanan dan minuman di kantin sekolah SMK N 1 Depok. Aplikasi ini menampilkan katalog produk, sistem pemesanan, dan tracking penjualan.',
-                'image_url' => 'canteensmkn1depok.png',
+                'image_url' => 'canteensmkn1depok.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Kotlin', 'Java', 'Android Studio'],
@@ -104,7 +104,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'Wandek Airlines',
                 'description' => 'Website pemesanan tiket pesawat maskapai Wandek Airlines. Platform ini memungkinkan pengguna mencari, membandingkan, dan memesan tiket penerbangan dengan sistem pembayaran terintegrasi.',
-                'image_url' => 'wandekairlines.png',
+                'image_url' => 'wandekairlines.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
@@ -118,7 +118,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'PT Komari - Web Kursus Online',
                 'description' => 'Website platform kursus online PT Komari yang memungkinkan pengguna melihat katalog kursus, mendaftar kelas, dan melacak progress belajar mereka dengan dashboard yang intuitif.',
-                'image_url' => 'Ptkomari.png',
+                'image_url' => 'Ptkomari.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
@@ -132,7 +132,7 @@ class CodingProjectSeeder extends Seeder
             [
                 'title' => 'Sarpras - Sistem Peminjaman Barang',
                 'description' => 'Website sistem peminjaman sarana dan prasarana (barang sekolah) yang membantu siswa dan guru meminjam barang-barang untuk kebutuhan pembelajaran dan kegiatan sekolah.',
-                'image_url' => 'sarpras.png',
+                'image_url' => 'sarpras.webp',
                 'demo_url' => null,
                 'github_url' => null,
                 'technologies' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],

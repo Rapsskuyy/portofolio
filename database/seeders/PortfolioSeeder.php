@@ -86,7 +86,7 @@ class PortfolioSeeder extends Seeder
             ['title' => 'Panitia Event Bulan Bahasa 2025'],
             [
                 'description' => 'Berperan sebagai Sie Acara dalam menyelenggarakan acara Bulan Bahasa 2025. Bertanggung jawab mengatur rundown acara, koordinasi timeline, dan memastikan setiap segment berjalan sesuai rencana dengan sempurna.',
-                'image_url' => 'projects/bulan_bahasa.jpg',
+                'image_url' => 'projects/bulan_bahasa.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Event Planning', 'Rundown Management', 'Koordinasi']),
@@ -97,7 +97,7 @@ class PortfolioSeeder extends Seeder
             ['title' => "Panitia Event One's Harmony 2025"],
             [
                 'description' => 'Sebagai Sie Perlengkapan dalam event One\'s Harmony 2025. Mengelola semua aspek perlengkapan acara mulai dari persiapan, pengadaan, penempatan hingga pemeliharaan semua peralatan untuk kelancaran event.',
-                'image_url' => 'projects/ones_harmony.jpg',
+                'image_url' => 'projects/ones_harmony.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Manajemen Perlengkapan', 'Logistik', 'Koordinasi Tim']),
@@ -108,7 +108,7 @@ class PortfolioSeeder extends Seeder
             ['title' => 'Juara Olimpiade Sains Nasional'],
             [
                 'description' => 'Meraih juara 1 dalam Olimpiade Sains Nasional. Pencapaian ini merupakan hasil dari dedikasi, pembelajaran berkelanjutan, dan kerja keras dalam mempersiapkan diri menghadapi kompetisi tingkat nasional.',
-                'image_url' => 'projects/olimpiade_sains.jpg',
+                'image_url' => 'projects/olimpiade_sains.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Sains', 'Problem Solving', 'Kompetisi Nasional']),
@@ -119,7 +119,7 @@ class PortfolioSeeder extends Seeder
             ['title' => 'MC: Project Kolaborasi Nusantara'],
             [
                 'description' => 'Menjadi MC pada acara Project Kolaborasi Nusantara: memandu acara, menjaga alur, serta berkoordinasi dengan tim produksi dan peserta agar acara berjalan lancar.',
-                'image_url' => 'projects/mc_kolaborasi_nusantara.jpg',
+                'image_url' => 'projects/mc_kolaborasi_nusantara.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Public Speaking', 'MC', 'Koordinasi Tim']),
@@ -130,7 +130,7 @@ class PortfolioSeeder extends Seeder
             ['title' => 'Panitia MPLS SMKN 1 Depok'],
             [
                 'description' => 'Panitia MPLS di SMKN 1 Depok: bertugas dalam perencanaan orientasi, registrasi peserta, dan koordinasi kegiatan untuk menyambut siswa baru.',
-                'image_url' => 'projects/panitia_mpls_smkn1_depok.jpg',
+                'image_url' => 'projects/panitia_mpls_smkn1_depok.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Organisasi', 'Registrasi', 'Koordinasi Kegiatan']),
@@ -141,7 +141,7 @@ class PortfolioSeeder extends Seeder
             ['title' => "Master of Ceremony One's Harmony 2.0"],
             [
                 'description' => "Menjadi Master of Ceremony pada event One's Harmony 2.0. Memandu jalannya seluruh rangkaian acara dari pembukaan hingga penutupan dengan energik dan profesional.",
-                'image_url' => 'projects/mcOH2.0.png',
+                'image_url' => 'projects/mcOH2.0.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Public Speaking', 'MC', 'Event Host', 'Communication']),
@@ -152,7 +152,7 @@ class PortfolioSeeder extends Seeder
             ['title' => 'Ketua Pelaksana Sidang Triwulan OSIS 2025'],
             [
                 'description' => 'Memimpin sidang triwulan OSIS 2025 sebagai Ketua Pelaksana. Sidang ini membahas evaluasi program kerja OSIS dan memberikan saran serta masukan agar program kerja dapat berjalan dengan baik dan lancar. Bertanggung jawab dalam koordinasi agenda, moderasi diskusi, dan penyusunan hasil sidang.',
-                'image_url' => 'projects/triwulan.jpg',
+                'image_url' => 'projects/triwulan.webp',
                 'project_url' => '#',
                 'github_url' => '#',
                 'technologies' => json_encode(['Leadership', 'Public Speaking', 'Event Management', 'Organizational Skills']),

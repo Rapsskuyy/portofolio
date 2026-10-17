@@ -314,7 +314,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small text-secondary">Atau URL Gambar</label>
-                                <input type="text" name="image_url" class="form-control" placeholder="https://... atau projects/gambar.jpg">
+                                <input type="text" name="image_url" class="form-control" placeholder="https://... atau projects/gambar.webp">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small text-secondary">Link Project (Opsional)</label>

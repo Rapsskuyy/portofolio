@@ -335,7 +335,7 @@
                 @forelse($projects as $project)
                 <div class="project-card-premium">
                     <div class="project-img-wrapper">
-                        <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" loading="lazy" decoding="async" onerror="this.src='{{ asset('images/projects/default.png') }}'">
+                        <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ asset('images/logo.webp') }}';">
                     </div>
                     <div class="project-content-premium">
                         <h3 class="project-title-premium">{{ $project->title }}</h3>
@@ -374,7 +374,7 @@
                 @forelse($codingProjects as $codingProject)
                 <div class="project-card-premium">
                     <div class="project-img-wrapper">
-                        <img src="{{ $codingProject->formatted_image_url }}" alt="{{ $codingProject->title }}" loading="lazy" decoding="async" onerror="this.src='{{ asset('images/projects/default.png') }}'">
+                        <img src="{{ $codingProject->formatted_image_url }}" alt="{{ $codingProject->title }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ asset('images/logo.webp') }}';">
                     </div>
                     <div class="project-content-premium">
                         <h3 class="project-title-premium">{{ $codingProject->title }}</h3>

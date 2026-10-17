@@ -106,10 +106,10 @@
                         <div>
                             <!-- Media Frame with Scanline & Reticles -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-emerald-500/30 mb-4 bg-cosmic-950 group/img">
-                                <img src="{{ asset('images/coding-projects/canteensmkn1depok.png') }}" 
+                                <img src="{{ asset('images/coding-projects/canteensmkn1depok.webp') }}"
                                      alt="Canteen SMKN 1 Depok Native Android App" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-25 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -199,10 +199,10 @@
                         <div>
                             <!-- Media Frame -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-cyan-500/30 mb-4 bg-cosmic-950 group/img">
-                                <img src="{{ asset('images/coding-projects/Ptkomari.png') }}" 
+                                <img src="{{ asset('images/coding-projects/Ptkomari.webp') }}"
                                      alt="PT Komari Online Learning Platform" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-25 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -292,10 +292,10 @@
                         <div>
                             <!-- Media Frame -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-cobalt-500/30 mb-4 bg-cosmic-950 group/img">
-                                <img src="{{ asset('images/coding-projects/wandekairlines.png') }}" 
+                                <img src="{{ asset('images/coding-projects/wandekairlines.webp') }}"
                                      alt="Wandek Airlines Ticket Booking Platform" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-25 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -385,10 +385,10 @@
                         <div>
                             <!-- Media Frame -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-cobalt-500/30 mb-4 bg-cosmic-950 group/img">
-                                <img src="{{ asset('images/coding-projects/sarpras.png') }}" 
+                                <img src="{{ asset('images/coding-projects/sarpras.webp') }}"
                                      alt="Sarpras SMKN 1 Depok Asset Management Platform" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-25 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -478,10 +478,10 @@
                         <div>
                             <!-- Media Frame with 3D Spatial Reticle -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-gold-400/40 mb-4 bg-cosmic-950 group/img cursor-pointer" onclick="open3DViewerModal('classroom')">
-                                <img src="{{ asset('images/coding-projects/kelas.png') }}" 
+                                <img src="{{ asset('images/coding-projects/kelas.webp') }}"
                                      alt="3D Classroom Reconstruction in Blender Cycles" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-700"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-20 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -578,10 +578,10 @@
                         <div>
                             <!-- Media Frame -->
                             <div class="relative aspect-video w-full rounded-lg overflow-hidden border border-gold-400/40 mb-4 bg-cosmic-950 group/img cursor-pointer" onclick="open3DViewerModal('sword')">
-                                <img src="{{ asset('images/coding-projects/pedang.png') }}" 
+                                <img src="{{ asset('images/coding-projects/pedang.webp') }}"
                                      alt="Hard-Surface Sword 3D Modeling and Procedural Texturing" 
                                      class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-700"
-                                     onerror="this.src='{{ asset('images/coding-projects/porto1.png') }}';">
+                                     onerror="this.src='{{ asset('images/coding-projects/porto1.webp') }}';">
                                 
                                 <div class="absolute inset-0 telemetry-scanline opacity-20 pointer-events-none"></div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 via-transparent to-transparent opacity-80"></div>
@@ -715,7 +715,7 @@
 
         const isClassroom = modelKey === 'classroom';
         const modelTitle = isClassroom ? 'SMKN 1 DEPOK CLASSROOM RECONSTRUCTION' : 'HARD-SURFACE CYBER SWORD MODEL';
-        const modelImage = isClassroom ? '{{ asset("images/coding-projects/kelas.png") }}' : '{{ asset("images/coding-projects/pedang.png") }}';
+        const modelImage = isClassroom ? '{{ asset("images/coding-projects/kelas.webp") }}' : '{{ asset("images/coding-projects/pedang.webp") }}';
         const polyCount = isClassroom ? '48,520 Faces // 52,140 Verts' : '32,180 Faces // 34,900 Verts';
         const engineInfo = isClassroom ? 'Blender 4.x Cycles // 512 Samples' : 'Blender 4.x Cycles // Procedural Metallic Wear';
         const lightingMode = isClassroom ? 'Global Daylight Ray-Tracing &amp; Sun Bounce' : 'Studio HDRI 3-Point Emissive Bloom Lighting';

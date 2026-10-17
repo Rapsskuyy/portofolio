@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" as="image" href="{{ asset('images/profile/profilrappa.webp') }}" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ asset('images/profile/profilrappa_original_raw.webp') }}" fetchpriority="high">
 
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
@@ -89,7 +89,7 @@
         <section id="home" class="hero-fullscreen">
             @php
                 $heroProfileImages = [
-                asset('images/profile/profilrappa.webp'),
+                asset('images/profile/profilrappa_original_raw.webp'),
                 asset('images/profile/profile.webp'),
                 asset('images/profile/rapoy122345.webp'),
                 ];
@@ -122,7 +122,7 @@
                 <div class="hero-right">
                     <div class="hero-image-wrapper">
                         <div class="hero-image-bg"></div>
-                        <img src="{{ asset('images/profile/profilrappa.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" loading="eager" decoding="async" data-hero-images='@json($heroProfileImages)' onerror="this.src='{{ asset('images/profile/profilrappa.jpeg') }}'">
+                        <img src="{{ asset('images/profile/profilrappa_original_raw.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" loading="eager" decoding="async" data-hero-images='@json($heroProfileImages)' onerror="this.src='{{ asset('images/profile/profile.webp') }}'">
                         <!-- Floating cards positioned above the profile image -->
                         <div class="floating-card card-top-1">
                             <i class="fas fa-code"></i>
