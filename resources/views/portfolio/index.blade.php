@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @php
+        $portfolioCssVersion = filemtime(public_path('css/portfolio.css')) ?: 'dev';
+        $portfolioJsVersion = filemtime(public_path('js/portfolio.js')) ?: 'dev';
+    @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,31 +25,49 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=20261016-studio-cosmic-gradients">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v={{ $portfolioCssVersion }}">
 </head>
 
 <body>
+    <div class="portfolio-splash" id="portfolioSplash" aria-hidden="true">
+        <div class="portfolio-splash__content">
+            <span class="portfolio-splash__eyebrow">Hello</span>
+            <strong class="portfolio-splash__name">Raffa Nur Musyaffa</strong>
+            <button type="button" class="portfolio-splash__skip" id="portfolioSplashSkip">Skip intro <span aria-hidden="true">â†’</span></button>
+        </div>
+    </div>
+
     <!-- Sidebar Navigation -->
-    <nav class="sidebar-nav">
-        <div class="logo">
-            <span class="logo-text">R</span>
+    <nav class="sidebar-nav" aria-label="Portfolio sections">
+        <div class="logo" title="Raffa Nur Musyaffa">
+            <svg class="logo-svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raffa Logo">
+                <path d="M6 5H16.5C19.5376 5 22 7.46243 22 10.5C22 13.0978 20.1947 15.2736 17.75 15.8454L22.5 23H17.2L12.8 16H10.5V23H6V5Z" fill="url(#rLogoGrad)"/>
+                <path d="M10.5 8.5V12.5H16C17.1046 12.5 18 11.6046 18 10.5C18 9.39543 17.1046 8.5 16 8.5H10.5Z" fill="#0a0f1d"/>
+                <circle cx="21.5" cy="5.5" r="2.5" fill="#ec4899"/>
+                <defs>
+                    <linearGradient id="rLogoGrad" x1="6" y1="5" x2="22" y2="23" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#818cf8"/>
+                        <stop offset="1" stop-color="#6366f1"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
         <ul class="nav-menu">
-            <li><a href="#home" class="nav-dot active" data-tooltip="Home" aria-label="Home" aria-current="location"><span></span></a></li>
-            <li><a href="#about" class="nav-dot" data-tooltip="About" aria-label="About"><span></span></a></li>
-            <li><a href="#education" class="nav-dot" data-tooltip="Education" aria-label="Education"><span></span></a></li>
-            <li><a href="#skills" class="nav-dot" data-tooltip="Skills" aria-label="Skills"><span></span></a></li>
-            <li><a href="#gallery" class="nav-dot" data-tooltip="Gallery" aria-label="Gallery"><span></span></a></li>
-            <li><a href="#projects" class="nav-dot" data-tooltip="Projects" aria-label="Projects"><span></span></a></li>
-            <li><a href="#experience" class="nav-dot" data-tooltip="Experience" aria-label="Experience"><span></span></a></li>
-            <li><a href="#contact" class="nav-dot" data-tooltip="Contact" aria-label="Contact"><span></span></a></li>
+            <li><a href="#home" class="nav-dot active" aria-current="location"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Home</span></a></li>
+            <li><a href="#about" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">About</span></a></li>
+            <li><a href="#education" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Education</span></a></li>
+            <li><a href="#skills" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Skills</span></a></li>
+            <li><a href="#gallery" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Gallery</span></a></li>
+            <li><a href="#projects" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Projects</span></a></li>
+            <li><a href="#experience" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Experience</span></a></li>
+            <li><a href="#contact" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label">Contact</span></a></li>
         </ul>
         <div class="social-links-sidebar">
-            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" aria-label="Open Raffa's Instagram profile"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div>
         <!-- Theme Toggle -->
-        <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">
+        <button class="theme-toggle-btn" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle color theme" title="Toggle Theme">
             <i class="fas fa-sun" id="themeIcon"></i>
         </button>
     </nav>
@@ -64,68 +86,42 @@
 
         <!-- Hero Section - Fullscreen Split -->
         <section id="home" class="hero-fullscreen">
+            @php
+                $heroProfileImages = [
+                asset('images/profile/profilrappa.webp'),
+                asset('images/profile/profile.webp'),
+                asset('images/profile/rapoy122345.webp'),
+                ];
+            @endphp
             <div class="hero-split-container">
                 <div class="hero-left">
-                    <div class="hero-content">
+                    <div class="hero-content hero-content--focused">
                         <span class="hero-greeting">Hello, I'm</span>
                         <h1 class="hero-name">Raffa Nur<br>Musyaffa</h1>
                         <div class="hero-role-wrapper">
                             <span class="hero-role-label">I'm a</span>
-                            <span class="hero-role" id="roleRotator">Web Developer</span>
+                            <span class="hero-role" id="roleRotator">Backend Engineer</span>
                         </div>
-                        <p class="hero-description">Software Engineering student at SMKN 1 Depok with a dedicated focus on Backend Architecture. Passionate about engineering scalable systems, exploring distributed technologies, and demonstrating leadership through student council governance.</p>
                         <div class="hero-buttons">
                             <a href="#projects" class="btn-primary-custom">
                                 <i class="fas fa-layer-group"></i> View Projects
                             </a>
-                            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="btn-github-hero">
-                                <i class="fab fa-github"></i> GitHub Profile
-                            </a>
                             <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-cv">
                                 <i class="fas fa-download"></i> Download CV
+                            </a>
+                            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="btn-github-hero">
+                                <i class="fab fa-github"></i> GitHub
                             </a>
                             <a href="#contact" class="btn-secondary-custom">
                                 <i class="fas fa-paper-plane"></i> Say Hello
                             </a>
-                        </div>
-                        
-                        <div class="hero-tech-stack">
-                            <span class="tech-stack-label">Software & Tools I Use:</span>
-                            <div class="tech-marquee-container">
-                                <div class="tech-marquee">
-                                    <div class="marquee-group">
-                                        <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
-                                    </div>
-                                    <div class="marquee-group" aria-hidden="true">
-                                        <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
-                                        <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="hero-right">
                     <div class="hero-image-wrapper">
                         <div class="hero-image-bg"></div>
-                        <img src="{{ asset('images/profile/profilrappa.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" decoding="sync" style="transition: opacity 0.5s ease-in-out;" onerror="this.src='{{ asset('images/profile/profilrappa.jpeg') }}'">
+                        <img src="{{ asset('images/profile/profilrappa.webp') }}" alt="Raffa Nur Musyaffa" id="heroProfileImage" class="hero-image" width="480" height="480" fetchpriority="high" decoding="sync" data-hero-images='@json($heroProfileImages)' onerror="this.src='{{ asset('images/profile/profilrappa.jpeg') }}'">
                         <!-- Floating cards positioned above the profile image -->
                         <div class="floating-card card-top-1">
                             <i class="fas fa-code"></i>
@@ -141,6 +137,37 @@
                         </div>
                     </div>
                 </div>
+                <div class="hero-tech-stack">
+                    <span class="tech-stack-label">Software & Tools I Use:</span>
+                    <div class="tech-marquee-container">
+                        <div class="tech-marquee">
+                            <div class="marquee-group">
+                                <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                            </div>
+                            <div class="marquee-group" aria-hidden="true">
+                                <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="GitHub"><img src="{{ asset('images/tech/github.svg') }}" alt="GitHub" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Laragon"><img src="{{ asset('images/laragon.svg') }}" alt="Laragon" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Canva"><img src="{{ asset('images/tech/canva.svg') }}" alt="Canva" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Figma"><img src="{{ asset('images/tech/figma.svg') }}" alt="Figma" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Unity Hub"><img src="{{ asset('images/tech/unity.svg') }}" alt="Unity" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Apache NetBeans"><img src="{{ asset('images/tech/netbeans.svg') }}" alt="NetBeans" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="scroll-indicator">
                 <span>Scroll Down</span>
@@ -149,7 +176,7 @@
         </section>
 
         <!-- About Section - Redesigned Layout -->
-        <section id="about" class="about-section-new">
+        <section id="about" class="about-section-new" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">01.</span>
@@ -197,7 +224,7 @@
         </section>
 
         <!-- Education Section - Cards -->
-        <section id="education" class="education-modern">
+        <section id="education" class="education-modern" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">02.</span>
@@ -222,70 +249,83 @@
             </div>
         </section>
 
-        <!-- Skills Section - Circular Progress -->
-        <section id="skills" class="skills-circular">
+        <!-- Skills Section - Competency List -->
+        <section id="skills" class="skills-circular" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">03.</span>
                     <span class="title-text">Skills</span>
                 </h2>
 
-                <div class="skills-container">
-                    <!-- Soft Skills -->
-                    <div class="skills-category">
-                        <h3 class="skills-category-title">
-                            <i class="fas fa-user-tie"></i> Soft Skills & Leadership
-                        </h3>
-                        <div class="skills-grid">
-                            @forelse($softSkills as $skill)
-                            <div class="skill-circle-item">
-                                <div class="circle-progress" data-percent="{{ $skill->proficiency }}">
-                                    <svg viewBox="0 0 140 140">
-                                        <circle cx="70" cy="70" r="60"></circle>
-                                        <circle cx="70" cy="70" r="60" class="progress-circle"></circle>
-                                    </svg>
-                                    <div class="circle-content">
-                                        <span class="percent-text">{{ $skill->proficiency }}%</span>
-                                    </div>
-                                </div>
-                                <h4 class="skill-name">{{ $skill->name }}</h4>
+                <div class="skills-panels">
+                    <!-- Soft Skills Panel -->
+                    <div class="skills-panel skills-panel--soft">
+                        <div class="skills-panel-header">
+                            <i class="fas fa-user-tie" aria-hidden="true"></i>
+                            <div>
+                                <h3 class="skills-panel-title">Soft Skills &amp; Leadership</h3>
+                                <p class="skills-panel-sub">Interpersonal &amp; organizational competencies</p>
                             </div>
-                            @empty
-                            <p class="text-muted">No soft skills available</p>
-                            @endforelse
                         </div>
+                        <ul class="skills-list" role="list">
+                            @forelse($softSkills as $skill)
+                            <li class="skill-row">
+                                <div class="skill-row-meta">
+                                    <span class="skill-row-name">{{ $skill->name }}</span>
+                                    <span class="skill-row-pct" aria-hidden="true">{{ $skill->proficiency }}%</span>
+                                </div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill"
+                                         data-percent="{{ $skill->proficiency }}"
+                                         role="progressbar"
+                                         aria-valuenow="{{ $skill->proficiency }}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         aria-label="{{ $skill->name }}: {{ $skill->proficiency }}%"></div>
+                                </div>
+                            </li>
+                            @empty
+                            <li class="skill-empty text-muted">No soft skills available</li>
+                            @endforelse
+                        </ul>
                     </div>
 
-                    <!-- Hard Skills -->
-                    <div class="skills-category">
-                        <h3 class="skills-category-title">
-                            <i class="fas fa-code"></i> Technical & Engineering Stack
-                        </h3>
-                        <div class="skills-grid">
-                            @forelse($hardSkills as $skill)
-                            <div class="skill-circle-item">
-                                <div class="circle-progress" data-percent="{{ $skill->proficiency }}">
-                                    <svg viewBox="0 0 140 140">
-                                        <circle cx="70" cy="70" r="60"></circle>
-                                        <circle cx="70" cy="70" r="60" class="progress-circle"></circle>
-                                    </svg>
-                                    <div class="circle-content">
-                                        <span class="percent-text">{{ $skill->proficiency }}%</span>
-                                    </div>
-                                </div>
-                                <h4 class="skill-name">{{ $skill->name }}</h4>
+                    <!-- Technical Skills Panel -->
+                    <div class="skills-panel skills-panel--hard">
+                        <div class="skills-panel-header">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            <div>
+                                <h3 class="skills-panel-title">Technical &amp; Engineering Stack</h3>
+                                <p class="skills-panel-sub">Languages, frameworks &amp; tools</p>
                             </div>
-                            @empty
-                            <p class="text-muted">No technical skills available</p>
-                            @endforelse
                         </div>
+                        <ul class="skills-list" role="list">
+                            @forelse($hardSkills as $skill)
+                            <li class="skill-row">
+                                <div class="skill-row-meta">
+                                    <span class="skill-row-name">{{ $skill->name }}</span>
+                                    <span class="skill-row-pct" aria-hidden="true">{{ $skill->proficiency }}%</span>
+                                </div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill"
+                                         data-percent="{{ $skill->proficiency }}"
+                                         role="progressbar"
+                                         aria-valuenow="{{ $skill->proficiency }}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         aria-label="{{ $skill->name }}: {{ $skill->proficiency }}%"></div>
+                                </div>
+                            </li>
+                            @empty
+                            <li class="skill-empty text-muted">No technical skills available</li>
+                            @endforelse
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Gallery Section - Masonry Layout -->
-        <section id="gallery" class="gallery-masonry">
+        <section id="gallery" class="gallery-masonry" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">04.</span>
@@ -335,7 +375,7 @@
         </section>
 
         <!-- My Projects Section -->
-        <section id="projects" class="projects-section">
+        <section id="projects" class="projects-section" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">05.</span>
@@ -525,7 +565,7 @@
         @endforeach
 
         <!-- Experience Section - 2x2 Grid Layout -->
-        <section id="experience" class="experience-section">
+        <section id="experience" class="experience-section" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
                     <span class="title-number">06.</span>
@@ -577,52 +617,58 @@
         </section>
 
         <!-- Footer -->
-        <footer id="contact" class="footer-modern">
+        <footer id="contact" class="footer-modern" data-section-reveal>
             <div class="container-fluid px-4">
                 <div class="footer-content">
-                    <div class="footer-left">
+                    <div class="footer-left footer-identity">
                         <h3 class="footer-name">Raffa Nur Musyaffa</h3>
                         <p class="footer-tagline">Aspiring Backend Systems Engineer | SMKN 1 Depok</p>
                         <p class="footer-description">Passionate about creating efficient backend solutions and always eager to learn new technologies.</p>
                     </div>
 
-                    <div class="footer-center">
-                        <h4 class="footer-title">Contact</h4>
-                        <div class="footer-contact">
-                            <a href="mailto:raffanurmusyaffa0712@gmail.com" class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>raffanurmusyaffa0712@gmail.com</span>
-                            </a>
-                            <a href="tel:+6281584760025" class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+62 815 8476 0025</span>
-                            </a>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Depok, West Java, Indonesia</span>
+                    <div class="footer-actions">
+                        <section class="footer-contact-group" aria-labelledby="footer-contact-title">
+                            <h4 class="footer-title" id="footer-contact-title">Contact</h4>
+                            <div class="footer-contact">
+                                <a href="mailto:raffanurmusyaffa0712@gmail.com" class="contact-item">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    <span>raffanurmusyaffa0712@gmail.com</span>
+                                </a>
+                                <a href="tel:+6281584760025" class="contact-item">
+                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                    <span>+62 815 8476 0025</span>
+                                </a>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                    <span>Depok, West Java, Indonesia</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </section>
 
-                    <div class="footer-right">
-                        <h4 class="footer-title">Follow Me</h4>
-                        <div class="footer-social">
-                            <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
-                                <i class="fab fa-github"></i>
+                        <section class="footer-social-group" aria-labelledby="footer-social-title">
+                            <h4 class="footer-title" id="footer-social-title">Follow Me</h4>
+                            <div class="footer-social">
+                                <a href="https://github.com/Rapsskuyy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Open Raffa's GitHub profile">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Open Raffa's Instagram profile">
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-footer">
+                                <i class="fas fa-download" aria-hidden="true"></i> Download CV
                             </a>
-                            <a href="https://www.instagram.com/rrapskuy/" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                        <a href="{{ asset('files/CV .pdf') }}" download class="btn-download-footer">
-                            <i class="fas fa-download"></i> Download CV
-                        </a>
+                        </section>
                     </div>
                 </div>
 
                 <div class="footer-bottom">
                     <p class="copyright">&copy; {{ date('Y') }} Raffa Nur Musyaffa. All rights reserved.</p>
-
+                    <nav class="footer-nav" aria-label="Footer navigation">
+                        <a href="#home">Home</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
                 </div>
             </div>
         </footer>
@@ -669,7 +715,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/portfolio.js') }}?v=20261016-studio-cosmic-gradients" defer></script>
+    <script src="{{ asset('js/portfolio.js') }}?v={{ $portfolioJsVersion }}" defer></script>
 
     @if(session('success') || session('success_guestbook') || (isset($errors) && $errors->any()))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>

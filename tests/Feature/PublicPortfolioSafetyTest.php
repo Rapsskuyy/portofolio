@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\CodingProject;
 use App\Models\Post;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -59,6 +60,47 @@ class PublicPortfolioSafetyTest extends TestCase
             ->assertDontSee('bootstrap.bundle.min.js', false)
             ->assertDontSee('setInterval(() => {', false)
             ->assertDontSee('cdn.jsdelivr.net/npm/sweetalert2@11', false);
+    }
+
+    public function test_homepage_uses_the_compact_intro_and_accessible_navigation_hooks(): void
+    {
+        $this->get(route('portfolio.home'))
+            ->assertOk()
+            ->assertSee('id="portfolioSplash"', false)
+            ->assertSee('class="nav-dot-label">Home</span>', false)
+            ->assertSee('data-section-reveal', false)
+            ->assertDontSee('Software Engineering student at SMKN 1 Depok with a dedicated focus on Backend Architecture.', false);
+    }
+
+    public function test_homepage_skills_use_accessible_progress_bars_without_circular_chart_logic(): void
+    {
+        Skill::create(['name' => 'Communication', 'type' => 'soft', 'proficiency' => 87]);
+        Skill::create(['name' => 'Laravel', 'type' => 'hard', 'proficiency' => 65]);
+
+        $this->get(route('portfolio.home'))
+            ->assertOk()
+            ->assertSee('class="skill-bar-fill"', false)
+            ->assertSee('role="progressbar"', false)
+            ->assertSee('aria-valuenow="', false)
+            ->assertSee('aria-valuemin="0"', false)
+            ->assertSee('aria-valuemax="100"', false)
+            ->assertSee('aria-label="', false)
+            ->assertDontSee('circle-progress', false);
+
+        $portfolioScript = file_get_contents(public_path('js/portfolio.js'));
+        $portfolioStyles = file_get_contents(public_path('css/portfolio.css'));
+
+        $this->assertIsString($portfolioScript);
+        $this->assertIsString($portfolioStyles);
+        $this->assertStringContainsString("document.querySelectorAll('.skill-bar-fill')", $portfolioScript);
+        $this->assertStringContainsString('new IntersectionObserver', $portfolioScript);
+        $this->assertStringNotContainsString('circumference', $portfolioScript);
+        $this->assertStringNotContainsString('strokeDashoffset', $portfolioScript);
+        $this->assertStringNotContainsString('.circle-progress', $portfolioStyles);
+        $this->assertStringContainsString('@media (max-width: 768px)', $portfolioStyles);
+        $this->assertStringContainsString('@media (min-width: 769px) and (max-width: 1100px)', $portfolioStyles);
+        $this->assertStringContainsString('@media (min-width: 1101px) and (max-width: 1199px)', $portfolioStyles);
+        $this->assertStringContainsString('overflow-wrap: anywhere', $portfolioStyles);
     }
 
     public function test_public_write_routes_are_rate_limited(): void
