@@ -366,7 +366,7 @@ html {
 .tech-marquee {
     display: flex;
     width: max-content;
-    animation: marquee-infinite 28s linear infinite;
+    animation: marquee-infinite 40s linear infinite;
 }
 
 .tech-marquee:hover {
@@ -1804,7 +1804,7 @@ html {
     padding-top: 30px;
     border-top: 1px solid rgba(255,255,255,0.05);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -1812,6 +1812,7 @@ html {
     color: var(--gray);
     font-size: 14px;
     margin: 0;
+    text-align: center;
 }
 
 .made-with {
@@ -5512,6 +5513,12 @@ a.contact-item:hover {
     gap: 4px 18px;
 }
 
+@media (min-width: 1200px) {
+    .footer-left {
+        padding-left: 24px;
+    }
+}
+
 .footer-nav a {
     display: inline-flex;
     align-items: center;
@@ -5608,7 +5615,8 @@ a.contact-item:hover {
 
     .footer-bottom {
         align-items: flex-start;
-        text-align: left;
+        align-items: center;
+        text-align: center;
     }
 
     .footer-nav {

@@ -190,6 +190,9 @@
                                 <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
                                 <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
                                 <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Laravel"><img src="{{ asset('images/tech/laravel.svg') }}" alt="Laravel" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Supabase"><img src="{{ asset('images/tech/supabase.svg') }}" alt="Supabase" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Vercel"><img src="{{ asset('images/tech/vercel.svg') }}" alt="Vercel" width="32" height="32" loading="lazy" decoding="async"></div>
                             </div>
                             <div class="marquee-group" aria-hidden="true">
                                 <div class="tech-icon" title="VS Code"><img src="{{ asset('images/tech/vscode.svg') }}" alt="VS Code" width="32" height="32" loading="lazy" decoding="async"></div>
@@ -202,6 +205,9 @@
                                 <div class="tech-icon" title="Eclipse IDE"><img src="{{ asset('images/tech/eclipse.svg') }}" alt="Eclipse" width="32" height="32" loading="lazy" decoding="async"></div>
                                 <div class="tech-icon" title="Team Viewer"><img src="{{ asset('images/tech/teamviewer.svg') }}" alt="TeamViewer" width="32" height="32" loading="lazy" decoding="async"></div>
                                 <div class="tech-icon" title="Blender"><img src="{{ asset('images/tech/blender.svg') }}" alt="Blender" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Laravel"><img src="{{ asset('images/tech/laravel.svg') }}" alt="" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Supabase"><img src="{{ asset('images/tech/supabase.svg') }}" alt="" width="32" height="32" loading="lazy" decoding="async"></div>
+                                <div class="tech-icon" title="Vercel"><img src="{{ asset('images/tech/vercel.svg') }}" alt="" width="32" height="32" loading="lazy" decoding="async"></div>
                             </div>
                         </div>
                     </div>
@@ -743,11 +749,6 @@
 
                 <div class="footer-bottom">
                     <p class="copyright">&copy; {{ date('Y') }} Raffa Nur Musyaffa. All rights reserved.</p>
-                    <nav class="footer-nav" aria-label="Footer navigation">
-                        <a href="#home" data-i18n="nav.home">Home</a>
-                        <a href="#projects" data-i18n="nav.projects">Projects</a>
-                        <a href="#contact" data-i18n="nav.contact">Contact</a>
-                    </nav>
                 </div>
             </div>
         </footer>
