@@ -22,4 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+/dapur/
+/*.md
+!/README.md
+/*.txt
 /database/backup/*.json
