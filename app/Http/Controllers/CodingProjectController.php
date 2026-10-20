@@ -57,7 +57,7 @@ class CodingProjectController extends Controller
 
         CodingProject::create($validated);
 
-        return back()->with('success', $this->publisher->trigger('coding_project_created'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**
@@ -95,7 +95,7 @@ class CodingProjectController extends Controller
 
         $codingProject->update($validated);
 
-        return back()->with('success', $this->publisher->trigger('coding_project_updated'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     protected function storeOptimizedImage(UploadedFile $file, string $diskName): string
@@ -171,6 +171,6 @@ class CodingProjectController extends Controller
     {
         $this->cleanupOldImage($codingProject->image_url, $this->resolveStorageDisk());
         $codingProject->delete();
-        return back()->with('success', $this->publisher->trigger('coding_project_deleted'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 }

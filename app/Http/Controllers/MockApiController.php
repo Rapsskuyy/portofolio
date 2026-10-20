@@ -43,7 +43,7 @@ class MockApiController extends Controller
 
         MockApi::create($validated);
 
-        return back()->with('success', $this->publisher->trigger('mock_api_created'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**
@@ -69,7 +69,7 @@ class MockApiController extends Controller
 
         $mockApi->update($validated);
 
-        return back()->with('success', $this->publisher->trigger('mock_api_updated'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**
@@ -78,7 +78,7 @@ class MockApiController extends Controller
     public function destroy(Request $request, MockApi $mockApi)
     {
         $mockApi->delete();
-        return back()->with('success', $this->publisher->trigger('mock_api_deleted'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**

@@ -34,7 +34,7 @@ class PostController extends Controller
         
         Post::create($validated);
 
-        return back()->with('success', $this->publisher->trigger('post_created'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**
@@ -51,7 +51,7 @@ class PostController extends Controller
 
         $post->update($validated);
 
-        return back()->with('success', $this->publisher->trigger('post_updated'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 
     /**
@@ -60,6 +60,6 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post)
     {
         $post->delete();
-        return back()->with('success', $this->publisher->trigger('post_deleted'));
+        return back()->with('success', $this->publisher->markUnpublished());
     }
 }

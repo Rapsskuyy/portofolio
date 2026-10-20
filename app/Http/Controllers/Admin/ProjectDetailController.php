@@ -39,6 +39,6 @@ class ProjectDetailController extends Controller
         );
 
         return redirect()->route('admin.coding_projects.index')
-            ->with('success', $this->publisher->trigger('project_detail_updated'));
+            ->with('success', $this->publisher->markUnpublished());
     }
 }

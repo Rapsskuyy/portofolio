@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Log;
 
 class PublicSitePublisher
 {
+    public function markUnpublished(): string
+    {
+        session()->put('public_site_unpublished', true);
+
+        return 'Perubahan tersimpan di database dan belum dipublish.';
+    }
+
     /**
      * Queue a new static deployment only after the caller has persisted its
      * database change. A failed hook never rolls back editorial work.
@@ -29,6 +36,8 @@ class PublicSitePublisher
             $response = Http::acceptJson()->timeout(10)->post($hookUrl);
 
             if ($response->successful()) {
+                session()->forget('public_site_unpublished');
+
                 return 'Konten tersimpan dan publikasi website sudah dijadwalkan.';
             }
 

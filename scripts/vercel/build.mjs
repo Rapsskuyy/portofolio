@@ -23,6 +23,14 @@ const excludedProjectEntries = new Set([
     'static-site',
     'tests',
     'vercel.json',
+    '.agents',
+    'test_extract',
+    'laravel.zip',
+    'laravel_lite.zip',
+    'database.sql',
+    'info.php',
+    'test_images.php',
+    'gen_flagship.js',
 ]);
 
 const staticRoutes = [
@@ -141,7 +149,8 @@ function copyProject(destination) {
             dereference: true,
             filter: (item) => {
                 const relativePath = path.relative(projectRoot, item).split(path.sep).join('/');
-                return !relativePath.startsWith('database/backup/');
+                return !relativePath.startsWith('database/backup/')
+                    && relativePath !== 'database/database.sqlite';
             },
             recursive: true,
         });

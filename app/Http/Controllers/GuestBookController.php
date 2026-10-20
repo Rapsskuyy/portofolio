@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuestBook;
+use App\Services\PublicSitePublisher;
 use Illuminate\Http\Request;
 
 class GuestBookController extends Controller
@@ -29,9 +30,9 @@ class GuestBookController extends Controller
     }
 
     // ADMIN hapus
-    public function destroy(Request $request, GuestBook $guestbook)
+    public function destroy(Request $request, GuestBook $guestbook, PublicSitePublisher $publisher)
     {
         $guestbook->delete();
-        return back()->with('success', 'Pesan buku tamu berhasil dihapus');
+        return back()->with('success', $publisher->markUnpublished());
     }
 }

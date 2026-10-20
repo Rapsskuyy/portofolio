@@ -47,6 +47,7 @@ Route::match(['get', 'post'], '/v1/{path}', [MockApiController::class, 'handleRe
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Middleware\AdminAuthMiddleware;
 
 // Admin Auth Routes (Public)
@@ -72,6 +73,12 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->
     // Guestbook
     Route::get('/guestbook', [GuestBookController::class, 'adminIndex'])->name('guestbook.index');
     Route::delete('/guestbook/{guestbook}', [GuestBookController::class, 'destroy'])->name('guestbook.delete');
+
+    // Skills
+    Route::get('/skills', [AdminSkillController::class, 'index'])->name('skills.index');
+    Route::post('/skills', [AdminSkillController::class, 'store'])->name('skills.store');
+    Route::put('/skills/{skill}', [AdminSkillController::class, 'update'])->name('skills.update');
+    Route::delete('/skills/{skill}', [AdminSkillController::class, 'destroy'])->name('skills.delete');
     
     // Mock APIs
     Route::get('/mock-apis', [MockApiController::class, 'index'])->name('mock_apis.index');

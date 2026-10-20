@@ -22,18 +22,18 @@ class DashboardController extends Controller
     public function approve(Testimonial $testimonial): RedirectResponse
     {
         $testimonial->update(['is_approved' => true]);
-        return redirect()->back()->with('success', $this->publisher->trigger('testimonial_approved'));
+        return redirect()->back()->with('success', $this->publisher->markUnpublished());
     }
 
     public function reject(Testimonial $testimonial): RedirectResponse
     {
         $testimonial->update(['is_approved' => false]);
-        return redirect()->back()->with('success', $this->publisher->trigger('testimonial_rejected'));
+        return redirect()->back()->with('success', $this->publisher->markUnpublished());
     }
 
     public function delete(Testimonial $testimonial): RedirectResponse
     {
         $testimonial->delete();
-        return redirect()->back()->with('success', $this->publisher->trigger('testimonial_deleted'));
+        return redirect()->back()->with('success', $this->publisher->markUnpublished());
     }
 }

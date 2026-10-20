@@ -2,6 +2,7 @@
     $adminLinks = [
         ['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'fa-comments', 'label' => 'Testimoni'],
         ['key' => 'guestbook', 'route' => 'admin.guestbook.index', 'icon' => 'fa-book', 'label' => 'Buku Tamu'],
+        ['key' => 'skills', 'route' => 'admin.skills.index', 'icon' => 'fa-chart-bar', 'label' => 'Skills'],
         ['key' => 'projects', 'route' => 'admin.projects.index', 'icon' => 'fa-images', 'label' => 'Galeri Project'],
         ['key' => 'coding-projects', 'route' => 'admin.coding_projects.index', 'icon' => 'fa-laptop-code', 'label' => 'Project Coding'],
         ['key' => 'posts', 'route' => 'admin.posts.index', 'icon' => 'fa-newspaper', 'label' => 'Blog Posts'],
@@ -19,6 +20,9 @@
     </div>
 
     <div class="nav flex-column">
+        @if(session('public_site_unpublished'))
+            <div class="alert alert-warning py-2 px-3 mx-2 mb-2 small" role="status">Perubahan belum dipublish.</div>
+        @endif
         @foreach($adminLinks as $link)
             <a
                 class="nav-link-custom {{ $active === $link['key'] ? 'active' : '' }}"
@@ -67,6 +71,9 @@
     </div>
     <div class="offcanvas-body">
         <nav class="nav flex-column" aria-label="Navigasi admin mobile">
+            @if(session('public_site_unpublished'))
+                <div class="alert alert-warning py-2 px-3 mb-2 small" role="status">Perubahan belum dipublish.</div>
+            @endif
             @foreach($adminLinks as $link)
                 <a
                     class="nav-link-custom {{ $active === $link['key'] ? 'active' : '' }}"

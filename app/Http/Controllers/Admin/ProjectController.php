@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
         Project::create($validated);
 
-        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_created'));
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->markUnpublished());
     }
 
     public function update(Request $request, Project $project)
@@ -73,7 +73,7 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_updated'));
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->markUnpublished());
     }
 
     public function destroy(Project $project)
@@ -83,7 +83,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', $this->publisher->trigger('project_deleted'));
+        return redirect()->route('admin.projects.index')->with('success', $this->publisher->markUnpublished());
     }
 
     /**

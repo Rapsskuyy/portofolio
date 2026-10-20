@@ -5888,3 +5888,35 @@ a.contact-item:hover {
         transition: none;
     }
 }
+
+/* Keep the mobile paint overrides last so earlier responsive refinements
+   cannot accidentally re-enable their expensive decorative layers. */
+@media (max-width: 768px) {
+    .portfolio-splash {
+        display: none !important;
+    }
+
+    .hero-fullscreen::before {
+        display: none;
+    }
+
+    .hero-fullscreen::after {
+        height: 64px;
+        background: linear-gradient(to bottom, transparent, rgba(10, 15, 29, 0.72) 75%, #0a0f1d 100%);
+    }
+
+    .hero-image-wrapper {
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+    }
+
+    .hero-image {
+        filter: none;
+    }
+
+    .section-motion-pending,
+    .section-motion-pending.is-visible.is-exiting {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

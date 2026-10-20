@@ -9,7 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebarRail(sidebarNav);
     initMobileMoreNav();
     initLanguageToggle();
-    initHeroProfileRotation(prefersReducedMotion);
+    const deferNonCriticalWork = (callback) => {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(callback, { timeout: 1200 });
+            return;
+        }
+
+        window.setTimeout(callback, 0);
+    };
+
+    deferNonCriticalWork(() => initHeroProfileRotation(prefersReducedMotion));
 
     navLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
@@ -71,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         roleIndex = 0;
         if (roleEl) roleEl.textContent = roles[roleIndex] || '';
     });
-    if (roleEl && !prefersReducedMotion()) {
+    if (roleEl && !prefersReducedMotion() && window.innerWidth > 768) {
         if (roleIndex < 0) roleIndex = 0;
         window.setInterval(() => {
             roleEl.classList.add('is-swapping');
@@ -221,6 +230,13 @@ function initPortfolioSplash(prefersReducedMotion) {
 
     if (!splash || !skipButton || prefersReducedMotion()) return;
 
+    // The first mobile viewport is the LCP surface. Do not cover it with an
+    // intentional loading delay; retain the splash for wider screens only.
+    if (window.innerWidth <= 768) {
+        splash.remove();
+        return;
+    }
+
     try {
         if (window.sessionStorage.getItem(splashKey) === 'true') return;
     } catch (_) {
@@ -281,8 +297,7 @@ function initPortfolioSplash(prefersReducedMotion) {
     skipButton.addEventListener('click', dismiss, { once: true });
     document.addEventListener('keydown', handleSplashKeydown);
     window.requestAnimationFrame(() => skipButton.focus());
-    const splashDuration = window.innerWidth <= 768 ? 700 : 900;
-    dismissTimer = window.setTimeout(dismiss, splashDuration);
+    dismissTimer = window.setTimeout(dismiss, 900);
 }
 
 function initSidebarRail(sidebarNav) {
