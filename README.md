@@ -48,7 +48,7 @@ The portfolio is also used as a practical demonstration of how a Laravel applica
 ### Data and media
 
 - Configurable MySQL, PostgreSQL/Supabase, or SQLite database connections
-- Eloquent models for portfolio, education, skill, project, post, testimonial, guestbook, and mock API data
+- Eloquent models for portfolio, education, skill, project, post, testimonial, and guestbook data
 - Local filesystem storage for development
 - Supabase Storage and other S3-compatible storage options for public media assets
 

@@ -41,70 +41,11 @@
     </div>
 </section>
 
-<!-- API Playground Section -->
-<section id="api-playground" class="api-playground-section animate-on-scroll mt-5">
-    <div class="container-fluid px-4">
-        <h2 class="section-title-modern">
-            <span class="title-number">02.</span>
-            <span class="title-text">API Playground</span>
-        </h2>
-        <p class="section-subtitle">Coba langsung API endpoint yang saya buat — klik tombol Send dan lihat response-nya secara real-time.</p>
-
-        <div class="api-playground-container glass-card rounded-4 p-1">
-            <!-- Left: Endpoint List -->
-            <div class="api-endpoint-list">
-                @forelse($mockApis as $api)
-                <div class="api-endpoint-item {{ $loop->first ? 'active' : '' }}"
-                     data-endpoint="/api/v1/{{ $api->path }}"
-                     data-method="{{ $api->method }}"
-                     data-desc="{{ $api->description }}"
-                     onclick="selectEndpoint(this)">
-                    <span class="api-method-badge method-{{ strtolower($api->method) }}">{{ $api->method }}</span>
-                    <div class="api-endpoint-info">
-                        <span class="api-endpoint-path">/api/v1/{{ $api->path }}</span>
-                        <span class="api-endpoint-desc">{{ $api->description ?? 'No description' }}</span>
-                    </div>
-                </div>
-                @empty
-                <div class="api-empty">
-                    <i class="fas fa-plug fa-2x mb-2"></i>
-                    <p>Belum ada API endpoint. Tambahkan melalui admin panel.</p>
-                </div>
-                @endforelse
-            </div>
-
-            <!-- Right: Request/Response Panel -->
-            <div class="api-response-panel">
-                <div class="api-request-header">
-                    <div class="api-url-bar">
-                        <span class="api-method-tag" id="currentMethod">GET</span>
-                        <span class="api-url-text" id="currentEndpoint">Pilih endpoint di kiri</span>
-                    </div>
-                    <button class="api-send-btn" id="sendBtn" onclick="sendApiRequest()" disabled>
-                        <i class="fas fa-paper-plane me-2"></i>Send Request
-                    </button>
-                </div>
-                <div class="api-response-area">
-                    <div class="api-response-header">
-                        <span>Response</span>
-                        <div class="api-response-meta">
-                            <span class="api-status" id="apiStatus"></span>
-                            <span class="api-time" id="apiTime"></span>
-                        </div>
-                    </div>
-                    <pre class="api-response-body" id="apiResponseBody"><code class="api-code">// Pilih endpoint dan klik Send Request
-// Response JSON akan muncul di sini...</code></pre>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Testimonials Section - Carousel -->
 <section id="testimonials" class="testimonials-carousel animate-on-scroll mt-5">
     <div class="container-fluid px-4">
         <h2 class="section-title-modern">
-            <span class="title-number">03.</span>
+            <span class="title-number">02.</span>
             <span class="title-text">Testimonials</span>
         </h2>
 
@@ -194,7 +135,7 @@
 <section id="guestbook" class="guestbook-chat animate-on-scroll mt-5 mb-5">
     <div class="container-fluid px-4">
         <h2 class="section-title-modern">
-            <span class="title-number">04.</span>
+            <span class="title-number">03.</span>
             <span class="title-text">Guestbook</span>
         </h2>
 
@@ -273,21 +214,7 @@
         document.getElementById('guestbookModal')?.classList.remove('active');
     }
 
-    function selectEndpoint(element) {
-        document.querySelectorAll('.api-endpoint-item').forEach((item) => item.classList.remove('active'));
-        element.classList.add('active');
-
-        document.getElementById('currentMethod').textContent = element.dataset.method;
-        document.getElementById('currentEndpoint').textContent = element.dataset.endpoint;
-        document.getElementById('sendBtn').disabled = false;
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
-        const firstApiEl = document.querySelector('.api-endpoint-item');
-        if (firstApiEl) {
-            selectEndpoint(firstApiEl);
-        }
-
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 closeGuestbookModal();
@@ -304,45 +231,5 @@
         });
     });
 
-    // Send API Request custom execution
-    function sendApiRequest() {
-        const endpoint = document.getElementById('currentEndpoint').textContent;
-        const method = document.getElementById('currentMethod').textContent;
-        const apiStatus = document.getElementById('apiStatus');
-        const apiTime = document.getElementById('apiTime');
-        const responseBody = document.getElementById('apiResponseBody');
-
-        responseBody.textContent = '// Sending request...';
-        apiStatus.textContent = '';
-        apiTime.textContent = '';
-
-        const startTime = performance.now();
-
-        fetch(endpoint, {
-            method: method,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => {
-            const duration = Math.round(performance.now() - startTime);
-            apiStatus.textContent = `${response.status} ${response.statusText}`;
-            apiStatus.className = `api-status ${response.ok ? 'text-success' : 'text-danger'}`;
-            apiTime.textContent = `${duration} ms`;
-            return response.json();
-        })
-        .then(data => {
-            responseBody.textContent = JSON.stringify(data, null, 4);
-        })
-        .catch(err => {
-            const duration = Math.round(performance.now() - startTime);
-            apiStatus.textContent = 'ERROR';
-            apiStatus.className = 'api-status text-danger';
-            apiTime.textContent = `${duration} ms`;
-            responseBody.textContent = `Error: ${err.message}`;
-        });
-    }
 </script>
 @endsection

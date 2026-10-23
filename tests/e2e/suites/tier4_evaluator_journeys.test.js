@@ -96,7 +96,7 @@ export async function runTier4EvaluatorJourneysTests(context = {}) {
     await test('T4.2.5', 'Tech Lead Journey Step 5: Validate Multi-Disciplinary Arsenal (Kotlin, Laravel, Blender 3D)', () => {
         const hasArsenal = (aggregatedViews.includes('Kotlin') || aggregatedViews.includes('Android') || aggregatedViews.includes('Canteen')) &&
             (aggregatedViews.includes('Laravel') || aggregatedViews.includes('Komari') || aggregatedViews.includes('Wandek')) &&
-            (aggregatedViews.includes('Blender') || aggregatedViews.includes('3D') || aggregatedViews.includes('Cycles') || aggregatedViews.includes('kelas.png'));
+            (aggregatedViews.includes('Blender') || aggregatedViews.includes('3D') || aggregatedViews.includes('Cycles') || aggregatedViews.includes('kelas.webp'));
         assertTrue(hasArsenal, 'Tech Lead validates fullstack proficiency across native Kotlin Android, Laravel, and Blender 3D');
     });
 

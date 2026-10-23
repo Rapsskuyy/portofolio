@@ -5,7 +5,6 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestBookController;
 
-use App\Http\Controllers\MockApiController;
 use App\Http\Controllers\CodingProjectController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Internal\PublicSiteExportController;
@@ -36,14 +35,6 @@ Route::get('/guestbook', [PortfolioController::class, 'guestbook'])->name('portf
 Route::post('/testimonial', [PortfolioController::class, 'storeTestimonial'])
     ->middleware('throttle:5,1')
     ->name('testimonial.store');
-
-// Public Mock API Endpoint
-Route::match(['get', 'post'], '/api/v1/{path}', [MockApiController::class, 'handleRequest'])
-    ->where('path', '.*')
-    ->middleware('throttle:60,1');
-Route::match(['get', 'post'], '/v1/{path}', [MockApiController::class, 'handleRequest'])
-    ->where('path', '.*')
-    ->middleware('throttle:60,1');
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
@@ -79,12 +70,6 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuthMiddleware::class)->
     Route::post('/skills', [AdminSkillController::class, 'store'])->name('skills.store');
     Route::put('/skills/{skill}', [AdminSkillController::class, 'update'])->name('skills.update');
     Route::delete('/skills/{skill}', [AdminSkillController::class, 'destroy'])->name('skills.delete');
-    
-    // Mock APIs
-    Route::get('/mock-apis', [MockApiController::class, 'index'])->name('mock_apis.index');
-    Route::post('/mock-apis', [MockApiController::class, 'store'])->name('mock_apis.store');
-    Route::put('/mock-apis/{mockApi}', [MockApiController::class, 'update'])->name('mock_apis.update');
-    Route::delete('/mock-apis/{mockApi}', [MockApiController::class, 'destroy'])->name('mock_apis.delete');
     
     // Coding Projects
     Route::get('/coding-projects', [CodingProjectController::class, 'index'])->name('coding_projects.index');

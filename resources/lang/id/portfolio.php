@@ -60,7 +60,7 @@ return [
         'softList' => ['comm' => 'Komunikasi', 'problemSolving' => 'Pemecahan Masalah', 'creative' => 'Berpikir Kreatif', 'leadership' => 'Kepemimpinan', 'teamwork' => 'Kerja Sama Tim'],
     ],
     'gallery' => [
-        'sectionNum' => '04.',
+        'sectionNum' => '06.',
         'sectionTitle' => 'Galeri',
         'viewMore' => 'Lihat Selengkapnya',
         'item1' => ['title' => "Master of Ceremony - One's Harmony 2.0", 'desc' => "Bertugas sebagai Master of Ceremony (MC) panggung utama festival One's Harmony 2.0, memandu jalannya acara secara profesional dan komunikatif."],
@@ -94,7 +94,7 @@ return [
         ],
     ],
     'experience' => [
-        'sectionNum' => '06.',
+        'sectionNum' => '04.',
         'sectionTitle' => 'Pengalaman Organisasi',
         'exp1' => ['year' => '2022-2023', 'org' => 'SMP Student Council (OSIS)', 'role' => 'Anggota Seksi Bidang Politik & Demokrasi', 'desc' => 'Menyelenggarakan program sosial dan pembinaan wawasan kebangsaan siswa untuk mendorong partisipasi aktif di sekolah.'],
         'exp2' => ['year' => '2023-2024', 'org' => 'SMP Student Council (OSIS)', 'role' => 'Wakil Ketua II OSIS', 'desc' => 'Mendampingi Ketua OSIS dalam mengarahkan program kerja, mengelola aspirasi siswa, serta mengawasi koordinasi antar seksi bidang.'],

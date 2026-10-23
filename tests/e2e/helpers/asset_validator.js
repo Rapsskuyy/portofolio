@@ -44,13 +44,13 @@ export class AssetValidator {
      */
     verifyFlagshipAssets() {
         const requiredAssets = [
-            'images/profile/profilrappa.jpeg',
-            'images/coding-projects/canteensmkn1depok.png',
-            'images/coding-projects/Ptkomari.png',
-            'images/coding-projects/wandekairlines.png',
-            'images/coding-projects/sarpras.png',
-            'images/coding-projects/kelas.png',
-            'images/coding-projects/pedang.png',
+            'images/profile/profilrappa_original_raw.webp',
+            'images/coding-projects/canteensmkn1depok.webp',
+            'images/coding-projects/Ptkomari.webp',
+            'images/coding-projects/wandekairlines.webp',
+            'images/coding-projects/sarpras.webp',
+            'images/coding-projects/kelas.webp',
+            'images/coding-projects/pedang.webp',
             'files/CV .pdf'
         ];
 

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\CodingProject;
 use App\Models\Education;
-use App\Models\MockApi;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
@@ -29,7 +28,6 @@ class PublicSiteSnapshot
         $codingProjects = CodingProject::query()->with('projectDetail')->orderBy('order')->orderByDesc('year')->get();
         $testimonials = Testimonial::query()->whereRaw('is_approved IS TRUE')->latest()->take(6)->get();
         $posts = Post::query()->whereRaw('is_published IS TRUE')->latest()->get();
-        $mockApis = MockApi::query()->whereRaw('is_active IS TRUE')->orderBy('id')->get();
 
         return [
             'educations' => $educations->map(fn (Education $education) => [
@@ -90,12 +88,6 @@ class PublicSiteSnapshot
                 'safe_content' => $post->safe_content,
                 'published_at' => optional($post->created_at)->toIso8601String(),
             ])->values()->all(),
-            'mock_apis' => $mockApis->map(fn (MockApi $mockApi) => [
-                'path' => $mockApi->path,
-                'method' => $mockApi->method,
-                'description' => $mockApi->description,
-                'response_body' => $mockApi->response_body,
-            ])->values()->all(),
         ];
     }
 
@@ -118,7 +110,6 @@ class PublicSiteSnapshot
         $codingProjects = CodingProject::query()->with('projectDetail')->orderBy('order')->orderByDesc('year')->get();
         $testimonials = Testimonial::query()->whereRaw('is_approved IS TRUE')->latest()->take(6)->get();
         $posts = Post::query()->whereRaw('is_published IS TRUE')->latest()->get();
-        $mockApis = MockApi::query()->whereRaw('is_active IS TRUE')->orderBy('id')->get();
 
         return [
             '/' => view('portfolio.index', compact('educations', 'softSkills', 'hardSkills', 'projects', 'codingProjects'))->render(),
@@ -126,7 +117,7 @@ class PublicSiteSnapshot
             '/about' => view('portfolio.about', compact('educations'))->render(),
             '/skills' => view('portfolio.skills', compact('softSkills', 'hardSkills'))->render(),
             '/experience' => view('portfolio.experience', compact('projects', 'codingProjects'))->render(),
-            '/guestbook' => view('portfolio.guestbook', compact('testimonials', 'posts', 'mockApis'))->render(),
+            '/guestbook' => view('portfolio.guestbook', compact('testimonials', 'posts'))->render(),
         ];
     }
 }

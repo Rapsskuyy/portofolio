@@ -6,7 +6,6 @@
         ['key' => 'projects', 'route' => 'admin.projects.index', 'icon' => 'fa-images', 'label' => 'Galeri Project'],
         ['key' => 'coding-projects', 'route' => 'admin.coding_projects.index', 'icon' => 'fa-laptop-code', 'label' => 'Project Coding'],
         ['key' => 'posts', 'route' => 'admin.posts.index', 'icon' => 'fa-newspaper', 'label' => 'Blog Posts'],
-        ['key' => 'mock-apis', 'route' => 'admin.mock_apis.index', 'icon' => 'fa-server', 'label' => 'Mock APIs'],
     ];
 @endphp
 

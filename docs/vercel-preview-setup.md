@@ -26,7 +26,7 @@ Set these build-time environment variables in that project:
 
 They are build credentials only. Do not prefix them with `VITE_`, and do not place them in source files. The generated browser output contains rendered HTML and `public-content.json`, never the export token.
 
-The static project proxies `/public-api/*` and `/api/v1/*` to `https://admin.raffanm17.my.id`. Before production cutover, update the static project configuration only if the chosen admin host differs.
+The static project proxies `/public-api/*` to `https://admin.raffanm17.my.id`. Before production cutover, update the static project configuration only if the chosen admin host differs.
 
 ## 3. Preview verification order
 
@@ -34,7 +34,7 @@ The static project proxies `/public-api/*` and `/api/v1/*` to `https://admin.raf
 2. Deploy the static preview using that backend preview URL. Confirm each public route renders as a static document, without a Laravel session cookie.
 3. Submit both public forms through the static preview. Verify validation, moderation, throttling, and success/error messages.
 4. Sign in to the backend admin preview. Test CRUD, Supabase Storage upload, and the `Publish website` action. A successful hook queues a deployment but does not itself prove that the deployment completed.
-5. Test 390px, tablet, and desktop views, keyboard focus, modal Escape behavior, and public API playground.
+5. Test 390px, tablet, and desktop views, keyboard focus, modal Escape behavior, and the public guestbook flow.
 6. Run Lighthouse mobile and desktop on the static preview. Only proceed when Performance is at least 90 and no functional regression appears.
 
 ## 4. Production cutover, later

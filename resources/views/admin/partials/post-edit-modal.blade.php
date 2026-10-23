@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">Konten Artikel</label>
-                            <textarea name="content" class="form-control summernote" rows="8" required>{!! $post->content !!}</textarea>
+                            <textarea name="content" class="form-control summernote" rows="8" required>{{ $post->content }}</textarea>
                         </div>
                         <div class="col-12">
                             <div class="form-check form-switch mt-2">

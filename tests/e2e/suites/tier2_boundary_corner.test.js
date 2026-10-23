@@ -61,9 +61,9 @@ export async function runTier2BoundaryCornerTests(context = {}) {
     // BOUNDARY 2: Missing Asset Fallbacks & Physical Path Integrity
     // =========================================================================
     await test('T2.2.1', 'Asset Integrity: Portrait photo cutout asset exists and is non-empty', () => {
-        const profile1 = assets.checkAssetExists('images/profile/profilrappa.jpeg');
-        const profile2 = assets.checkAssetExists('images/profile/media_1787815622667.jpg');
-        const profile3 = assets.checkAssetExists('images/profile/profile.jpeg');
+        const profile1 = assets.checkAssetExists('images/profile/profilrappa_original_raw.webp');
+        const profile2 = assets.checkAssetExists('images/profile/rapoy122345.webp');
+        const profile3 = assets.checkAssetExists('images/profile/profile.webp');
         const exists = profile1.exists || profile2.exists || profile3.exists;
         const size = (profile1.size || 0) + (profile2.size || 0) + (profile3.size || 0);
         assertTrue(exists, 'Expected profile photo asset to exist in public/images/profile/');
@@ -81,15 +81,15 @@ export async function runTier2BoundaryCornerTests(context = {}) {
     });
 
     await test('T2.2.3', 'Asset Integrity: Coding project screenshots (Canteen, Komari, Wandek, Sarpras)', () => {
-        const canteen = assets.checkAssetExists('images/coding-projects/canteensmkn1depok.png');
-        const komari = assets.checkAssetExists('images/coding-projects/Ptkomari.png');
-        const wandek = assets.checkAssetExists('images/coding-projects/wandekairlines.png');
-        const sarpras = assets.checkAssetExists('images/coding-projects/sarpras.png');
+        const canteen = assets.checkAssetExists('images/coding-projects/canteensmkn1depok.webp');
+        const komari = assets.checkAssetExists('images/coding-projects/Ptkomari.webp');
+        const wandek = assets.checkAssetExists('images/coding-projects/wandekairlines.webp');
+        const sarpras = assets.checkAssetExists('images/coding-projects/sarpras.webp');
 
-        assertTrue(canteen.exists, 'Expected canteensmkn1depok.png to exist in public/images/coding-projects/');
-        assertTrue(komari.exists, 'Expected Ptkomari.png to exist in public/images/coding-projects/');
-        assertTrue(wandek.exists, 'Expected wandekairlines.png to exist in public/images/coding-projects/');
-        assertTrue(sarpras.exists, 'Expected sarpras.png to exist in public/images/coding-projects/');
+        assertTrue(canteen.exists, 'Expected canteensmkn1depok.webp to exist in public/images/coding-projects/');
+        assertTrue(komari.exists, 'Expected Ptkomari.webp to exist in public/images/coding-projects/');
+        assertTrue(wandek.exists, 'Expected wandekairlines.webp to exist in public/images/coding-projects/');
+        assertTrue(sarpras.exists, 'Expected sarpras.webp to exist in public/images/coding-projects/');
         
         assertGreaterOrEqual(canteen.size, 1000, 'canteen screenshot must be non-empty');
         assertGreaterOrEqual(komari.size, 1000, 'komari screenshot must be non-empty');
@@ -98,21 +98,21 @@ export async function runTier2BoundaryCornerTests(context = {}) {
     });
 
     await test('T2.2.4', 'Asset Integrity: 3D Blender render assets (Classroom & Cyber Sword)', () => {
-        const kelas = assets.checkAssetExists('images/coding-projects/kelas.png');
-        const pedang = assets.checkAssetExists('images/coding-projects/pedang.png');
+        const kelas = assets.checkAssetExists('images/coding-projects/kelas.webp');
+        const pedang = assets.checkAssetExists('images/coding-projects/pedang.webp');
 
-        assertTrue(kelas.exists, 'Expected kelas.png to exist in public/images/coding-projects/');
-        assertTrue(pedang.exists, 'Expected pedang.png to exist in public/images/coding-projects/');
-        assertGreaterOrEqual(kelas.size, 1000, 'kelas.png must be non-empty');
-        assertGreaterOrEqual(pedang.size, 1000, 'pedang.png must be non-empty');
+        assertTrue(kelas.exists, 'Expected kelas.webp to exist in public/images/coding-projects/');
+        assertTrue(pedang.exists, 'Expected pedang.webp to exist in public/images/coding-projects/');
+        assertGreaterOrEqual(kelas.size, 1000, 'kelas.webp must be non-empty');
+        assertGreaterOrEqual(pedang.size, 1000, 'pedang.webp must be non-empty');
     });
 
     await test('T2.2.5', 'Asset Integrity: Honors & Leadership project gallery images', () => {
-        const olimpiade = assets.checkAssetExists('images/projects/olimpiade_sains.jpg');
-        const triwulan = assets.checkAssetExists('images/projects/triwulan.jpg');
+        const olimpiade = assets.checkAssetExists('images/projects/olimpiade_sains.webp');
+        const triwulan = assets.checkAssetExists('images/projects/triwulan.webp');
 
-        assertTrue(olimpiade.exists, 'Expected olimpiade_sains.jpg to exist in public/images/projects/');
-        assertTrue(triwulan.exists, 'Expected triwulan.jpg to exist in public/images/projects/');
+        assertTrue(olimpiade.exists, 'Expected olimpiade_sains.webp to exist in public/images/projects/');
+        assertTrue(triwulan.exists, 'Expected triwulan.webp to exist in public/images/projects/');
     });
 
     // =========================================================================

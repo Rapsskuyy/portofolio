@@ -48,8 +48,9 @@ class PublicPortfolioSafetyTest extends TestCase
             ->assertSee('function closeBlogModal', false)
             ->assertSee('function openGuestbookModal', false)
             ->assertSee('function closeGuestbookModal', false)
-            ->assertSee('function selectEndpoint', false)
-            ->assertSee('responseBody.textContent = JSON.stringify(data, null, 4);', false);
+            ->assertSee('id="guestbookModal"', false)
+            ->assertDontSee('API Playground', false)
+            ->assertDontSee('function selectEndpoint', false);
     }
 
     public function test_homepage_does_not_load_nonessential_scripts_during_initial_render(): void
@@ -107,7 +108,8 @@ class PublicPortfolioSafetyTest extends TestCase
     {
         $this->assertContains('throttle:5,1', Route::getRoutes()->getByName('testimonial.store')->gatherMiddleware());
         $this->assertContains('throttle:5,1', Route::getRoutes()->getByName('guestbook.store')->gatherMiddleware());
-        $this->assertContains('throttle:60,1', Route::getRoutes()->match(request()->create('/api/v1/ping', 'GET'))->gatherMiddleware());
+        $this->get('/api/v1/ping')->assertNotFound();
+        $this->get('/admin/mock-apis')->assertNotFound();
     }
 
     public function test_coding_project_upload_uses_supabase_when_configured(): void

@@ -28,9 +28,10 @@ class PostController extends Controller
             'title' => 'required|string|max:200',
             'content' => 'required|string',
             'category' => 'nullable|string|max:100',
+            'is_published' => 'nullable|boolean',
         ]);
 
-        $validated['is_published'] = true;
+        $validated['is_published'] = $request->boolean('is_published');
         
         Post::create($validated);
 
@@ -46,9 +47,10 @@ class PostController extends Controller
             'title' => 'required|string|max:200',
             'content' => 'required|string',
             'category' => 'nullable|string|max:100',
-            'is_published' => 'boolean',
+            'is_published' => 'nullable|boolean',
         ]);
 
+        $validated['is_published'] = $request->boolean('is_published');
         $post->update($validated);
 
         return back()->with('success', $this->publisher->markUnpublished());

@@ -23,8 +23,6 @@ class ExportPortfolioData extends Command
             'coding_projects',
             'project_details',
             'posts',
-            'mock_apis',
-            'api_endpoints',
             'testimonials',
             'guest_books',
         ];

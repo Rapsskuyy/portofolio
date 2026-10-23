@@ -8,7 +8,6 @@ use App\Models\Project;
 use App\Models\CodingProject;
 use App\Models\Testimonial;
 use App\Models\Post;
-use App\Models\MockApi;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -62,8 +61,7 @@ class PortfolioController extends Controller
     {
         $testimonials = Testimonial::whereRaw('is_approved IS TRUE')->latest()->take(6)->get();
         $posts = Post::whereRaw('is_published IS TRUE')->latest()->get();
-        $mockApis = MockApi::whereRaw('is_active IS TRUE')->orderBy('id')->get();
-        return view('portfolio.guestbook', compact('testimonials', 'posts', 'mockApis'));
+        return view('portfolio.guestbook', compact('testimonials', 'posts'));
     }
 
     public function storeTestimonial(Request $request): RedirectResponse

@@ -15,22 +15,18 @@ const phpBinaryDirectory = path.join(phpPackageDirectory, 'native', 'php');
 const phpLibraryDirectory = path.join(phpPackageDirectory, 'native', 'lib');
 const maximumFunctionSize = 240 * 1024 * 1024;
 
-const excludedProjectEntries = new Set([
-    '.git',
-    '.vercel',
-    'node_modules',
-    'scripts',
-    'static-site',
-    'tests',
-    'vercel.json',
-    '.agents',
-    'test_extract',
-    'laravel.zip',
-    'laravel_lite.zip',
-    'database.sql',
-    'info.php',
-    'test_images.php',
-    'gen_flagship.js',
+const runtimeProjectEntries = new Set([
+    'api',
+    'app',
+    'artisan',
+    'bootstrap',
+    'composer.json',
+    'composer.lock',
+    'config',
+    'public',
+    'resources',
+    'routes',
+    'vendor',
 ]);
 
 const staticRoutes = [
@@ -139,22 +135,29 @@ function copyProject(destination) {
     fs.mkdirSync(destination, { recursive: true });
 
     for (const entry of fs.readdirSync(projectRoot)) {
-        if (excludedProjectEntries.has(entry) || entry === '.env' || entry.startsWith('.env.')) {
+        if (!runtimeProjectEntries.has(entry)) {
             continue;
         }
 
         const source = path.join(projectRoot, entry);
         const target = path.join(destination, entry);
+
+        if (entry === 'public') {
+            copyRuntimePublicFiles(target);
+            continue;
+        }
+
         fs.cpSync(source, target, {
             dereference: true,
-            filter: (item) => {
-                const relativePath = path.relative(projectRoot, item).split(path.sep).join('/');
-                return !relativePath.startsWith('database/backup/')
-                    && relativePath !== 'database/database.sqlite';
-            },
             recursive: true,
         });
     }
+}
+
+function copyRuntimePublicFiles(destination) {
+    fs.mkdirSync(path.join(destination, 'build'), { recursive: true });
+    fs.copyFileSync(path.join(projectRoot, 'public', 'index.php'), path.join(destination, 'index.php'));
+    fs.copyFileSync(path.join(projectRoot, 'public', 'build', 'manifest.json'), path.join(destination, 'build', 'manifest.json'));
 }
 
 function copyPhpRuntime() {

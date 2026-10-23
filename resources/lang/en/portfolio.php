@@ -64,7 +64,7 @@ return [
         'softList' => ['comm' => 'Communication', 'problemSolving' => 'Problem Solving', 'creative' => 'Creative Thinking', 'leadership' => 'Leadership', 'teamwork' => 'Teamwork'],
     ],
     'gallery' => [
-        'sectionNum' => '04.',
+        'sectionNum' => '06.',
         'sectionTitle' => 'Gallery',
         'viewMore' => 'View More',
         'item1' => ['title' => "Master of Ceremony - One's Harmony 2.0", 'desc' => "Served as main stage Master of Ceremony for One's Harmony 2.0 festival, presenting stage programs with professional poise and dynamic audience moderation."],
@@ -98,7 +98,7 @@ return [
         ],
     ],
     'experience' => [
-        'sectionNum' => '06.',
+        'sectionNum' => '04.',
         'sectionTitle' => 'Experience',
         'exp1' => ['year' => '2022-2023', 'org' => 'SMP Student Council (OSIS)', 'role' => 'Political & Civic Affairs Commission Member', 'desc' => 'Organized student social and civic engagement programs, fostering school community participation.'],
         'exp2' => ['year' => '2023-2024', 'org' => 'SMP Student Council (OSIS)', 'role' => 'Vice President II', 'desc' => 'Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.'],

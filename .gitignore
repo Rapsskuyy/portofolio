@@ -27,6 +27,7 @@ Thumbs.db
 !/README.md
 /*.txt
 /database/backup/*.json
+/tests/e2e/reports/
 
 # Local databases and retired deployment/debug artifacts
 database/database.sqlite

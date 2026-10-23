@@ -207,10 +207,9 @@ export async function runTier1FeatureCoverageTests(context = {}) {
     });
 
     await test('T1.5.2', 'Hero Cockpit: Raffa Almet MPK portrait cutout asset integration', () => {
-        const hasProfileImage = aggregatedViews.includes('profilrappa.jpeg') ||
-            aggregatedViews.includes('media_1787815622667.jpg') ||
-            aggregatedViews.includes('profile.jpeg') ||
-            aggregatedViews.includes('rapoy122345.png');
+        const hasProfileImage = aggregatedViews.includes('profilrappa_original_raw.webp') ||
+            aggregatedViews.includes('profile.webp') ||
+            aggregatedViews.includes('rapoy122345.webp');
         assertTrue(hasProfileImage, 'Expected MPK Almet portrait cutout asset in Hero Cockpit');
     });
 
@@ -395,19 +394,19 @@ export async function runTier1FeatureCoverageTests(context = {}) {
         const has3dLab = aggregatedViews.includes('3D') ||
             aggregatedViews.includes('Blender') ||
             aggregatedViews.includes('Spatial') ||
-            aggregatedViews.includes('kelas.png') ||
-            aggregatedViews.includes('pedang.png');
+            aggregatedViews.includes('kelas.webp') ||
+            aggregatedViews.includes('pedang.webp');
         assertTrue(has3dLab, 'Expected 3D Spatial Lab section in portfolio views');
     });
 
     await test('T1.10.2', '3D Spatial Lab: SMKN 1 Depok Classroom Reconstruction (Cycles & PBR)', () => {
-        const hasClassroom = (aggregatedViews.includes('Classroom') || aggregatedViews.includes('Kelas') || aggregatedViews.includes('kelas.png')) &&
+        const hasClassroom = (aggregatedViews.includes('Classroom') || aggregatedViews.includes('Kelas') || aggregatedViews.includes('kelas.webp')) &&
             (aggregatedViews.includes('Blender') || aggregatedViews.includes('3D') || aggregatedViews.includes('Cycles') || aggregatedViews.includes('PBR'));
         assertTrue(hasClassroom, 'Expected Classroom 3D model with Cycles/PBR attribution in 3D Lab');
     });
 
     await test('T1.10.3', '3D Spatial Lab: Hard-Surface Cyber Sword Model with Emissive Shaders', () => {
-        const hasSword = (aggregatedViews.includes('Sword') || aggregatedViews.includes('Pedang') || aggregatedViews.includes('pedang.png')) &&
+        const hasSword = (aggregatedViews.includes('Sword') || aggregatedViews.includes('Pedang') || aggregatedViews.includes('pedang.webp')) &&
             (aggregatedViews.includes('Blender') || aggregatedViews.includes('3D') || aggregatedViews.includes('Hard-Surface') || aggregatedViews.includes('Shading'));
         assertTrue(hasSword, 'Expected Cyber Sword 3D model in 3D Lab');
     });

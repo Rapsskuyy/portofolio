@@ -62,9 +62,9 @@
             <li><a href="#about" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.about">About</span></a></li>
             <li><a href="#education" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.education">Education</span></a></li>
             <li><a href="#skills" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.skills">Skills</span></a></li>
-            <li><a href="#gallery" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.gallery">Gallery</span></a></li>
-            <li><a href="#projects" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.projects">Projects</span></a></li>
             <li><a href="#experience" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.experience">Experience</span></a></li>
+            <li><a href="#projects" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.projects">Projects</span></a></li>
+            <li><a href="#gallery" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.gallery">Gallery</span></a></li>
             <li><a href="#contact" class="nav-dot"><span class="nav-dot-marker" aria-hidden="true"></span><span class="nav-dot-label" data-i18n="nav.contact">Contact</span></a></li>
         </ul>
         <div class="social-links-sidebar">
@@ -83,8 +83,8 @@
     <nav class="mobile-bottom-nav" aria-label="Primary portfolio navigation">
         <a href="#home" class="mobile-nav-link active"><i class="fas fa-home" aria-hidden="true"></i><span data-i18n="nav.home">Home</span></a>
         <a href="#about" class="mobile-nav-link"><i class="fas fa-user" aria-hidden="true"></i><span data-i18n="nav.about">About</span></a>
-        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
         <a href="#experience" class="mobile-nav-link"><i class="fas fa-users" aria-hidden="true"></i><span data-i18n="nav.experience">Experience</span></a>
+        <a href="#projects" class="mobile-nav-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
         <a href="#contact" class="mobile-nav-link"><i class="fas fa-envelope" aria-hidden="true"></i><span data-i18n="nav.contact">Contact</span></a>
         <button type="button" class="mobile-nav-more-toggle" id="mobileMoreToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobileMorePanel">
             <i class="fas fa-ellipsis-h" aria-hidden="true"></i><span data-i18n="nav.more">More</span>
@@ -109,9 +109,9 @@
                 <a href="#education" class="mobile-more-link"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span data-i18n="nav.education">Education</span></a>
                 <a href="#skills" class="mobile-more-link"><i class="fas fa-chart-bar" aria-hidden="true"></i><span data-i18n="nav.skills">Skills</span></a>
                 <p class="mobile-more-group-label" data-i18n="nav.workGroup">Work</p>
-                <a href="#gallery" class="mobile-more-link"><i class="fas fa-images" aria-hidden="true"></i><span data-i18n="nav.gallery">Gallery</span></a>
-                <a href="#projects" class="mobile-more-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
                 <a href="#experience" class="mobile-more-link"><i class="fas fa-users" aria-hidden="true"></i><span data-i18n="nav.experience">Experience</span></a>
+                <a href="#projects" class="mobile-more-link"><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="nav.projects">Projects</span></a>
+                <a href="#gallery" class="mobile-more-link"><i class="fas fa-images" aria-hidden="true"></i><span data-i18n="nav.gallery">Gallery</span></a>
                 <button type="button" class="mobile-language-toggle" id="mobileLanguageToggle" aria-label="Switch language">
                     <i class="fas fa-language" aria-hidden="true"></i><span id="mobileLanguageToggleLabel">ID</span>
                 </button>
@@ -376,64 +376,55 @@
                 </div>
             </div>
         </section>
-        <!-- Gallery Section - Masonry Layout -->
-        <section id="gallery" class="gallery-masonry" data-section-reveal>
+        <!-- Experience Section - 2x2 Grid Layout -->
+        <section id="experience" class="experience-section" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number" data-i18n="gallery.sectionNum">04.</span>
-                    <span class="title-text" data-i18n="gallery.sectionTitle">Gallery</span>
+                    <span class="title-number" data-i18n="experience.sectionNum">04.</span>
+                    <span class="title-text" data-i18n="experience.sectionTitle">Experience</span>
                 </h2>
 
-                <div class="masonry-grid" id="galleryGrid">
-                    @php
-                        $galleryTranslationKeys = [
-                            "Master of Ceremony — One's Harmony 2.0" => 'item1',
-                            'Event Committee — Bulan Bahasa 2025' => 'item2',
-                            "Logistics Committee — One's Harmony 2025" => 'item3',
-                            'Master of Ceremony — Project Kolaborasi Nusantara' => 'item4',
-                            'Orientation Committee — MPLS SMKN 1 Depok' => 'item5',
-                            'Organizing Chairman — Student Council Plenary Assembly 2025' => 'item6',
-                        ];
-                    @endphp
-                    @forelse($projects as $index => $project)
-                    @php $galleryTranslationKey = $galleryTranslationKeys[$project->title] ?? null; @endphp
-                    <div class="masonry-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                        <div class="project-card-modern">
-                            <div class="project-image-wrapper">
-                                <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" class="project-image" loading="lazy" decoding="async">
-                                <div class="project-overlay">
-                                    <div class="project-info">
-                                        <h3 class="project-title" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.title" @endif>{{ $project->title }}</h3>
-                                        <p class="project-description" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.desc" @endif>{{ $project->description }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="experience-grid-2x2">
+                    <!-- Experience 1 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2022-2023</span>
+                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
                         </div>
+                        <h3 class="experience-title" data-i18n="experience.exp1.role">Political & Civic Affairs Commission Member</h3>
+                        <p class="experience-desc" data-i18n="experience.exp1.desc">Organized student social and civic engagement programs, fostering school community participation.</p>
                     </div>
-                    @empty
-                    <div class="col-12 py-5 text-center empty-state-box">
-                        <div class="empty-icon-wrapper mb-3">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted opacity-50 ms-auto me-auto d-block">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                        </div>
-                        <h5 class="text-white-50 fw-semibold mb-1">Photo Gallery Coming Soon</h5>
-                        <p class="text-muted small">Event, competition, and leadership documentation will be updated shortly.</p>
-                    </div>
-                    @endforelse
-                </div>
 
-                @if(count($projects) > 2)
-                <div class="expand-controls-wrapper d-none" id="galleryExpandControls">
-                    <button type="button" class="btn-expand-toggle" id="galleryExpandBtn" aria-expanded="false" aria-controls="galleryGrid">
-                        <span class="btn-expand-text" data-i18n="gallery.viewMore">View More</span>
-                        <span class="btn-expand-badge d-none" id="galleryExpandBadge"></span>
-                        <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
-                    </button>
+                    <!-- Experience 2 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2023-2024</span>
+                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
+                        </div>
+                        <h3 class="experience-title" data-i18n="experience.exp2.role">Vice President II</h3>
+                        <p class="experience-desc" data-i18n="experience.exp2.desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2024-2025</span>
+                            <span class="experience-org-badge"><i class="fas fa-university" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
+                        </div>
+                        <h3 class="experience-title" data-i18n="experience.exp3.role">Commission B Member</h3>
+                        <p class="experience-desc" data-i18n="experience.exp3.desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
+                    </div>
+
+                    <!-- Experience 4 -->
+                    <div class="experience-card-2x2 timeline-item-h">
+                        <div class="experience-meta-row">
+                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2025-2026</span>
+                            <span class="experience-org-badge"><i class="fas fa-award" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
+                        </div>
+                        <h3 class="experience-title" data-i18n="experience.exp4.role">Senior Member, Commission B</h3>
+                        <p class="experience-desc" data-i18n="experience.exp4.desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
+                    </div>
                 </div>
-                @endif
             </div>
         </section>
 
@@ -649,55 +640,64 @@
         @endif
         @endforeach
 
-        <!-- Experience Section - 2x2 Grid Layout -->
-        <section id="experience" class="experience-section" data-section-reveal>
+        <!-- Gallery Section - Masonry Layout -->
+        <section id="gallery" class="gallery-masonry" data-section-reveal>
             <div class="container-fluid px-4">
                 <h2 class="section-title-modern">
-                    <span class="title-number" data-i18n="experience.sectionNum">06.</span>
-                    <span class="title-text" data-i18n="experience.sectionTitle">Experience</span>
+                    <span class="title-number" data-i18n="gallery.sectionNum">06.</span>
+                    <span class="title-text" data-i18n="gallery.sectionTitle">Gallery</span>
                 </h2>
 
-                <div class="experience-grid-2x2">
-                    <!-- Experience 1 -->
-                    <div class="experience-card-2x2 timeline-item-h">
-                        <div class="experience-meta-row">
-                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2022-2023</span>
-                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
+                <div class="masonry-grid" id="galleryGrid">
+                    @php
+                        $galleryTranslationKeys = [
+                            "Master of Ceremony — One's Harmony 2.0" => 'item1',
+                            'Event Committee — Bulan Bahasa 2025' => 'item2',
+                            "Logistics Committee — One's Harmony 2025" => 'item3',
+                            'Master of Ceremony — Project Kolaborasi Nusantara' => 'item4',
+                            'Orientation Committee — MPLS SMKN 1 Depok' => 'item5',
+                            'Organizing Chairman — Student Council Plenary Assembly 2025' => 'item6',
+                        ];
+                    @endphp
+                    @forelse($projects as $index => $project)
+                    @php $galleryTranslationKey = $galleryTranslationKeys[$project->title] ?? null; @endphp
+                    <div class="masonry-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="project-card-modern">
+                            <div class="project-image-wrapper">
+                                <img src="{{ $project->formatted_image_url }}" alt="{{ $project->title }}" class="project-image" loading="lazy" decoding="async">
+                                <div class="project-overlay">
+                                    <div class="project-info">
+                                        <h3 class="project-title" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.title" @endif>{{ $project->title }}</h3>
+                                        <p class="project-description" @if($galleryTranslationKey) data-i18n="gallery.{{ $galleryTranslationKey }}.desc" @endif>{{ $project->description }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="experience-title" data-i18n="experience.exp1.role">Political & Civic Affairs Commission Member</h3>
-                        <p class="experience-desc" data-i18n="experience.exp1.desc">Organized student social and civic engagement programs, fostering school community participation.</p>
                     </div>
-
-                    <!-- Experience 2 -->
-                    <div class="experience-card-2x2 timeline-item-h">
-                        <div class="experience-meta-row">
-                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2023-2024</span>
-                            <span class="experience-org-badge"><i class="fas fa-users" aria-hidden="true"></i> SMP Student Council (OSIS)</span>
+                    @empty
+                    <div class="col-12 py-5 text-center empty-state-box">
+                        <div class="empty-icon-wrapper mb-3">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted opacity-50 ms-auto me-auto d-block">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
                         </div>
-                        <h3 class="experience-title" data-i18n="experience.exp2.role">Vice President II</h3>
-                        <p class="experience-desc" data-i18n="experience.exp2.desc">Assisted the President in directing council initiatives, managing student welfare programs, and overseeing departmental task forces.</p>
+                        <h5 class="text-white-50 fw-semibold mb-1">Photo Gallery Coming Soon</h5>
+                        <p class="text-muted small">Event, competition, and leadership documentation will be updated shortly.</p>
                     </div>
-
-                    <!-- Experience 3 -->
-                    <div class="experience-card-2x2 timeline-item-h">
-                        <div class="experience-meta-row">
-                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2024-2025</span>
-                            <span class="experience-org-badge"><i class="fas fa-university" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
-                        </div>
-                        <h3 class="experience-title" data-i18n="experience.exp3.role">Commission B Member</h3>
-                        <p class="experience-desc" data-i18n="experience.exp3.desc">Executed legislative oversight, strategic program planning, and student aspiration governance.</p>
-                    </div>
-
-                    <!-- Experience 4 -->
-                    <div class="experience-card-2x2 timeline-item-h">
-                        <div class="experience-meta-row">
-                            <span class="experience-year-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 2025-2026</span>
-                            <span class="experience-org-badge"><i class="fas fa-award" aria-hidden="true"></i> MPK SMKN 1 Depok</span>
-                        </div>
-                        <h3 class="experience-title" data-i18n="experience.exp4.role">Senior Member, Commission B</h3>
-                        <p class="experience-desc" data-i18n="experience.exp4.desc">Exercising sustained leadership, mentoring junior council delegates, and auditing student body program effectiveness.</p>
-                    </div>
+                    @endforelse
                 </div>
+
+                @if(count($projects) > 2)
+                <div class="expand-controls-wrapper d-none" id="galleryExpandControls">
+                    <button type="button" class="btn-expand-toggle" id="galleryExpandBtn" aria-expanded="false" aria-controls="galleryGrid">
+                        <span class="btn-expand-text" data-i18n="gallery.viewMore">View More</span>
+                        <span class="btn-expand-badge d-none" id="galleryExpandBadge"></span>
+                        <i class="fas fa-chevron-down btn-expand-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+                @endif
             </div>
         </section>
 

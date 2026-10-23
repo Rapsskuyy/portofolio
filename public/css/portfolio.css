@@ -233,8 +233,8 @@ html {
 
 .hero-greeting {
     font-size: 20px;
-    color: var(--primary);
-    font-weight: 500;
+    color: #a5b4fc;
+    font-weight: 600;
     display: block;
     margin-bottom: 15px;
 }
