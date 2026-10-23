@@ -156,8 +156,12 @@ function copyProject(destination) {
 
 function copyRuntimePublicFiles(destination) {
     fs.mkdirSync(path.join(destination, 'build'), { recursive: true });
+    fs.mkdirSync(path.join(destination, 'css'), { recursive: true });
+    fs.mkdirSync(path.join(destination, 'js'), { recursive: true });
     fs.copyFileSync(path.join(projectRoot, 'public', 'index.php'), path.join(destination, 'index.php'));
     fs.copyFileSync(path.join(projectRoot, 'public', 'build', 'manifest.json'), path.join(destination, 'build', 'manifest.json'));
+    fs.copyFileSync(path.join(projectRoot, 'public', 'css', 'portfolio.css'), path.join(destination, 'css', 'portfolio.css'));
+    fs.copyFileSync(path.join(projectRoot, 'public', 'js', 'portfolio.js'), path.join(destination, 'js', 'portfolio.js'));
 }
 
 function copyPhpRuntime() {
